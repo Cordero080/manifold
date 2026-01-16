@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ScrambleLink from '../../../ui/ScrambleLink/ScrambleLink';
-import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '../../../layout/NavBar/navLabels';
+import ScrambleLink from '@components/ui/ScrambleLink/ScrambleLink';
+import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '@components/layout/NavBar/navLabels';
 
 /**
  * Quantum-themed navigation bar with dynamic portal colors

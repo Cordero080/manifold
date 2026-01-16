@@ -5,10 +5,10 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../features/auth/context/AuthContext';
-import { saveScene } from '../../../services/sceneApi';
+import { useAuth } from '@features/auth/context/AuthContext';
+import { saveScene } from '@services/sceneApi';
 import { createSaveHandler } from './saveButtonHandlers';
-import ScrambleButton from '@/components/ui/ScrambleButton/ScrambleButton';
+import ScrambleButton from '@components/ui/ScrambleButton/ScrambleButton';
 import styles from './SaveButton.module.scss';
 
 function SaveButton({ sceneConfig }) {

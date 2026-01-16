@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { nearestVertexIndex } from '../../../utils/geometryHelpers';
+import { nearestVertexIndex } from '@features/sceneControls/utils/geometryHelpers';
 
 export function createTetrahedronWireframe(geometry, wireframeMaterial, radiusScale = 1.0) {
   // Use EdgesGeometry to reliably get all edges (6 for simple, 12 for compound)

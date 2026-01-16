@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { useScene } from '../../../context/SceneContext';
-import { useAuth } from '../../../features/auth/context/AuthContext';
-import { getMyScenes } from '../../../services/sceneApi'; // Import API function
+import { useScene } from '@context/SceneContext';
+import { useAuth } from '@features/auth/context/AuthContext';
+import { getMyScenes } from '@services/sceneApi'; // Import API function
 import SceneCard from './components/SceneCard';
-import CustomSelect from '../../ui/CustomSelect/CustomSelect';
-import ScrambleButton from '../../ui/ScrambleButton/ScrambleButton';
-import BeamScanButton from '../../ui/BeamScanButton/BeamScanButton';
-import { DeleteSuccessModal } from '../../ui/Modals';
+import CustomSelect from '@components/ui/CustomSelect/CustomSelect';
+import ScrambleButton from '@components/ui/ScrambleButton/ScrambleButton';
+import BeamScanButton from '@components/ui/BeamScanButton/BeamScanButton';
+import { DeleteSuccessModal } from '@components/ui/Modals';
 import QuantumNav from '../HomePage/components/QuantumNav';
-import HomeBackground from '../../ui/HomeBackground/HomeBackground';
+import HomeBackground from '@components/ui/HomeBackground/HomeBackground';
 import QuantumPortalShowcase from '../Showcase/components/QuantumPortalShowcase';
-import { quantumCollapse } from '../../../utils/coreHelpers';
-import '../../../styles/quantumTitles.css';
-import '../../../styles/quantumBackground.css';
+import { quantumCollapse } from '@utils/coreHelpers';
+import '@styles/quantumTitles.css';
+import '@styles/quantumBackground.css';
 import './MyScenesPage-styles.module.scss';
 import styles from './MyScenesPage.module.scss';
-import sharedStyles from '../../../styles/shared.module.scss';
-import '../../layout/NavBar/nav.scss';
-import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '../../layout/NavBar/navLabels';
+import sharedStyles from '@styles/shared.module.scss';
+import '@components/layout/NavBar/nav.scss';
+import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '@components/layout/NavBar/navLabels';
 import homeStyles from '../HomePage/HomeIndex.module.scss';
 
 /**

@@ -2,17 +2,17 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { Canvas } from '@react-three/fiber';
 import { useLocation } from 'react-router-dom';
-import { useAuth } from '../../../features/auth/context/AuthContext';
+import { useAuth } from '@features/auth/context/AuthContext';
 import RotatingCube from './components/ShowcaseViewer/RotatingCube/RotatingCube';
 import ShowcaseViewer from './components/ShowcaseViewer';
 import QuantumPortalShowcase from './components/QuantumPortalShowcase';
 import { noetechAnima } from './data/noetechAnima';
-import { portalWorlds, glyphSets } from '../../../data/portalWorlds';
+import { portalWorlds, glyphSets } from '@/data/portalWorlds';
 import { quantumCollapse, getCardPosition } from './utils/showcaseHelpers';
-import '../../../styles/quantumTitles.css';
-import '../../../styles/quantumBackground.css';
+import '@styles/quantumTitles.css';
+import '@styles/quantumBackground.css';
 import './ShowcaseGallery.scss';
-import sharedStyles from '../../../styles/shared.module.scss';
+import sharedStyles from '@styles/shared.module.scss';
 
 const HERO_TAGLINES = [
   'The Noetech Digital Pantheon',

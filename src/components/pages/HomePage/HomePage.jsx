@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 // Components
-import Quote from '../../ui/Quote/Quote';
+import Quote from '@components/ui/Quote/Quote';
 import ProgressBar from './components/ProgressBar';
 import Scene from './components/Scene';
 import ScrambleOnHover from './components/ScrambleOnHover';
@@ -14,18 +14,18 @@ import QuantumManifoldAnimation from './components/QuantumManifoldAnimation';
 import styles from './HomeIndex.module.scss';
 
 // Utilities
-import quantumCollapse from '@/utils/quantumCollapse';
-import { portalWorlds, glyphSets } from '../../../data/portalWorlds';
+import quantumCollapse from '@utils/quantumCollapse';
+import { portalWorlds, glyphSets } from '@/data/portalWorlds';
 
 // Custom Hooks
-import useQuantumState from '@/hooks/useQuantumState';
-import useParallax from '@/hooks/useParallax';
+import useQuantumState from '@hooks/useQuantumState';
+import useParallax from '@hooks/useParallax';
 
 // External
-import BeamScanButton from '../../ui/BeamScanButton/BeamScanButton';
+import BeamScanButton from '@components/ui/BeamScanButton/BeamScanButton';
 import { Link, useNavigate } from 'react-router-dom';
-import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '../../layout/NavBar/navLabels';
-import { useAuth } from '../../../features/auth/context/AuthContext';
+import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '@components/layout/NavBar/navLabels';
+import { useAuth } from '@features/auth/context/AuthContext';
 
 export default function HomePage() {
   const { isAuthenticated, logout, user } = useAuth();
@@ -152,7 +152,7 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
               </h1>
             </div>
             <p className="quantum-subtitle">
-              / / I N T E R A C T I V E _ C O N S O L E _ A W A I T S . . .
+               I N T E R A C T I V E _ C O N S O L E _ A W A I T S 
             </p>
             <div className="hero-stats">
               <div className="stat-item">

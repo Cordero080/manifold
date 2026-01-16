@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import BeamScanButton from '../../../../components/ui/BeamScanButton/BeamScanButton';
-import { quantumCollapse } from '../../../../utils/coreHelpers';
+import { useAuth } from '@features/auth/context/AuthContext';
+import BeamScanButton from '@components/ui/BeamScanButton/BeamScanButton';
+import { quantumCollapse } from '@utils/coreHelpers';
 import './SignUpPage.css';
-import '../../../../components/layout/NavBar/nav.scss';
-import homeStyles from '../../../../components/pages/HomePage/HomeIndex.module.scss';
+import '@components/layout/NavBar/nav.scss';
+import homeStyles from '@components/pages/HomePage/HomeIndex.module.scss';
 
 // Portal worlds system (matching MyScenesPage/Showcase)
 const portalWorlds = [
