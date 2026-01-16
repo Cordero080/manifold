@@ -130,7 +130,13 @@ function GeomLab() {
       const link = e.target.closest('a');
       if (link && link.href) {
         const url = new URL(link.href);
-        const targetPath = url.pathname;
+        let targetPath = url.pathname;
+        
+        // Strip the base path if present (for GitHub Pages deployment)
+        const basePath = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
+        if (basePath && targetPath.startsWith(basePath)) {
+          targetPath = targetPath.slice(basePath.length) || '/';
+        }
 
         // Only block internal navigation to different routes
         if (targetPath !== location.pathname && url.origin === window.location.origin) {
