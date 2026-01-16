@@ -790,6 +790,29 @@ input,
     color: var(--glyph-color);
     filter: var(--glyph-filter);
     text-shadow: var(--glyph-text-shadow);
+
+    /* Responsive glyph sizing */
+    @media (max-width: 768px) {
+      font-size: 13px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 11px;
+      margin-left: 6px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px;
+      margin-left: 5px;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 375px) {
+      font-size: 9px;
+      margin-left: 4px;
+      letter-spacing: 0.06em;
+    }
   }
 
   /* Dynamic Portal Background wrapper */
