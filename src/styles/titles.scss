@@ -132,18 +132,18 @@ h1.quantum-title {
   animation: pageTitleShimmer 5s ease-in-out infinite;
 }
 
-.slashed-zero::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 65%;
-  height: 8px;
-  background: linear-gradient(135deg, #c1077dc1 0%, #9c65f4 55%, #2eaca4 75%, #c82e76 90%);
-  transform: translate(-65%, -90%) rotate(-30deg);
-  z-index: 2;
-  pointer-events: none;
-}
+// .slashed-zero::after {
+//   content: '';
+//   position: absolute;
+//   left: 50%;
+//   top: 50%;
+//   width: 85%;
+//   height: 8px;
+//   background: linear-gradient(135deg, #c1077dc1 0%, #9c65f4 55%, #2eaca4 75%, #c82e76 90%);
+//   transform: translate(-65%, -90%) rotate(-30deg);
+//   z-index: 2;
+//   pointer-events: none;
+// }
 
 /* Apply upside-down A transform to all Orbitron text elements */
 .nav-link,
