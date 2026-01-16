@@ -913,7 +913,7 @@ input,
   :global(.button-wrapper-auth) {
     display: flex;
     justify-content: center;
-    margin-top: calc(10px + 1vh);
+    margin-top: calc(30px + 2vh);
     margin-bottom: 24px;
     position: relative;
     z-index: 100;
@@ -923,12 +923,38 @@ input,
   /* Button wrapper not authenticated */
   :global(.button-wrapper-no-auth) {
     display: flex;
-    gap: 32px; /* Reduced from 48px for tighter spacing */
+    gap: 48px;
     justify-content: center;
-    margin-top: calc(10px + 1vh);
+    margin-top: calc(30px + 2vh);
     position: relative;
     z-index: 100;
     pointer-events: auto;
+
+    /* Dark navy text for login/signup buttons */
+    button,
+    button span,
+    button * {
+      color: #0a1628 !important;
+      -webkit-text-fill-color: #0a1628 !important;
+    }
+
+    /* Make buttons wider */
+    button {
+      padding: 14px 70px;
+      font-size: 16px;
+    }
+  }
+
+  /* Large screens - scale up buttons */
+  @media (min-width: 1400px) {
+    :global(.button-wrapper-no-auth) button {
+      padding: 18px 90px !important;
+      font-size: 18px !important;
+    }
+    :global(.button-wrapper-auth) button {
+      padding: 18px 90px !important;
+      font-size: 18px !important;
+    }
   }
 
   /* Inverted letter styles moved to /components/ui/InvertedLetterText/invertedLetters.css */

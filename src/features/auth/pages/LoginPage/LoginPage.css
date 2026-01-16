@@ -13,6 +13,7 @@
   position: relative;
   overflow: hidden;
   cursor: none;
+  margin-top: -60px;
 }
 
 .login-page * {
@@ -92,7 +93,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 650px;
+  max-width: 600px;
   /* Holographic cosmic black style */
   background:
     linear-gradient(145deg, rgba(10, 10, 10, 0.7), rgba(0, 0, 0, 0.55)),
@@ -117,18 +118,14 @@
     50% 50%;
   animation: dark-holographic-shimmer 8s ease infinite;
   border: 1px solid rgba(0, 212, 255, 0.3);
-  border-radius: 24px;
-  padding: 56px 48px;
+  border-radius: 21px;
+  padding: 29px 35px;
   box-shadow:
     0 8px 32px rgba(0, 212, 255, 0.2),
     0 0 80px rgba(138, 43, 226, 0.1),
     inset 0 1px 3px rgba(255, 255, 255, 0.2),
     inset 0 -1px 3px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
-
-  /* Scale entire card down by 50% then up by 20% = 0.6 total */
-  transform: scale(0.6);
-  transform-origin: center;
 
   /* Angled corners clip-path */
   clip-path: polygon(
@@ -153,19 +150,22 @@
 
 .login-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 31px;
+  padding: 10px 0;
 }
 
 .login-title {
   font-family: 'Future Z', 'Orbitron', 'Rajdhani', monospace;
-  font-size: 38px;
+  font-size: clamp(19px, 4.8vw, 31px);
   font-weight: 700;
   letter-spacing: 3px;
-  margin: 0 0 12px 0;
+  margin: 10px 0 15px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 13px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .title-word-left {
@@ -304,28 +304,28 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 11px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
 }
 
 .form-label {
-  font-family: 'Orbitron', monospace;
-  font-size: 17px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
 }
 
 .form-input {
-  font-family: 'Orbitron', monospace;
-  font-size: 20px;
-  padding: 18px 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  padding: 11px 11px;
   background:
     linear-gradient(145deg, #0a0a0a, #000000),
     radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 50%),
@@ -345,6 +345,7 @@
   border: 1px solid rgba(0, 212, 255, 0.3);
   border-radius: 12px;
   color: #ffffff;
+  caret-color: #00ffff;
   outline: none;
   transition: all 0.3s ease;
   animation: dark-holographic-shimmer 8s ease infinite;
@@ -361,6 +362,8 @@
 }
 
 .form-input::placeholder {
+  font-family: inherit;
+  font-size: inherit;
   color: rgba(255, 255, 255, 0.3);
 }
 
@@ -520,25 +523,209 @@
   text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
 }
 
-/* Responsive design */
+/* Password input wrapper with eye toggle */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.password-input-wrapper .form-input {
+  width: 100%;
+  padding-right: 55px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer !important;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 212, 255, 0.6);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.password-toggle:hover {
+  color: #00ffff;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+}
+
+.password-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ====================================
+   RESPONSIVE BREAKPOINTS
+   ==================================== */
+
+/* Tablet */
 @media (max-width: 768px) {
+  .login-page {
+    padding: 100px 15px 30px;
+  }
+
   .login-container {
-    max-width: 90%;
-    padding: 36px 28px;
+    max-width: 95%;
+    padding: 30px 24px;
   }
 
   .login-title {
-    font-size: 32px;
-    gap: 12px;
+    font-size: 28px;
+    gap: 10px;
   }
 
   .title-separator {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .form-label {
+    font-size: 14px;
+  }
+
+  .form-input {
+    font-size: 16px;
+    padding: 14px 18px;
+  }
+
+  .password-input-wrapper .form-input {
+    padding-right: 45px;
+  }
+
+  .password-toggle svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .login-page {
+    padding: 80px 10px 20px;
+  }
+
+  .login-container {
+    max-width: 100%;
+    padding: 25px 18px;
+    border-radius: 16px;
+  }
+
+  .login-title {
+    font-size: 22px;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .title-separator {
+    font-size: 14px;
+  }
+
+  .login-subtitle {
+    font-size: 10px;
+  }
+
+  .form-label {
+    font-size: 12px;
+  }
+
+  .form-input {
+    font-size: 14px;
+    padding: 12px 14px;
+    border-radius: 8px;
+  }
+
+  .password-input-wrapper .form-input {
+    padding-right: 40px;
+  }
+
+  .password-toggle {
+    right: 10px;
+  }
+
+  .password-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer-text,
+  .footer-link {
+    font-size: 14px;
+  }
+
+  .error-message {
+    font-size: 12px;
+  }
+
+  .submit-error {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 375px) {
+  .login-page {
+    padding: 70px 8px 15px;
+  }
+
+  .login-container {
+    padding: 20px 14px;
+  }
+
+  .login-title {
+    font-size: 18px;
+    gap: 6px;
+  }
+
+  .title-separator {
+    font-size: 12px;
+  }
+
+  .login-subtitle {
+    font-size: 9px;
+  }
+
+  .form-label {
+    font-size: 11px;
+  }
+
+  .form-input {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .footer-text,
+  .footer-link {
+    font-size: 12px;
   }
 }
 
 /* Increase button size for login page only */
+.login-page button[class*="beamScanBtn"],
+.login-page button[class*="beamScanBtn"] span,
+.login-page button[class*="beamScanBtn"] * {
+  color: #0a1628 !important;
+  -webkit-text-fill-color: #0a1628 !important;
+}
+
 .login-page button[class*="beamScanBtn"] {
-  font-size: 21.41px !important;
-  padding: 18.85px 113.80px !important;
+  font-size: 18px !important;
+  padding: 16px 80px !important;
+  margin-top: 10px;
+  margin-bottom: -20px;
+}
+
+@media (max-width: 480px) {
+  .login-page button[class*="beamScanBtn"] {
+    font-size: 14px !important;
+    padding: 12px 40px !important;
+  }
 }

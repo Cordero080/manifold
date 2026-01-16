@@ -25,7 +25,7 @@
   backdrop-filter: blur(30px);
   border-bottom: 2px solid rgba(0, 255, 255, 0.27);
   box-shadow: 0 2px 24px rgba(0, 255, 255, 0.13);
-  transition: all 1.2s ease;
+  transition: background 1.2s ease, backdrop-filter 1.2s ease, box-shadow 1.2s ease, border-color 1.2s ease;
 }
 
 /* Scrolled state */
@@ -227,8 +227,10 @@
    RESPONSIVE BREAKPOINTS
    ==================================== */
 
-/* Tablet: 768px - 1024px */
-@media (max-width: 1024px) {
+/* Large Desktop: > 1200px - Default styles apply */
+
+/* Desktop: 1024px - 1200px */
+@media (max-width: 1200px) {
   .quantum-nav {
     padding: 0 30px;
     height: 100px;
@@ -240,57 +242,45 @@
 
   .nav-links {
     gap: 20px;
-    flex-wrap: nowrap; /* Prevent wrapping */
   }
 
   .nav-link {
-    font-size: 15px;
-    white-space: nowrap; /* Prevent text wrapping within links */
-  }
-
-  .nav-terminal {
-    font-size: 12px;
-    margin-left: 15px;
-  }
-
-  .nav-terminal .terminal-cursor {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 
-/* Mobile Landscape: 481px - 767px */
-@media (max-width: 767px) {
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) {
   .quantum-nav {
-    padding: 0 20px;
+    padding: 0 25px;
     height: 90px;
   }
 
   .logo-text {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .nav-links {
-    gap: 12px;
-    flex-wrap: nowrap;
+    gap: 16px;
   }
 
   .nav-link {
-    font-size: 13px;
-    white-space: nowrap;
+    font-size: 14px;
+    letter-spacing: 0.5px;
   }
 
   .nav-terminal {
-    font-size: 11px;
-    margin-left: 10px;
+    font-size: 12px;
+    margin-left: 12px;
   }
 
-  .nav-terminal .terminal-cursor {
-    font-size: 11px;
+  .nav-username {
+    font-size: 10px;
   }
 }
 
-/* Mobile Portrait: < 480px */
-@media (max-width: 480px) {
+/* Large Mobile / Small Tablet: 600px - 768px */
+@media (max-width: 768px) {
   .quantum-nav {
     padding: 0 15px;
     height: 80px;
@@ -301,22 +291,157 @@
   }
 
   .nav-links {
-    gap: 8px;
-    flex-wrap: nowrap;
+    gap: 10px;
   }
 
   .nav-link {
-    font-size: 11px;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .nav-terminal {
+    font-size: 10px;
+    margin-left: 8px;
+  }
+
+  .nav-username {
+    font-size: 9px;
+  }
+
+  .nav-terminal .terminal-cursor svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Mobile: 480px - 600px */
+@media (max-width: 600px) {
+  .quantum-nav {
+    padding: 0 12px;
+    height: 70px;
+  }
+
+  .logo-text {
+    font-size: 15px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+    letter-spacing: 0;
   }
 
   .nav-terminal {
     font-size: 9px;
-    margin-left: 8px;
+    margin-left: 6px;
   }
 
-  .nav-terminal .terminal-cursor {
+  .nav-username {
+    font-size: 8px;
+  }
+
+  .nav-terminal .terminal-cursor svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Small Mobile: 375px - 480px (iPhone 6/7/8 size) */
+@media (max-width: 480px) {
+  .quantum-nav {
+    padding: 0 10px;
+    height: 60px;
+  }
+
+  .logo-text {
+    font-size: 13px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-link {
     font-size: 9px;
+    letter-spacing: 0;
+  }
+
+  .nav-terminal {
+    font-size: 8px;
+    margin-left: 5px;
+  }
+
+  .nav-username {
+    font-size: 7px;
+    display: none; /* Hide username on very small screens */
+  }
+
+  .nav-terminal .terminal-cursor svg {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+/* Extra Small Mobile: < 375px (iPhone SE, older devices) */
+@media (max-width: 375px) {
+  .quantum-nav {
+    padding: 0 8px;
+    height: 55px;
+  }
+
+  .logo-text {
+    font-size: 11px;
+  }
+
+  .nav-links {
+    gap: 4px;
+  }
+
+  .nav-link {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .nav-terminal {
+    font-size: 7px;
+    margin-left: 4px;
+  }
+
+  .nav-terminal .terminal-cursor svg {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Tiny screens: < 320px */
+@media (max-width: 320px) {
+  .quantum-nav {
+    padding: 0 6px;
+    height: 50px;
+  }
+
+  .logo-text {
+    font-size: 10px;
+  }
+
+  .nav-links {
+    gap: 3px;
+  }
+
+  .nav-link {
+    font-size: 7px;
+  }
+
+  .nav-terminal {
+    font-size: 6px;
+    margin-left: 3px;
+  }
+
+  .nav-terminal .terminal-cursor svg {
+    width: 9px;
+    height: 9px;
   }
 }

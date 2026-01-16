@@ -11,7 +11,7 @@ import { portalWorlds, glyphSets } from '../../../data/portalWorlds';
 import { quantumCollapse, getCardPosition } from './utils/showcaseHelpers';
 import '../../../styles/quantumTitles.css';
 import '../../../styles/quantumBackground.css';
-import styles from './ShowcaseGallery.module.scss';
+import './ShowcaseGallery.scss';
 import sharedStyles from '../../../styles/shared.module.scss';
 
 const HERO_TAGLINES = [
