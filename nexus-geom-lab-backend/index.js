@@ -52,6 +52,12 @@ app.use(
         return callback(null, true);
       }
 
+      // Allow Vercel deployments
+      if (origin.includes('vercel.app') || origin.includes('nexus-geom-lab')) {
+        console.log('CORS allowed for Vercel');
+        return callback(null, true);
+      }
+
       // Allow production frontend URL from env
       if (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) {
         return callback(null, true);
