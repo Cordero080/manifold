@@ -13,14 +13,6 @@ const getBase = () => {
   return '/';
 };
 
-// Determine output directory
-// - Vercel: 'dist'
-// - GitHub Pages: 'docs'
-const getOutDir = () => {
-  if (process.env.VERCEL) return 'dist';
-  return 'docs';
-};
-
 export default defineConfig({
   base: getBase(),
   plugins: [
@@ -41,7 +33,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: getOutDir(),
+    outDir: 'docs',
     cssMinify: 'esbuild',
     cssCodeSplit: true,
     rollupOptions: {
