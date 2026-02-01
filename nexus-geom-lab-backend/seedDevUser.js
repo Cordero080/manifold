@@ -10,9 +10,9 @@ const seedDevUser = async () => {
     console.log("✅ Connected to MongoDB\n");
 
     // Get credentials from .env or use defaults
-    const email = process.env.DEV_USER_EMAIL || "dev@test.com";
-    const password = process.env.DEV_USER_PASSWORD || "dev123";
-    const username = process.env.DEV_USER_USERNAME || "devuser";
+    const email = process.env.DEV_USER_EMAIL || "pablo@test.com";
+    const password = process.env.DEV_USER_PASSWORD || "test123";
+    const username = process.env.DEV_USER_USERNAME || "pablo";
 
     // Check if dev user already exists
     let user = await User.findOne({ email });

@@ -18,6 +18,7 @@ import { create24Cell } from '../geometries/polytopes/cell24.js';
 import { createCompound24Cell } from '../geometries/polytopes/compoundCell24.js';
 import { create16Cell } from '../geometries/polytopes/cell16.js';
 import { create600Cell } from '../geometries/polytopes/cell600.js';
+import { createCompoundPolychoron } from '../geometries/polytopes/compoundPolychoron.js';
 import { createCompound600Cell } from '../geometries/polytopes/compoundCell600.js';
 import { createMobiusSphere } from '../geometries/manifolds/mobiusSphere.js';
 import { createMegaTesseract } from '../geometries/polytopes/megaTesseract.js';
@@ -133,6 +134,10 @@ export function createGeometry(type = 'icosahedron', options = {}) {
     case 'compound600cell':
       // Use modular geometry - see geometries/polytopes/compoundCell600.js
       return createCompound600Cell(options);
+
+    case 'compoundpolychoron':
+      // Use modular geometry - see geometries/polytopes/compoundPolychoron.js
+      return createCompoundPolychoron(options);
 
     default:
       return new THREE.IcosahedronGeometry();

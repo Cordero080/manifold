@@ -1,5 +1,6 @@
 // Imports MongoDB connection library
-const mongoose = require("mongoose"); // Mongoose = MongoDB ODM (Object Data Modeling) library
+const mongoose = require('mongoose'); // Mongoose = MongoDB ODM (Object Data Modeling) library
+const seedDevUser = require('./seedDevUser'); // Auto-seed dev user
 
 // Creates a function that connects to database
 const connectDB = async () => {
@@ -9,9 +10,12 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGODB_URI); // Wait for connection to complete
 
     // If successful, prints success message only in development
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== 'production') {
       console.log(`MongoDb Connected: ${conn.connection.host}`); // Shows database hostname
     }
+
+    // Auto-seed dev user after connection (development only)
+    await seedDevUser();
 
     // If it fails, prints error
   } catch (error) {

@@ -35,8 +35,8 @@ class ErrorBoundary extends React.Component {
         <div className={styles.errorBackdrop}>
           <div className={styles.errorContainer}>
             <div className={styles.errorHeader}>
-              <h1 className={styles.errorTitle}>⚠️ SYSTEM ERROR</h1>
               <div className={styles.errorIcon}>!</div>
+              <h1 className={styles.errorTitle}>SYSTEM ERROR</h1>
             </div>
 
             <div className={styles.errorContent}>

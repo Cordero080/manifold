@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 import { useAuth } from '@features/auth/context/AuthContext';
 import RotatingCube from './components/ShowcaseViewer/RotatingCube/RotatingCube';
 import ShowcaseViewer from './components/ShowcaseViewer';
-import QuantumPortalShowcase from './components/QuantumPortalShowcase';
 import { noetechAnima } from './data/noetechAnima';
 import { portalWorlds, glyphSets } from '@/data/portalWorlds';
 import { quantumCollapse, getCardPosition } from './utils/showcaseHelpers';
@@ -366,35 +365,10 @@ export default function ShowcaseGallery() {
 
   return (
     <>
-      {/* Three.js Quantum Portal Effect - Top */}
-      <QuantumPortalShowcase
-        position="top"
-        sceneColors={{
-          color1: portalState.colors[0],
-          color2: portalState.colors[1],
-          color3: portalState.colors[2],
-        }}
-      />
-
-      {/* Three.js Quantum Portal Effect - Bottom */}
-      <QuantumPortalShowcase
-        position="bottom"
-        sceneColors={{
-          color1: portalState.colors[0],
-          color2: portalState.colors[1],
-          color3: portalState.colors[2],
-        }}
-      />
-
-      {/* Three.js Quantum Portal Effect - Middle */}
-      <QuantumPortalShowcase
-        position="middle"
-        sceneColors={{
-          color1: portalState.colors[0],
-          color2: portalState.colors[1],
-          color3: portalState.colors[2],
-        }}
-      />
+      {/* Three.js Quantum Portal Effect - DISABLED for performance */}
+      {/* <QuantumPortalShowcase position="top" sceneColors={{...}} /> */}
+      {/* <QuantumPortalShowcase position="bottom" sceneColors={{...}} /> */}
+      {/* <QuantumPortalShowcase position="middle" sceneColors={{...}} /> */}
 
       {/* Clip-path background layer (matching HomePage) */}
       <div className="bg-gallery-layer bg-gallery-reality" aria-hidden="true"></div>

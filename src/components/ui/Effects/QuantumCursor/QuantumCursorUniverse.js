@@ -1,7 +1,7 @@
 /**
  * QUANTUM CONSTELLATION CURSOR UNIVERSE ENGINE
  * Controls the behavior of the QuantumCursor component
- * Creates particle effects, energy waves, and interactive cursor elements
+ * Creates energy waves and interactive cursor elements
  */
 export default class QuantumCursorUniverse {
   constructor() {
@@ -13,33 +13,20 @@ export default class QuantumCursorUniverse {
     this.mouseY = 0;
     this.targetX = 0;
     this.targetY = 0;
-    this.prevMouseX = 0;
-    this.prevMouseY = 0;
-    this.velocity = 0;
-    this.angle = 0;
 
-    this.particles = [];
-    this.trailParticles = []; // New: Dedicated trail particles
     this.energyWaves = [];
-    this.maxParticles = 10;
-    this.maxTrailParticles = 200; // REDUCED from 500 for better performance
-    this.maxEnergyWaves = 3; // Hexagon formation
+    this.maxEnergyWaves = 3;
 
     this.isMouseMoving = false;
     this.moveTimeout = null;
     this.quantumState = 0;
     this.dimensionalTear = false;
-    this.isOverControl = false; // Track if mouse is over a control element
-    this.frameCount = 0;
+    this.isOverControl = false;
 
     this.init();
   }
 
   init() {
-    // Don't set cursor style here - we'll let the CSS handle it
-
-    this.createParticleSystem();
-    this.createTrailParticleSystem(); // New: Trail particles
     this.createEnergyWaves();
 
     document.addEventListener('mousemove', (e) => this.updateMousePosition(e));
@@ -49,7 +36,6 @@ export default class QuantumCursorUniverse {
       }
     });
     document.addEventListener('mousedown', (e) => {
-      // Disable dimensional rift effect in the geom-lab route and over controls
       if (!this.isInGeomLab() && !this.isOverControl) {
         this.createDimensionalRift();
       }
@@ -59,24 +45,14 @@ export default class QuantumCursorUniverse {
     this.animate();
   }
 
-  // Helper method to check if we're currently in the geom-lab route
   isInGeomLab() {
     return window.location.pathname.includes('/geom-lab');
   }
 
   updateMousePosition(e) {
-    this.prevMouseX = this.mouseX;
-    this.prevMouseY = this.mouseY;
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
 
-    // Calculate velocity and angle for trail effects
-    const dx = this.mouseX - this.prevMouseX;
-    const dy = this.mouseY - this.prevMouseY;
-    this.velocity = Math.sqrt(dx * dx + dy * dy);
-    this.angle = Math.atan2(dy, dx);
-
-    // Check if mouse is over an interactive control element
     const target = e.target;
     this.isOverControl =
       target.tagName === 'INPUT' ||
@@ -86,13 +62,11 @@ export default class QuantumCursorUniverse {
       target.classList.contains('section-header') ||
       target.classList.contains('controls');
 
-    // Show/hide cursor based on our context
     if (this.cursor) {
-      // Only hide cursor in geom-lab page, always show on homepage
       if (this.isInGeomLab()) {
-        this.cursor.style.opacity = '0'; // Hide only in geom-lab
+        this.cursor.style.opacity = '0';
       } else {
-        this.cursor.style.opacity = '1'; // Always show on homepage, regardless of what element we're over
+        this.cursor.style.opacity = '1';
       }
     }
 
@@ -101,32 +75,6 @@ export default class QuantumCursorUniverse {
     this.moveTimeout = setTimeout(() => {
       this.isMouseMoving = false;
     }, 100);
-
-    // Only create particles when not in geom-lab
-    if (!this.isInGeomLab()) {
-      this.createQuantumParticles();
-      this.spawnTrailParticles(); // New: Spawn trail particles
-    }
-  }
-
-  createParticleSystem() {
-    for (let i = 0; i < this.maxParticles; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'quantum-particle';
-      document.body.appendChild(particle);
-
-      this.particles.push({
-        element: particle,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 1.5,
-        vy: (Math.random() - 0.5) * 1.5,
-        life: Math.random(),
-        maxLife: Math.random() * 4 + 2,
-        hue: Math.random() * 360,
-        baseSize: 0.8 + Math.random() * 0.4,
-      });
-    }
   }
 
   createEnergyWaves() {
@@ -137,78 +85,10 @@ export default class QuantumCursorUniverse {
 
       this.energyWaves.push({
         element: wave,
-        angle: (360 / this.maxEnergyWaves) * i, // Evenly distributed (120° apart for 3 waves)
-        distance: 15, // Fixed closer distance
-        speed: 1.5, // Uniform speed for symmetrical rotation
+        angle: (360 / this.maxEnergyWaves) * i,
+        distance: 15,
+        speed: 1.5,
       });
-    }
-  }
-
-  // New: Create trail particle system
-  createTrailParticleSystem() {
-    for (let i = 0; i < this.maxTrailParticles; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'trail-particle';
-      document.body.appendChild(particle);
-
-      this.trailParticles.push({
-        element: particle,
-        x: -100,
-        y: -100,
-        targetX: -100,
-        targetY: -100,
-        life: 0,
-        maxLife: 1.0, // Much longer lifetime for extended dragon trail
-        size: 40 + Math.random() * 6,
-        delay: i * 0.02, // Stagger the particles
-        hue: 0,
-        active: false,
-      });
-    }
-  }
-
-  // New: Spawn trail particles based on movement
-  spawnTrailParticles() {
-    this.frameCount++;
-
-    // PERFORMANCE: Reduced spawn rate and increased threshold
-    const spawnRate = Math.min(Math.floor(this.velocity / 2), 3); // Reduced from 5 to 3
-
-    if (this.frameCount % 2 === 0 && this.velocity > 1) {
-      // Every 2 frames instead of every frame, higher threshold
-      for (let i = 0; i < spawnRate; i++) {
-        const particle = this.trailParticles.find((p) => !p.active);
-        if (particle) {
-          // Spawn at the visual cursor position (targetX/targetY) not the mouse position
-          particle.x = this.targetX;
-          particle.y = this.targetY;
-          particle.targetX = particle.x;
-          particle.targetY = particle.y;
-          particle.life = particle.maxLife;
-          particle.active = true;
-          particle.size = 3 + Math.min(this.velocity / 10, 8); // Size based on velocity
-
-          // Mostly blue to magenta (220-300), with occasional teal accent (170-190)
-          const useTeal = Math.random() < 0.15; // 15% chance for teal accent
-          particle.hue = useTeal
-            ? 170 + Math.random() * 20 // Teal accent
-            : 220 + ((this.quantumState * 100 + this.velocity * 5) % 80); // Blue to magenta
-        }
-      }
-    }
-  }
-
-  createQuantumParticles() {
-    const particle = this.particles[Math.floor(Math.random() * this.particles.length)];
-    if (particle) {
-      particle.x = this.mouseX + (Math.random() - 0.5) * 30;
-      particle.y = this.mouseY + (Math.random() - 0.5) * 200;
-      particle.vx = (Math.random() - 0.5) * 8;
-      particle.vy = (Math.random() - 0.5) * 8;
-      particle.life = particle.maxLife;
-      // Mostly blue to magenta, with occasional teal accent
-      const useTeal = Math.random() < 0.15;
-      particle.hue = useTeal ? 170 + Math.random() * 20 : 220 + Math.random() * 80;
     }
   }
 
@@ -230,14 +110,12 @@ export default class QuantumCursorUniverse {
       wormhole.style.top = this.mouseY + 'px';
       wormhole.style.transform = 'translate(-50%, -50%) scale(0)';
 
-      // Animate wormhole ripple
       requestAnimationFrame(() => {
         wormhole.style.transition = 'all 0.8s ease-out';
         wormhole.style.transform = 'translate(-50%, -50%) scale(3)';
         wormhole.style.opacity = '0';
       });
 
-      // Reset after animation
       setTimeout(() => {
         wormhole.style.transition = 'none';
         wormhole.style.transform = 'translate(-50%, -50%) scale(0)';
@@ -253,21 +131,16 @@ export default class QuantumCursorUniverse {
   }
 
   updatePhysics() {
-    // FASTER SMOOTHING: Increased from 0.15 to 0.25 for more responsive cursor
-    this.targetX += (this.mouseX - this.targetX) * 0.25;
-    this.targetY += (this.mouseY - this.targetY) * 0.25;
+    this.targetX = this.mouseX;
+    this.targetY = this.mouseY;
 
     if (this.cursor) {
-      // Set position with left/top, then center with transform
       this.cursor.style.left = `${this.targetX}px`;
       this.cursor.style.top = `${this.targetY}px`;
       this.cursor.style.transform = `translate(-50%, -50%) scale(${0.7 + Math.sin(this.quantumState * 3) * 0.15})`;
 
-      // Electric blues to vibrant magenta - full cyberpunk spectrum (220-300 hue range)
-      const baseHue = 220 + ((this.quantumState * 100) % 80); // Cycles through 220-300 (deep blue to magenta)
-      const ringPulse = 1 + Math.sin(this.quantumState * 2) * 0.1; // Reduced from 0.15 to 0.1
+      const baseHue = 220 + ((this.quantumState * 100) % 80);
 
-      // Multiple layered box-shadows to create concentric color rings (smaller)
       this.cursor.style.boxShadow = `
         0 0 4px 1px hsl(${baseHue}, 100%, 70%),
         0 0 8px 2px hsl(${220 + ((baseHue + 30) % 80)}, 100%, 60%),
@@ -285,16 +158,14 @@ export default class QuantumCursorUniverse {
         )
       `;
 
-      this.cursor.style.width = '20px'; // Reduced from 24px
+      this.cursor.style.width = '20px';
       this.cursor.style.height = '20px';
     }
 
-    // Adjust gravity field visibility
     if (this.gravityField) {
-      this.gravityField.style.left = this.mouseX - 90 + 'px';
-      this.gravityField.style.top = this.mouseY - 90 + 'px';
+      this.gravityField.style.left = this.mouseX - 30 + 'px';
+      this.gravityField.style.top = this.mouseY - 30 + 'px';
 
-      // Only hide gravity field in geom-lab, always show on homepage
       if (this.isInGeomLab()) {
         this.gravityField.style.opacity = '0';
       } else {
@@ -302,57 +173,11 @@ export default class QuantumCursorUniverse {
       }
     }
 
-    this.particles.forEach((particle) => {
-      const dx = this.mouseX - particle.x;
-      const dy = this.mouseY - particle.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance > 0 && distance < 200) {
-        const force = Math.min(30 / (distance * 0.5), 0.3);
-        particle.vx += (dx / distance) * force * 0.08;
-        particle.vy += (dy / distance) * force * 0.08;
-      }
-
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-      particle.vx *= 0.985;
-      particle.vy *= 0.985;
-
-      if (particle.x < -10) particle.x = window.innerWidth + 10;
-      if (particle.x > window.innerWidth + 10) particle.x = -10;
-      if (particle.y < -10) particle.y = window.innerHeight + 10;
-      if (particle.y > window.innerHeight + 10) particle.y = -10;
-
-      particle.life -= 0.008;
-      if (particle.life <= 0) {
-        particle.life = particle.maxLife;
-        particle.x = Math.random() * window.innerWidth;
-        particle.y = Math.random() * window.innerHeight;
-        particle.vx = (Math.random() - 0.5) * 1;
-        particle.vy = (Math.random() - 0.5) * 1;
-      }
-
-      particle.element.style.left = particle.x + 'px';
-      particle.element.style.top = particle.y + 'px';
-      const hueShift = (particle.hue + this.quantumState * 50) % 360;
-      particle.element.style.background = `
-        radial-gradient(circle, 
-          hsl(${hueShift}, 100%, 80%) 0%, 
-          hsl(${(hueShift + 60) % 360}, 100%, 60%) 30%,
-          hsl(${(hueShift + 120) % 360}, 80%, 50%) 60%,
-          transparent 100%
-        )
-      `;
-      const lifeOpacity = Math.min(particle.life / particle.maxLife, 1);
-      particle.element.style.opacity = lifeOpacity * 0.9;
-      particle.element.style.transform = `scale(${0.8 + lifeOpacity * 0.4})`;
-    });
-
     this.energyWaves.forEach((wave, index) => {
       wave.angle += wave.speed * 0.8;
       const radians = (wave.angle * Math.PI) / 180;
-      const dynamicDistance = 15 + Math.sin(this.quantumState + index) * 3; // Closer orbit, less variation
-      const waveX = this.targetX + Math.cos(radians) * dynamicDistance; // Use targetX/Y for smooth following
+      const dynamicDistance = 15 + Math.sin(this.quantumState + index) * 3;
+      const waveX = this.targetX + Math.cos(radians) * dynamicDistance;
       const waveY = this.targetY + Math.sin(radians) * dynamicDistance;
 
       wave.element.style.left = waveX + 'px';
@@ -368,49 +193,6 @@ export default class QuantumCursorUniverse {
       wave.element.style.background = `rgba(0, 255, 255, 0.6)`;
       wave.element.style.borderColor = `hsl(${hue}, 100%, 70%)`;
       wave.element.style.boxShadow = `0 0 8px hsl(${hue}, 100%, 70%)`;
-    });
-
-    // Update trail particles
-    this.trailParticles.forEach((particle) => {
-      if (particle.active) {
-        // Smooth interpolation towards target
-        particle.targetX += (particle.x - particle.targetX) * 0.1;
-        particle.targetY += (particle.y - particle.targetY) * 0.1;
-
-        // Decay life
-        particle.life -= 0.02;
-
-        if (particle.life <= 0) {
-          particle.active = false;
-          particle.element.style.opacity = '0';
-        } else {
-          const lifeRatio = particle.life / particle.maxLife;
-          const opacity = Math.min(lifeRatio * 1.2, 0.9);
-
-          particle.element.style.left = particle.targetX + 'px';
-          particle.element.style.top = particle.targetY + 'px';
-          particle.element.style.opacity = opacity;
-
-          // Dynamic color shift
-          const currentHue = (particle.hue + (1 - lifeRatio) * 60) % 360;
-          particle.element.style.background = `
-            radial-gradient(circle,
-              hsl(${currentHue}, 100%, 70%) 0%,
-              hsl(${(currentHue + 30) % 360}, 100%, 60%) 40%,
-              transparent 100%
-            )
-          `;
-          particle.element.style.boxShadow = `
-            0 0 ${particle.size * 2}px hsl(${currentHue}, 100%, 70%),
-            0 0 ${particle.size * 4}px hsl(${(currentHue + 60) % 360}, 80%, 60%, 0.5)
-          `;
-
-          // Size based on life (shrink as it fades)
-          const currentSize = particle.size * (0.3 + lifeRatio * 0.7);
-          particle.element.style.width = currentSize + 'px';
-          particle.element.style.height = currentSize + 'px';
-        }
-      }
     });
 
     this.quantumState += 0.015;

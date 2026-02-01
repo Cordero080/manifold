@@ -402,6 +402,8 @@
   line-height: 1;
   position: relative;
   z-index: 2;
+  color: #000000 !important;
+  text-shadow: none !important;
 }
 
 .create-scene-card:hover .create-scene-card__icon {
@@ -416,11 +418,12 @@
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
+  color: #000000 !important;
 }
 
 .create-scene-card__subtitle {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.7) !important;
   margin: 0;
   font-family: 'Orbitron', monospace;
   text-align: center;

@@ -21,31 +21,22 @@ export default function QuantumCursor() {
     const universe = new QuantumCursorUniverse();
     universeRef.current = universe;
 
-    // Cleanup function to remove particles and restore cursor
+    // Cleanup function to remove elements and restore cursor
     return () => {
-      // Remove any created particles when component unmounts
       if (universeRef.current) {
-        // Clean up particles
-        universeRef.current.particles.forEach((particle) => {
-          if (particle.element && particle.element.parentNode) {
-            particle.element.parentNode.removeChild(particle.element);
-          }
-        });
-
-        // Clean up trail particles
-        universeRef.current.trailParticles.forEach((particle) => {
-          if (particle.element && particle.element.parentNode) {
-            particle.element.parentNode.removeChild(particle.element);
-          }
-        });
-
         // Clean up energy waves
-        universeRef.current.energyWaves.forEach((wave) => {
-          if (wave.element && wave.element.parentNode) {
-            wave.element.parentNode.removeChild(wave.element);
-          }
-        });
+        if (universeRef.current.energyWaves) {
+          universeRef.current.energyWaves.forEach((wave) => {
+            if (wave.element && wave.element.parentNode) {
+              wave.element.parentNode.removeChild(wave.element);
+            }
+          });
+        }
       }
+
+      // Restore default cursor
+      document.documentElement.style.removeProperty('cursor');
+      document.body.style.removeProperty('cursor');
     };
   }, []);
 

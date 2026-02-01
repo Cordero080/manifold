@@ -559,6 +559,8 @@ export default function HessianPolychoronAnimation({ isActive = false }) {
         transform: 'translateX(-50%)',
         zIndex: 1,
         pointerEvents: 'none',
+        maskImage: 'linear-gradient(to bottom, white 0%, white 60%, transparent 90%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, white 0%, white 60%, transparent 90%)',
       }}
     />
   );

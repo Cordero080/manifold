@@ -36,7 +36,7 @@ function nextGrid(grid) {
   }
   return newGrid;
 }
-export default function ProgressBar({ portalState, glyphState, onQuantumCollapse }) {
+export default function ProgressBar({ portalState, onQuantumCollapse }) {
   const textRef = useRef();
   const [scrollState, setScrollState] = useState({ progress: 0, atBottom: false });
   const [pulse, setPulse] = useState(0);

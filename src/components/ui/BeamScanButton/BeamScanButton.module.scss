@@ -35,8 +35,8 @@ $font-code: 'Roboto Mono', 'JetBrains Mono', monospace;
 .beamScanBtn {
   position: relative;
   display: inline-block;
-  padding: 12.39px 52.38px; /* Reduced from 74.83px by 30% */
-  font-size: 14.08px;
+  padding: 14px 56px;
+  font-size: 18px;
   font-weight: 700;
   color: $text-color;
   background: $primary-gradient;
@@ -493,10 +493,10 @@ $font-code: 'Roboto Mono', 'JetBrains Mono', monospace;
 // Label (visible by default)
 .beamScanLabel {
   z-index: 2;
-  color: #ffffff;
+  color: #000000;
   text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.5),
-    0 1px 2px rgba(0, 0, 0, 0.3);
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.1);
   font-weight: 900;
   opacity: 1;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);

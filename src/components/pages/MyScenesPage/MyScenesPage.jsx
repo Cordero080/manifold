@@ -10,7 +10,6 @@ import BeamScanButton from '@components/ui/BeamScanButton/BeamScanButton';
 import { DeleteSuccessModal } from '@components/ui/Modals';
 import QuantumNav from '../HomePage/components/QuantumNav';
 import HomeBackground from '@components/ui/HomeBackground/HomeBackground';
-import QuantumPortalShowcase from '../Showcase/components/QuantumPortalShowcase';
 import { quantumCollapse } from '@utils/coreHelpers';
 import '@styles/quantumTitles.css';
 import '@styles/quantumBackground.css';
@@ -32,14 +31,6 @@ const portalWorlds = [
   { colors: ['#cfccbeff', '#056864ff', '#210205ff'], label: 'Singularity' },
 ];
 
-const glyphSets = [
-  ['ψ', 'Ω', 'Σ'],
-  ['λ', 'Φ', 'Ξ'],
-  ['π', 'Δ', 'Γ'],
-  ['μ', 'θ', 'ζ'],
-  ['τ', 'β', 'η'],
-];
-
 export default function MyScenesPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -57,7 +48,6 @@ export default function MyScenesPage() {
   const [deletedSceneName, setDeletedSceneName] = useState('');
 
   const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
-  const [glyphState, setGlyphState] = useState(() => quantumCollapse(glyphSets));
   const [navScrolled, setNavScrolled] = useState(false);
   
   // Smooth color interpolation
@@ -169,11 +159,9 @@ export default function MyScenesPage() {
     const handleQuantumCollapse = () => {
       // Collapse quantum superposition into definite states
       const newPortalState = quantumCollapse(portalWorlds);
-      const newGlyphState = quantumCollapse(glyphSets);
 
       // Update React state to trigger UI re-render with new colors
       setPortalState(newPortalState);
-      setGlyphState(newGlyphState);
     };
 
     const handleClickCollapse = () => {
@@ -323,35 +311,10 @@ export default function MyScenesPage() {
 
   return (
     <>
-      {/* Three.js Quantum Portal Effect - Top */}
-      <QuantumPortalShowcase
-        position="top"
-        sceneColors={{
-          color1: currentColors[0],
-          color2: currentColors[1],
-          color3: currentColors[2],
-        }}
-      />
-
-      {/* Three.js Quantum Portal Effect - Bottom */}
-      <QuantumPortalShowcase
-        position="bottom"
-        sceneColors={{
-          color1: currentColors[0],
-          color2: currentColors[1],
-          color3: currentColors[2],
-        }}
-      />
-
-      {/* Three.js Quantum Portal Effect - Middle */}
-      <QuantumPortalShowcase
-        position="middle"
-        sceneColors={{
-          color1: currentColors[0],
-          color2: currentColors[1],
-          color3: currentColors[2],
-        }}
-      />
+      {/* Three.js Quantum Portal Effect - DISABLED for performance */}
+      {/* <QuantumPortalShowcase position="top" sceneColors={{...}} /> */}
+      {/* <QuantumPortalShowcase position="bottom" sceneColors={{...}} /> */}
+      {/* <QuantumPortalShowcase position="middle" sceneColors={{...}} /> */}
 
       {/* Clip-path background layer (matching HomePage) */}
       <div className="bg-gallery-layer bg-gallery-reality" aria-hidden="true"></div>
@@ -411,7 +374,6 @@ export default function MyScenesPage() {
       <div className="my-scenes-page">
         <QuantumNav
           portalState={portalState}
-          glyphState={glyphState}
           navScrolled={navScrolled}
           isAuthenticated={isAuthenticated}
           logout={logout}
@@ -529,24 +491,8 @@ export default function MyScenesPage() {
                 background: `linear-gradient(135deg, ${portalState.colors[0]}15, ${portalState.colors[1]}10)`,
               }}
             >
-              <div
-                className="create-scene-card__icon"
-                style={{
-                  color: portalState.colors[0],
-                  textShadow: `0 0 20px ${portalState.colors[0]}`,
-                }}
-              >
-                +
-              </div>
-              <h3
-                className="create-scene-card__title"
-                style={{
-                  color: portalState.colors[0],
-                  opacity: 0.8,
-                }}
-              >
-                Create New Scene
-              </h3>
+              <div className="create-scene-card__icon">+</div>
+              <h3 className="create-scene-card__title">Create New Scene</h3>
               <p className="create-scene-card__subtitle">Start a new geometric creation</p>
             </div>
 

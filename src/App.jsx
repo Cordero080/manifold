@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import useSceneState from "@/hooks/useSceneState";
 import ThreeScene from '@/features/sceneControls/ThreeScene';
@@ -6,18 +6,20 @@ import Controls from '@/features/sceneControls/components/Controls/Controls';
 import SaveControls from '@/features/sceneControls/components/SaveButton/SaveControls';
 import ExitButton from '@/features/sceneControls/components/Controls/ExitButton/ExitButton';
 import ScrambleButton from '@/components/ui/ScrambleButton/ScrambleButton';
-import HomePage from '@/components/pages/HomePage/HomePage';
 import NavBar from '@/components/layout/NavBar/NavBar';
-import ShowcaseGallery from '@/components/pages/Showcase/ShowcaseGallery';
-import MyScenesPage from '@/components/pages/MyScenesPage/MyScenesPage';
-import SignUpPage from '@/features/auth/pages/SignUpPage/SignUpPage';
-import LoginPage from '@/features/auth/pages/LoginPage/LoginPage';
 import { SceneProvider, useScene } from '@/context/SceneContext';
 import { AuthProvider, useAuth } from "@/features/auth/context/AuthContext";
 import { QuantumCursor } from "@/components/ui/Effects";
 import Footer from "@/components/pages/HomePage/components/Footer/Footer";
 import './cursor-override.module.scss';
 import sharedStyles from '@/styles/shared.module.scss';
+
+// Lazy-loaded pages for better initial load performance
+const HomePage = lazy(() => import('@/components/pages/HomePage/HomePage'));
+const ShowcaseGallery = lazy(() => import('@/components/pages/Showcase/ShowcaseGallery'));
+const MyScenesPage = lazy(() => import('@/components/pages/MyScenesPage/MyScenesPage'));
+const SignUpPage = lazy(() => import('@/features/auth/pages/SignUpPage/SignUpPage'));
+const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage/LoginPage'));
 
 function GeomLab() {
   const { loadedConfig, resetScene } = useScene(); // CUSTOM HOOK: Get loaded config from context
@@ -493,44 +495,46 @@ function AppContent() {
       {/* Footer only on homepage bottom */}
       {currentPath === '/' && <Footer />}
 
-      <Routes>
-        {/* PUBLIC ROUTE - anyone can access */}
-        <Route path="/" element={<HomePageWithNav />} />
+      <Suspense fallback={<div style={{ background: '#0a0a0a', minHeight: '100vh' }} />}>
+        <Routes>
+          {/* PUBLIC ROUTE - anyone can access */}
+          <Route path="/" element={<HomePageWithNav />} />
 
-        {/* PROTECTED ROUTES - redirect to login if not authenticated */}
-        <Route
-          path="/geom-lab"
-          element={isAuthenticated ? <GeomLab /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/geometry-lab"
-          element={isAuthenticated ? <GeomLab /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/showcase"
-          element={
-            isAuthenticated ? (
-              <>
-                <NavBar />
-                <ShowcaseGallery />
-              </>
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/scenes"
-          element={isAuthenticated ? <MyScenesPage /> : <Navigate to="/login" />}
-        />
+          {/* PROTECTED ROUTES - redirect to login if not authenticated */}
+          <Route
+            path="/geom-lab"
+            element={isAuthenticated ? <GeomLab /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/geometry-lab"
+            element={isAuthenticated ? <GeomLab /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/showcase"
+            element={
+              isAuthenticated ? (
+                <>
+                  <NavBar />
+                  <ShowcaseGallery />
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route
+            path="/scenes"
+            element={isAuthenticated ? <MyScenesPage /> : <Navigate to="/login" />}
+          />
 
-        {/* PUBLIC AUTH ROUTES - anyone can access */}
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
+          {/* PUBLIC AUTH ROUTES - anyone can access */}
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
 
-        {/* CATCH-ALL - redirect unmatched routes to home */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+          {/* CATCH-ALL - redirect unmatched routes to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
     </SceneProvider>
   );
 }

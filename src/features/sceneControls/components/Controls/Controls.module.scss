@@ -168,6 +168,8 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 12px;
+  position: relative;
+  z-index: 1; /* Lower than dropdown z-index */
 }
 
 .controls input[type='range']:hover {
@@ -187,24 +189,15 @@
   background: linear-gradient(135deg, #00ffff, #ff00ff);
   border-radius: 10%;
   cursor: pointer;
-  box-shadow:
-    0 0 10px rgba(0, 255, 255, 0.8),
-    0 0 20px rgba(255, 0, 255, 0.6);
   transition: all 0.2s ease;
 }
 
 .controls input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  box-shadow:
-    0 0 15px rgba(0, 255, 255, 1),
-    0 0 30px rgba(255, 0, 255, 0.8);
 }
 
 .controls input[type='range']::-webkit-slider-thumb:active {
   transform: scale(1.1);
-  box-shadow:
-    0 0 20px rgba(0, 255, 255, 1),
-    0 0 35px rgba(255, 0, 255, 0.9);
 }
 
 .controls input[type='range']::-moz-range-thumb {
@@ -214,24 +207,15 @@
   border: none;
   border-radius: 10%;
   cursor: pointer;
-  box-shadow:
-    0 0 10px rgba(0, 255, 255, 0.8),
-    0 0 20px rgba(255, 0, 255, 0.6);
   transition: all 0.2s ease;
 }
 
 .controls input[type='range']::-moz-range-thumb:hover {
   transform: scale(1.2);
-  box-shadow:
-    0 0 15px rgba(0, 255, 255, 1),
-    0 0 30px rgba(255, 0, 255, 0.8);
 }
 
 .controls input[type='range']::-moz-range-thumb:active {
   transform: scale(1.1);
-  box-shadow:
-    0 0 20px rgba(0, 255, 255, 1),
-    0 0 35px rgba(255, 0, 255, 0.9);
 }
 
 .controls input[type='range']::-moz-range-track {

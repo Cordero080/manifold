@@ -12,8 +12,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  height: 110px;
+  padding: 0 27px;
+  height: 64px; /* Match navigation.css shared height */
   font-family: 'Orbitron', monospace;
   /* Default fallback styles when no inline styles present */
   background: linear-gradient(
@@ -86,7 +86,6 @@
 
 .nav-link:hover {
   color: #ff00cc;
-  text-shadow: 0 0 10px #ff00cc;
 }
 
 /* Brighter HOME link with a golden gradient */

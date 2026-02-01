@@ -16,21 +16,12 @@ const portalWorlds = [
   { colors: ['#cfccbeff', '#056864ff', '#210205ff'], label: 'Singularity' },
 ];
 
-const glyphSets = [
-  ['ψ', 'Ω', 'Σ'],
-  ['λ', 'Φ', 'Ξ'],
-  ['π', 'Δ', 'Γ'],
-  ['μ', 'θ', 'ζ'],
-  ['τ', 'β', 'η'],
-];
-
 const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
   // Quantum state management (matching MyScenesPage/Showcase)
   const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
-  const [glyphState, setGlyphState] = useState(() => quantumCollapse(glyphSets));
   const [navScrolled, setNavScrolled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -91,9 +82,7 @@ const LoginPage = () => {
   useEffect(() => {
     const handleQuantumCollapse = () => {
       const newPortalState = quantumCollapse(portalWorlds);
-      const newGlyphState = quantumCollapse(glyphSets);
       setPortalState(newPortalState);
-      setGlyphState(newGlyphState);
     };
 
     const handleClickCollapse = () => {
@@ -333,34 +322,9 @@ const LoginPage = () => {
       <div className="login-page">
         <nav className={`quantum-nav ${navScrolled ? 'scrolled' : ''}`}>
           <div className="nav-logo">
-            <span
-              className="logo-text"
-              data-text="N3XUS_GEOM"
-              style={{
-                color: '#fff',
-                filter: `drop-shadow(0 0 4px ${portalState.colors[1]}66)`,
-                transition: 'filter 1.2s',
-              }}
-            >
+            <Link to="/" className="logo-text" data-text="N3XUS_GEOM">
               N3XUS_GEOM
-            </span>
-            {/* Subtle quantum glyphs in navbar */}
-            <span
-              style={{
-                marginLeft: 10,
-                fontSize: 16,
-                color: portalState.colors[1],
-                letterSpacing: '0.12em',
-                verticalAlign: 'middle',
-                opacity: 0.8,
-                filter: `blur(0.3px) drop-shadow(0 0 4px ${portalState.colors[1]}88)`,
-                transition: 'color 1.2s, filter 1.2s, opacity 1.2s',
-                textShadow: `0 0 8px ${portalState.colors[1]}, 0 0 2px ${portalState.colors[0]}`,
-              }}
-            >
-              {glyphState.join(' ')}
-            </span>
-            <div className="logo-particles"></div>
+            </Link>
           </div>
           <div className="nav-links">
             <Link to="/" className="nav-link nav-link--home" data-dimension="0">
@@ -370,7 +334,6 @@ const LoginPage = () => {
               // SIGN UP
             </Link>
           </div>
-          <div className="nav-quantum-field"></div>
         </nav>
 
         <div className="login-container">

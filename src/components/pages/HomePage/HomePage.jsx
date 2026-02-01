@@ -32,7 +32,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   // Custom Hooks
-  const { portalState, glyphState, handleQuantumCollapse } = useQuantumState();
+  const { portalState, handleQuantumCollapse } = useQuantumState();
   const { parallaxRef, fgRef, bgRef, layer1Ref, layer2Ref, layer3Ref, layer4Ref, layer5Ref } =
     useParallax();
 
@@ -99,7 +99,6 @@ export default function HomePage() {
       {/* VINE-INSPIRED QUANTUM NAVIGATION */}
       <QuantumNav
         portalState={portalState}
-        glyphState={glyphState}
         navScrolled={navScrolled}
         isAuthenticated={isAuthenticated}
         logout={logout}
@@ -285,7 +284,6 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
 
       <ProgressBar
         portalState={portalState}
-        glyphState={glyphState}
         onQuantumCollapse={handleQuantumCollapse}
       />
     </>

@@ -6,7 +6,6 @@ import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '@components/layout/NavBa
 /**
  * Quantum-themed navigation bar with dynamic portal colors
  * @param {Object} portalState - Current portal color state
- * @param {Array} glyphState - Current quantum glyph state
  * @param {boolean} navScrolled - Whether nav is in scrolled state
  * @param {boolean} isAuthenticated - User authentication status
  * @param {Function} logout - Logout handler
@@ -15,7 +14,6 @@ import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '@components/layout/NavBa
  */
 export default function QuantumNav({
   portalState,
-  glyphState,
   navScrolled,
   isAuthenticated,
   logout,
@@ -36,48 +34,30 @@ export default function QuantumNav({
       }}
     >
       <div className="nav-logo">
-        <span
-          className="logo-text"
-          data-text={user?.username || 'N3XUS_GEOM'}
-          style={{
-            '--logo-filter': `drop-shadow(0 0 4px ${portalState.colors[1]}66)`,
-          }}
-        >
+        <Link to="/" className="logo-text" data-text={user?.username || 'N3XUS_GEOM'}>
           {user?.username || 'N3XUS_GEOM'}
-        </span>
-        {/* Subtle quantum glyphs in navbar */}
-        <span
-          className="nav-quantum-glyphs"
-          style={{
-            '--glyph-color': portalState.colors[1],
-            '--glyph-filter': `blur(0.3px) drop-shadow(0 0 4px ${portalState.colors[1]}88)`,
-            '--glyph-text-shadow': `0 0 8px ${portalState.colors[1]}, 0 0 2px ${portalState.colors[0]}`,
-          }}
-        >
-          {glyphState.join(' ')}
-        </span>
-        <div className="logo-particles"></div>
+        </Link>
       </div>
       <div className="nav-links">
         {isAuthenticated && (
           <>
             {currentPage !== 'home' && (
-              <ScrambleLink to="/" className="nav-link nav-link--home" data-dimension="0">
+              <Link to="/" className="nav-link nav-link--home">
                 // HOME
-              </ScrambleLink>
+              </Link>
             )}
             {currentPage !== 'scenes' && (
-              <ScrambleLink to="/scenes" className="nav-link" data-dimension="1">
+              <Link to="/scenes" className="nav-link">
                 // SCENES
-              </ScrambleLink>
+              </Link>
             )}
             {currentPage !== 'showcase' && (
-              <ScrambleLink to="/showcase" className="nav-link" data-dimension="2">
+              <Link to="/showcase" className="nav-link">
                 {SHOWCASE_LINK_TEXT}
-              </ScrambleLink>
+              </Link>
             )}
             {currentPage !== 'geom-lab' && (
-              <ScrambleLink to="/geom-lab" className="nav-link" data-dimension="3">
+              <ScrambleLink to="/geom-lab" className="nav-link">
                 {GEOM_LAB_LINK_TEXT}
               </ScrambleLink>
             )}
@@ -102,7 +82,6 @@ export default function QuantumNav({
           </>
         )}
       </div>
-      <div className="nav-quantum-field"></div>
     </nav>
   );
 }

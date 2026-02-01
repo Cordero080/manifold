@@ -82,16 +82,6 @@ export default function BackgroundLayers({ portalState, bgRef, fgRef }) {
         }}
       />
 
-      {/* Three.js Quantum Portal Effect - Middle */}
-      <QuantumPortal
-        position="middle"
-        sceneColors={{
-          color1: currentColors[0],
-          color2: currentColors[1],
-          color3: currentColors[2],
-        }}
-      />
-
       {/* Base Dark Layer */}
       <div className={styles.baseDark}></div>
 
