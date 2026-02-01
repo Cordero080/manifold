@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build:vercel",
+  "buildCommand": "vite build --base / --outDir dist",
   "outputDirectory": "dist",
   "framework": "vite"
 }
