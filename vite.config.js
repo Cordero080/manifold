@@ -3,11 +3,26 @@ import react from '@vitejs/plugin-react';
 import removeConsole from 'vite-plugin-remove-console';
 import path from 'path';
 
-// Root-level Vite config (used by the dev server)
+// Determine the base path based on deployment target
+// - Vercel: '/' (root)
+// - GitHub Pages: '/nexus-geom-lab/'
+// - Local dev: '/'
+const getBase = () => {
+  if (process.env.VERCEL) return '/';
+  if (process.env.NODE_ENV === 'production') return '/nexus-geom-lab/';
+  return '/';
+};
+
+// Determine output directory
+// - Vercel: 'dist'
+// - GitHub Pages: 'docs'
+const getOutDir = () => {
+  if (process.env.VERCEL) return 'dist';
+  return 'docs';
+};
+
 export default defineConfig({
-  // GitHub Pages deploys to https://username.github.io/repo-name/
-  // For local dev, use '/' - for GH Pages build, use '/nexus-geom-lab/'
-  base: process.env.NODE_ENV === 'production' ? '/nexus-geom-lab/' : '/',
+  base: getBase(),
   plugins: [
     react(),
     removeConsole({
@@ -26,7 +41,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'docs',
+    outDir: getOutDir(),
     cssMinify: 'esbuild',
     cssCodeSplit: true,
     rollupOptions: {
