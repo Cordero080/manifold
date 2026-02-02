@@ -277,23 +277,23 @@
 /* Large Mobile / Small Tablet: 600px - 768px */
 @media (max-width: 768px) {
   .quantum-nav {
-    padding: 0 15px;
-    height: 70px;
+    padding: 0 10px;
+    height: 55px;
     flex-wrap: nowrap;
   }
 
   .logo-text {
-    font-size: 15px;
+    font-size: 12px;
     white-space: nowrap;
   }
 
   .nav-links {
-    gap: 10px;
+    gap: 6px;
     flex-wrap: nowrap;
   }
 
   .nav-link {
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 0;
     white-space: nowrap;
   }

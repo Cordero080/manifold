@@ -212,3 +212,27 @@ h1.quantum-title {
     0 0 20px rgba(22, 10, 27, 0.146),
     0 0 60px rgba(5, 1, 49, 0.89);
 }
+
+/* ====================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Disable animations on mobile for better performance
+   ==================================== */
+@media (max-width: 768px) {
+  h1.quantum-title {
+    animation: none !important;
+  }
+
+  .title-word {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .slashed-zero {
+    animation: none !important;
+  }
+
+  .zero-char::before,
+  .zero-char::after {
+    display: none; /* Remove blur/shadow layers on mobile */
+  }
+}
