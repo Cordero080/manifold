@@ -46,7 +46,7 @@ export function createSpectralOrbs(scene, count = 8, orbitRadius = 4, hueShift =
   // Create main gradient orbs
   for (let i = 0; i < count; i++) {
     // Create biomorphic blob geometry with more vertices for morphing
-    const geometry = new THREE.SphereGeometry(0.3, 332, 32);
+    const geometry = new THREE.SphereGeometry(0.3, 32, 32);
 
     // Store original positions for morphing
     const positionAttribute = geometry.attributes.position;

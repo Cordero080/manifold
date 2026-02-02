@@ -47,3 +47,26 @@
   display: inline-block;
   transform: scaleX(-1);
 }
+
+/* Mobile fixes for iOS Safari - text-fill-color can cause rendering issues */
+@media (max-width: 768px) {
+  .title-inverted-v,
+  .nav-inverted-v {
+    /* Use simpler rendering on mobile to avoid webkit glitches */
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+}
+
+/* iOS-specific fix using supports query */
+@supports (-webkit-touch-callout: none) {
+  .title-inverted-v,
+  .nav-inverted-v {
+    -webkit-text-fill-color: currentColor;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+}

@@ -5,6 +5,13 @@ import {
   updateSpectralOrbHue,
 } from '../objects/spectralOrbs';
 
+// Detect mobile devices for performance optimization
+const isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    typeof navigator !== 'undefined' ? navigator.userAgent : ''
+  ) ||
+  (typeof window !== 'undefined' && window.innerWidth < 768);
+
 // Track current environment and orb state per scene
 const sceneState = new WeakMap();
 
@@ -29,9 +36,11 @@ export function updateEnvironment(scene, environment, hueShift = 0) {
           // Don't set scene.background - let CSS background show through
           scene.background = null;
 
-          // Add spectral orbs with hue shift (NO lights, won't affect background)
-          createSpectralOrbs(scene, 8, 4, hueShift);
-          state.orbsCreated = true;
+          // Add spectral orbs with hue shift (skip on mobile for performance)
+          if (!isMobile) {
+            createSpectralOrbs(scene, 8, 4, hueShift);
+            state.orbsCreated = true;
+          }
           break;
         }
         case 'space': {
@@ -52,8 +61,8 @@ export function updateEnvironment(scene, environment, hueShift = 0) {
 
     createEnvironment(environment);
   } else {
-    // Same environment, just update hue of existing orbs
-    if (state.orbsCreated && (environment === 'nebula' || environment === 'matrix')) {
+    // Same environment, just update hue of existing orbs (skip on mobile)
+    if (!isMobile && state.orbsCreated && (environment === 'nebula' || environment === 'matrix')) {
       updateSpectralOrbHue(scene, hueShift);
     }
   }
