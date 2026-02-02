@@ -156,7 +156,7 @@ export function createSpectralOrbs(scene, count = 8, orbitRadius = 4, hueShift =
   }
 
   // Create smaller companion orbs (non-gradient, solid colors)
-  const smallOrbCount = count * 2; // Twice as many small orbs
+  const smallOrbCount = Math.floor(count * 1.9); // 5% fewer orbs for performance
   for (let i = 0; i < smallOrbCount; i++) {
     // Smaller geometry
     const geometry = new THREE.SphereGeometry(0.08, 16, 16);

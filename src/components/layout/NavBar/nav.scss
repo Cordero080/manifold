@@ -58,7 +58,8 @@
   background-clip: text;
   color: #ffffff;
   text-shadow: 0 0 20px rgba(45, 86, 86, 0.4);
-  /* No animations - static nav */
+  /* Gradient animation only - no tilting/glitch effects */
+  animation: gradientShift 4s ease-in-out infinite;
   padding: 0 5px; /* Add padding to prevent text clipping */
   display: inline-block; /* Ensure padding applies properly */
 }

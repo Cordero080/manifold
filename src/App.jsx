@@ -210,6 +210,29 @@ function GeomLab() {
     }
   }, [loadedConfig]);
 
+  // Handle browser back/forward buttons (popstate event)
+  useEffect(() => {
+    const handlePopState = (e) => {
+      // If there are unsaved changes and we're not allowing navigation,
+      // push the current location back to prevent leaving
+      if (hasUnsavedChanges && !allowNavigation) {
+        // Push current location back onto history to "cancel" the back action
+        window.history.pushState(null, '', window.location.href);
+        // Show save prompt
+        setNextPath('/'); // Default to home for back navigation
+        setShowSavePrompt(true);
+      }
+    };
+
+    // Push initial state to enable popstate interception
+    if (hasUnsavedChanges && !allowNavigation) {
+      window.history.pushState(null, '', window.location.href);
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [hasUnsavedChanges, allowNavigation]);
+
   // Prevent browser navigation (close tab, refresh, back button)
   useEffect(() => {
     const handleBeforeUnload = (e) => {

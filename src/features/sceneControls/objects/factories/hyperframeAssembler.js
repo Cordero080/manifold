@@ -44,7 +44,11 @@ export function assembleHyperframe(geometry, hyperframeColor, hyperframeLineColo
   ) {
     // Check if it's a 16-cell
     if (geometry.userData && geometry.userData.is16Cell) {
-      const result = create16CellHyperframe(geometry, hyperframeColor, hyperframeLineColor);
+      const result = create16CellHyperframe({
+        geometry,
+        hyperframeColor,
+        hyperframeLineColor,
+      });
       ({ centerLines, centerLinesMaterial, curvedLines, curvedLinesMaterial } = result);
     } else {
       // Regular compound tetrahedron
