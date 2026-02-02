@@ -91,7 +91,7 @@ export default function RotatingCube({
         // Gentle auto-rotate on y-axis only when not dragging
         const autoRotY = new THREE.Quaternion().setFromAxisAngle(
           new THREE.Vector3(0, 1, 0),
-          delta * 0.5 * speed
+          delta * 1.2 * speed  // Increased from 0.5 to 1.2 for faster rotation
         );
         cubeRef.current.quaternion.premultiply(autoRotY);
       }

@@ -199,10 +199,35 @@ export function useObjectInteraction(refs) {
       setUserRotation(objectId, newRotation);
     };
 
+    // Touch handler for mobile - converts touch to mouse-like coordinates
+    const handleTouchMove = (event) => {
+      if (event.touches.length === 1) {
+        const touch = event.touches[0];
+        // Create a synthetic event object with clientX/clientY
+        handleMouseMove({
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+        });
+      }
+    };
+
+    const handleTouchStart = (event) => {
+      if (event.touches.length === 1) {
+        const touch = event.touches[0];
+        // Initialize lastClient values for touch
+        lastClientX = touch.clientX;
+        lastClientY = touch.clientY;
+      }
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, [sceneRef, cameraRef, rendererRef, getUserRotation, setUserRotation]);
 

@@ -18,8 +18,8 @@ function CameraController({ speed }) {
   const rotationRef = useRef({ y: 0 });
 
   useFrame(() => {
-    // Auto-rotate camera around scene - independent slower rotation
-    rotationRef.current.y += 0.002;
+    // Auto-rotate camera around scene - increased speed for more dynamic feel
+    rotationRef.current.y += 0.004 * speed;  // Increased from 0.002 and added speed multiplier
 
     // Update camera position in orbit
     const radius = 8;
