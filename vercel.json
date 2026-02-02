@@ -1,4 +1,7 @@
 {
   "buildCommand": "vite build",
-  "outputDirectory": "docs"
+  "outputDirectory": "docs",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
