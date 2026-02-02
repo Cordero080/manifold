@@ -283,19 +283,23 @@
   .quantum-nav {
     padding: 0 15px;
     height: 70px;
+    flex-wrap: nowrap;
   }
 
   .logo-text {
     font-size: 15px;
+    white-space: nowrap;
   }
 
   .nav-links {
     gap: 10px;
+    flex-wrap: nowrap;
   }
 
   .nav-link {
     font-size: 12px;
     letter-spacing: 0;
+    white-space: nowrap;
   }
 
   .nav-terminal {

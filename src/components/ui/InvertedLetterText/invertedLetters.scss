@@ -53,10 +53,11 @@
   .title-inverted-v,
   .nav-inverted-v {
     /* Use simpler rendering on mobile to avoid webkit glitches */
-    -webkit-text-fill-color: currentColor;
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
+    -webkit-text-fill-color: #00ffff !important;
+    color: #00ffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
   }
 }
 
@@ -64,9 +65,10 @@
 @supports (-webkit-touch-callout: none) {
   .title-inverted-v,
   .nav-inverted-v {
-    -webkit-text-fill-color: currentColor;
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
+    -webkit-text-fill-color: #00ffff !important;
+    color: #00ffff !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
   }
 }
