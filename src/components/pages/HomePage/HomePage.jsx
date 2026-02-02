@@ -112,7 +112,11 @@ export default function HomePage() {
       <BackgroundLayers portalState={portalState} bgRef={bgRef} fgRef={fgRef} />
 
       {/* Parallax Container */}
-      <div className={styles.parallaxContainer} id="parallax-container" ref={parallaxRef}>
+      <div
+        className={`${styles.parallaxContainer}${!isAuthenticated ? ' no-nav' : ''}`}
+        id="parallax-container"
+        ref={parallaxRef}
+      >
         {/* Scene 1: Reality Layer */}
         {/* Scene 1: Reality Layer */}
         <section
@@ -155,13 +159,7 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
             <p className="quantum-subtitle">
                I N T E R A C T I V E _ C O N S O L E _ A W A I T S 
             </p>
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-label">MODULES LOADED-</span>
-                <span className="stat-value" data-stat="modules">
-                  080
-                </span>
-              </div>
+            <div className="hero-stats hero-stats-centered">
               <div className="stat-item">
                 <span className="stat-label">QUANTUM STATE-</span>
                 <span
@@ -173,12 +171,6 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
                   }}
                 >
                   {portalState.label.toUpperCase()}
-                </span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-label">NETWORK STATUS</span>
-                <span className="stat-value" data-stat="network">
-                  -CONNECTED
                 </span>
               </div>
             </div>

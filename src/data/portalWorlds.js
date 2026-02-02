@@ -7,6 +7,7 @@ export const portalWorlds = [
   { colors: ['#aa1100', '#770066', '#050a0f'], label: 'Inferno' },
   { colors: ['#00aa11', '#0066aa', '#001f1f'], label: 'Emerald' },
   { colors: ['#999999', '#00aa99', '#050a0f'], label: 'Singularity' },
+  { colors: ['#00ccff', '#ff00aa', '#0a0a1a'], label: '080' },
 ];
 
 /**

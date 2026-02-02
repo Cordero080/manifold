@@ -199,6 +199,7 @@
   text-align: center;
   overflow: visible;
   pointer-events: none !important;
+  transition: padding-top 0.3s ease;
 
   /* Ensure title and content are super front */
   h1,
@@ -408,6 +409,14 @@
   transform-style: preserve-3d;
   pointer-events: none !important;
   z-index: 1;
+
+  /* When no nav is present (not authenticated), move content higher */
+  &:global(.no-nav) {
+    :global(.scene-content),
+    :global(.scene-content-wrapper) {
+      padding-top: 60px;
+    }
+  }
 }
 
 /* --- Unused Module Classes (candidates for removal) --- */
@@ -1520,6 +1529,11 @@ input,
     text-align: center;
     overflow: visible;
     pointer-events: auto !important;
+  }
+
+  /* When no nav is present, reduce top padding to move content higher */
+  :global(.no-nav .scene-content) {
+    padding-top: 80px;
   }
 
   /* All interactive children must be clickable */
