@@ -51,16 +51,14 @@
   font-family: 'Future Z', 'Orbitron', monospace;
   font-size: 28px;
   font-weight: 800;
-  background: linear-gradient(135deg, #00ffff72, #ff00668d, #ffff0094, #00ff33, #cc00ff, #ff3300);
+  background: linear-gradient(135deg, #00ffff, #ff0066, #ffff00, #00ff33, #cc00ff, #ff3300);
   background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: #ffffff;
   text-shadow: 0 0 20px rgba(45, 86, 86, 0.4);
-  animation:
-    logoGlitch 6s ease-in-out infinite,
-    gradientShift 4s ease-in-out infinite;
+  /* No animations - static nav */
   padding: 0 5px; /* Add padding to prevent text clipping */
   display: inline-block; /* Ensure padding applies properly */
 }
@@ -97,7 +95,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 3s ease-in-out infinite;
+  /* No animation - static */
   filter: drop-shadow(0 0 0px rgba(255, 215, 0, 0));
   transition: filter 0.3s ease;
 }
@@ -109,9 +107,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation:
-    gradientShift 3s ease-in-out infinite,
-    subtleGlowPulse 2s ease-in-out infinite;
+  /* No animation - just glow on hover */
   filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)) drop-shadow(0 0 12px rgba(255, 165, 0, 0.4));
 }
 
