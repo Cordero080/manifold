@@ -96,15 +96,17 @@ export default function HomePage() {
 
   return (
     <>
-      {/* VINE-INSPIRED QUANTUM NAVIGATION */}
-      <QuantumNav
-        portalState={portalState}
-        navScrolled={navScrolled}
-        isAuthenticated={isAuthenticated}
-        logout={logout}
-        user={user}
-        currentPage="home"
-      />
+      {/* VINE-INSPIRED QUANTUM NAVIGATION - Only show when authenticated */}
+      {isAuthenticated && (
+        <QuantumNav
+          portalState={portalState}
+          navScrolled={navScrolled}
+          isAuthenticated={isAuthenticated}
+          logout={logout}
+          user={user}
+          currentPage="home"
+        />
+      )}
 
       {/* Background Layers */}
       <BackgroundLayers portalState={portalState} bgRef={bgRef} fgRef={fgRef} />

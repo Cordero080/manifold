@@ -316,56 +316,24 @@
 /* Mobile: 480px - 600px */
 @media (max-width: 600px) {
   .quantum-nav {
-    padding: 0 12px;
-    height: 60px;
-  }
-
-  .logo-text {
-    font-size: 13px;
-  }
-
-  .nav-links {
-    gap: 8px;
-  }
-
-  .nav-link {
-    font-size: 10px;
-    letter-spacing: 0;
-  }
-
-  .nav-terminal {
-    font-size: 9px;
-    margin-left: 6px;
-  }
-
-  .nav-username {
-    font-size: 8px;
-  }
-
-  .nav-terminal .terminal-cursor svg {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-/* Small Mobile: 375px - 480px (iPhone 6/7/8 size) */
-@media (max-width: 480px) {
-  .quantum-nav {
     padding: 0 10px;
     height: 55px;
   }
 
   .logo-text {
     font-size: 11px;
+    white-space: nowrap;
   }
 
   .nav-links {
     gap: 6px;
+    flex-wrap: nowrap;
   }
 
   .nav-link {
     font-size: 9px;
     letter-spacing: 0;
+    white-space: nowrap;
   }
 
   .nav-terminal {
@@ -375,7 +343,6 @@
 
   .nav-username {
     font-size: 7px;
-    display: none; /* Hide username on very small screens */
   }
 
   .nav-terminal .terminal-cursor svg {
@@ -384,24 +351,28 @@
   }
 }
 
-/* Extra Small Mobile: < 375px (iPhone SE, older devices) */
-@media (max-width: 375px) {
+/* Small Mobile: 375px - 480px (iPhone 6/7/8 size) */
+@media (max-width: 480px) {
   .quantum-nav {
     padding: 0 8px;
-    height: 55px;
+    height: 50px;
   }
 
   .logo-text {
-    font-size: 11px;
+    font-size: 10px;
+    white-space: nowrap;
   }
 
   .nav-links {
     gap: 4px;
+    flex-wrap: nowrap;
   }
 
   .nav-link {
     font-size: 8px;
     letter-spacing: 0;
+    white-space: nowrap;
+    padding: 4px 2px;
   }
 
   .nav-terminal {
@@ -409,9 +380,49 @@
     margin-left: 4px;
   }
 
+  .nav-username {
+    font-size: 7px;
+    display: none; /* Hide username on very small screens */
+  }
+
   .nav-terminal .terminal-cursor svg {
     width: 10px;
     height: 10px;
+  }
+}
+
+/* Extra Small Mobile: < 375px (iPhone SE, older devices) */
+@media (max-width: 375px) {
+  .quantum-nav {
+    padding: 0 6px;
+    height: 48px;
+  }
+
+  .logo-text {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .nav-links {
+    gap: 3px;
+    flex-wrap: nowrap;
+  }
+
+  .nav-link {
+    font-size: 7px;
+    letter-spacing: 0;
+    white-space: nowrap;
+    padding: 3px 1px;
+  }
+
+  .nav-terminal {
+    font-size: 6px;
+    margin-left: 3px;
+  }
+
+  .nav-terminal .terminal-cursor svg {
+    width: 9px;
+    height: 9px;
   }
 }
 
