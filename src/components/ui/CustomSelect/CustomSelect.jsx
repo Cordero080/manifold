@@ -26,7 +26,7 @@ const CustomSelect = ({ value, onChange, options, label }) => {
   const selectedOption = options.find((opt) => opt.value === value);
 
   return (
-    <div className={styles.customSelect} ref={selectRef}>
+    <div className={`${styles.customSelect} ${isOpen ? styles.isOpen : ''}`} ref={selectRef}>
       <div
         className={`${styles.customSelect__trigger} ${isOpen ? styles.open : ''}`}
         onClick={handleToggle}

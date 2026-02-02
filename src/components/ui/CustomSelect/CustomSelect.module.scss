@@ -27,6 +27,11 @@ $border-color-active: rgba(0, 255, 255, 0.6);
   min-width: 200px;
   z-index: 10; /* Ensure select is above sibling elements like sliders */
 
+  /* When dropdown is open, elevate z-index to appear above sliders */
+  &.isOpen {
+    z-index: 100001;
+  }
+
   &__trigger {
     display: flex;
     align-items: center;

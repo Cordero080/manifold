@@ -1,0 +1,4 @@
+import{r as c,j as a,aD as S}from"./index-uiKJHC0E.js";const f="_beamScanBtn_1qyry_1",i="_beamScanLabel_1qyry_44",u="_beamScanCode_1qyry_49",y="_beamScanEffect_1qyry_54",e={beamScanBtn:f,beamScanLabel:i,beamScanCode:u,beamScanEffect:y},_=`function quantumLeap() {
+  const energy = Math.random() * 42;
+  return energy > 21 ? 'Wormhole!' : 'Try again';
+}`;function x({onClick:n,label:t="Enter Playground",code:s=_,style:r,className:m="",delayedString:o=!1}){const b=c.useRef(null);c.useEffect(()=>{},[]);const l=d=>{n&&n(d)};return a.jsxs("button",{ref:b,className:`${e.beamScanBtn} ${o?e.delayedString:""} ${S.angledCorners} ${m}`,onClick:l,tabIndex:0,style:r,children:[a.jsx("span",{className:e.beamScanLabel,children:t}),a.jsx("span",{className:e.beamScanCode,"aria-hidden":"true",children:a.jsx("pre",{children:s})}),a.jsx("span",{className:e.beamScanEffect,"aria-hidden":"true"})]})}export{x as B};
