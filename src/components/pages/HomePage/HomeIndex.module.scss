@@ -955,6 +955,12 @@ input,
     position: relative;
     z-index: 100;
     pointer-events: auto;
+
+    /* Match size with login/signup buttons */
+    button {
+      padding: 14px 80px !important;
+      font-size: 16px !important;
+    }
   }
 
   /* Button wrapper not authenticated */
@@ -977,7 +983,7 @@ input,
 
     /* Button sizing */
     button {
-      padding: 14px 58px;
+      padding: 14px 80px;
       font-size: 16px;
     }
   }
@@ -985,7 +991,7 @@ input,
   /* Large screens - scale up buttons */
   @media (min-width: 1400px) {
     :global(.button-wrapper-no-auth) button {
-      padding: 18px 60px !important;
+      padding: 18px 90px !important;
       font-size: 18px !important;
     }
     :global(.button-wrapper-auth) button {

@@ -41,6 +41,11 @@ _Landing page with quantum background and navigation_
 ![Homepage Logged In](./screenshots/homepage-logged-in.png)
 _Landing page showing authenticated user state with username and My Scenes link_
 
+### Title Scramble Effect (アトリエ)
+
+![Nexus Scramble](./screenshots/nexus-scramble.png)
+_Title scrambles into Japanese characters for "atelier" (アトリエ) on hover_
+
 ### Sign Up Page
 
 ![Sign Up](./screenshots/signup.png)

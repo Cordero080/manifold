@@ -1,9 +1,8 @@
 // Authentication API service
 // Handles user authentication operations: signup, login, and fetching current user
 
-// In development: use empty string (Vite proxy forwards /api to backend)
-// In production: Use Render backend URL
-const API_BASE_URL = import.meta.env.PROD ? 'https://nexus-geom-lab-backend-sn7k.onrender.com' : '';
+// Always use Render backend URL (works for both local dev and production)
+const API_BASE_URL = 'https://nexus-geom-lab-backend-sn7k.onrender.com';
 
 /**
  * Sign up a new user

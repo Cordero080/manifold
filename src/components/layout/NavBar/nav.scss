@@ -119,6 +119,21 @@
   cursor: pointer;
 }
 
+/* Wider auth links (Login/Sign Up) */
+.nav-link[href="/login"],
+.nav-link[href="/signup"] {
+  padding: 8px 24px;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-link[href="/login"]:hover,
+.nav-link[href="/signup"]:hover {
+  border-color: #ff00cc;
+  background: rgba(255, 0, 204, 0.1);
+}
+
 .nav-terminal {
   font-size: 18px; /* Match link size */
   color: #00ffff;
