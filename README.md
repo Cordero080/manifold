@@ -31,6 +31,11 @@ This project is **NOT open source**. You may view the code for personal learning
 
 <div align="center">
 
+### Landing Page
+
+![Landing Page](./screenshots/nexus-landing1.jpg)
+_Nexus Geom Lab landing page with quantum aesthetics_
+
 ### Landing Page (Homepage)
 
 ![Homepage](./screenshots/homepage.png)
