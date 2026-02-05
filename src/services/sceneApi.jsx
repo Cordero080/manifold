@@ -21,6 +21,9 @@ export const saveScene = async (sceneData, token) => {
 
   try {
     const url = `${API_BASE_URL}/api/scenes`; // this is the route we are posting to, a.k.a. backend endpoint
+    
+    console.log('DEBUG saveScene - token value:', token);
+    console.log('DEBUG saveScene - localStorage token:', localStorage.getItem('token'));
 
     const response = await fetch(url, {
       method: 'POST',
@@ -35,6 +38,8 @@ export const saveScene = async (sceneData, token) => {
     // Backend sent response back over network
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('DEBUG saveScene - error response:', response.status, errorText);
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     // check if request succeeded (status 200-299) otherwise throw error

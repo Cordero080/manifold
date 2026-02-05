@@ -23,7 +23,7 @@ const LoginPage = lazy(() => import('@/features/auth/pages/LoginPage/LoginPage')
 
 function GeomLab() {
   const { loadedConfig, resetScene } = useScene(); // CUSTOM HOOK: Get loaded config from context
-  const { token } = useAuth(); // CUSTOM HOOK: Get auth for save functionality
+  const { token, isAuthenticated } = useAuth(); // CUSTOM HOOK: Get auth for save functionality
   const navigate = useNavigate(); // For navigation is usNavigate
   const location = useLocation(); // Current location
 
@@ -254,6 +254,13 @@ function GeomLab() {
 
   // Handle save scene with name
   const handleSaveScene = async () => {
+    // Check authentication before saving
+    if (!isAuthenticated || !token) {
+      alert('Please log in to save scenes');
+      navigate('/login');
+      return;
+    }
+
     if (sceneName && sceneName.trim() !== '') {
       try {
         const { saveScene } = await import('./services/sceneApi');
