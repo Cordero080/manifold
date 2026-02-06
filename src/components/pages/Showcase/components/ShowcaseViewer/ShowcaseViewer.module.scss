@@ -386,10 +386,11 @@
 /* Base viewer-info - structural only, colors are character-specific */
 :global(.viewer-info) {
   flex-shrink: 0;
-  padding: 16px 30px;
+  padding: 20px 30px 24px 30px;
   text-align: center;
   position: relative;
   z-index: 10;
+  min-height: 90px;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.5),
     0 4px 16px rgba(0, 0, 0, 0.4),
