@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './Controls.module.scss';
 import LightingControls from './LightingControls';
 import MaterialPropertiesSection from './_sections/MaterialPropertiesSection';
@@ -37,6 +37,9 @@ import {
 // PROPS RECEIVED FROM App.jsx - config object and onChange object with all setters
 // only Values are brought into Controls to be receptors of the value change, while the onChange are taken into a sort of factory to prepare them to change the value"
 function Controls({ config, onChange }) {
+  // Ref for click outside detection
+  const controlsRef = useRef(null);
+  
   // Destructure all current values from config
   const {
     // MATERIAL PROPERTIES
@@ -68,6 +71,32 @@ function Controls({ config, onChange }) {
   const [lightingOpen, setLightingOpen] = useState(false); // Lighting Controls section closed by default
   const [isHidden, setIsHidden] = useState(true); // Controls panel hidden by default on page load
   // Note: materialOpen, surfaceOpen, geometryOpen, sceneOpen are now managed in their respective section components
+
+  // Click outside handler - collapse controls when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Only handle on mobile (when controls are at bottom of screen)
+      if (window.innerWidth > 480) return;
+      
+      // If controls are hidden, do nothing
+      if (isHidden) return;
+      
+      // If click is outside the controls panel, hide it
+      if (controlsRef.current && !controlsRef.current.contains(event.target)) {
+        // Don't hide if clicking the toggle button
+        if (event.target.closest(`.${styles.controlsToggleBtn}`)) return;
+        setIsHidden(true);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isHidden]);
 
   /*
   // EVENT HANDLER FUNCTIONS
@@ -195,7 +224,7 @@ function Controls({ config, onChange }) {
         </button>
       )}
 
-      <div className={`${styles.controls} ${isHidden ? styles.controlsHidden : ''}`}>
+      <div ref={controlsRef} className={`${styles.controls} ${isHidden ? styles.controlsHidden : ''}`}>
         {/* Hide Button - Shows when controls are visible */}
         <button
           className={`${styles.controlsToggleBtn} ${styles.controlsToggleBtnHide}`}

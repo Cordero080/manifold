@@ -54,7 +54,9 @@ export function useSceneState() {
   // ============================================
   // ANIMATION STATE
   // ============================================
-  const [scale, setScale] = useState(1);
+  // Mobile devices get 10% smaller default scale for better performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const [scale, setScale] = useState(isMobile ? 0.9 : 1);
   const [objectSpeed, setObjectSpeed] = useState(1.0);
   const [orbSpeed, setOrbSpeed] = useState(1.0);
 
