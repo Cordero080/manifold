@@ -293,34 +293,45 @@
 /* Large Mobile / Small Tablet: 600px - 768px */
 @media (max-width: 768px) {
   .quantum-nav {
-    padding: 0 10px;
-    height: 55px;
+    padding: 0 8px;
+    height: 50px;
     flex-wrap: nowrap;
+  }
+
+  .nav-logo {
+    max-width: 90px;
+    overflow: hidden;
+    flex-shrink: 1;
   }
 
   .logo-text {
-    font-size: 12px;
+    font-size: 10px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90px;
   }
 
   .nav-links {
-    gap: 6px;
+    gap: 4px;
     flex-wrap: nowrap;
+    flex-shrink: 0;
   }
 
   .nav-link {
-    font-size: 10px;
+    font-size: 8px;
     letter-spacing: 0;
     white-space: nowrap;
   }
 
   .nav-terminal {
     font-size: 10px;
-    margin-left: 8px;
+    margin-left: 6px;
+    flex-shrink: 0;
   }
 
   .nav-username {
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .nav-terminal .terminal-cursor svg {
@@ -332,78 +343,74 @@
 /* Mobile: 480px - 600px */
 @media (max-width: 600px) {
   .quantum-nav {
-    padding: 0 10px;
-    height: 55px;
+    padding: 0 6px;
+    height: 48px;
+  }
+
+  .nav-logo {
+    max-width: 70px;
   }
 
   .logo-text {
-    font-size: 11px;
-    white-space: nowrap;
+    font-size: 9px;
+    max-width: 70px;
   }
 
   .nav-links {
-    gap: 6px;
-    flex-wrap: nowrap;
+    gap: 3px;
   }
 
   .nav-link {
-    font-size: 9px;
-    letter-spacing: 0;
-    white-space: nowrap;
+    font-size: 7px;
   }
 
   .nav-terminal {
     font-size: 8px;
-    margin-left: 5px;
+    margin-left: 4px;
   }
 
   .nav-username {
-    font-size: 7px;
+    display: none;
   }
 
   .nav-terminal .terminal-cursor svg {
-    width: 11px;
-    height: 11px;
+    width: 12px;
+    height: 12px;
   }
 }
 
 /* Small Mobile: 375px - 480px (iPhone 6/7/8 size) */
 @media (max-width: 480px) {
   .quantum-nav {
-    padding: 0 8px;
-    height: 50px;
+    padding: 0 5px;
+    height: 46px;
+  }
+
+  .nav-logo {
+    max-width: 55px;
   }
 
   .logo-text {
-    font-size: 10px;
-    white-space: nowrap;
+    font-size: 8px;
+    max-width: 55px;
   }
 
   .nav-links {
-    gap: 4px;
-    flex-wrap: nowrap;
+    gap: 2px;
   }
 
   .nav-link {
-    font-size: 8px;
-    letter-spacing: 0;
-    white-space: nowrap;
-    padding: 4px 2px;
+    font-size: 6.5px;
+    padding: 3px 1px;
   }
 
   .nav-terminal {
-    font-size: 7px;
-    margin-left: 4px;
-  }
-
-  .nav-username {
-    font-size: 7px;
-    display: none; /* Hide username on very small screens */
+    margin-left: 3px;
   }
 
   .nav-terminal .terminal-cursor svg {
-    width: 10px;
-    height: 10px;
+    width: 11px;
+    height: 11px;
   }
 }
 
