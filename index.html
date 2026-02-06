@@ -4,21 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Nexus Geom Lab</title>
-    
+
     <!-- PWA Meta Tags -->
     <meta name="description" content="3D geometry visualization and scene creation tool" />
     <meta name="theme-color" content="#00ffff" />
-    
+
     <!-- iOS PWA Support -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Geom Lab" />
     <link rel="apple-touch-icon" href="/icons/icon-152x152.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.svg" />
-    
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
-    
+
     <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
@@ -49,12 +49,13 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    
+
     <!-- Register Service Worker -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          navigator.serviceWorker
+            .register('/sw.js')
             .then((registration) => {
               console.log('SW registered:', registration.scope);
             })
