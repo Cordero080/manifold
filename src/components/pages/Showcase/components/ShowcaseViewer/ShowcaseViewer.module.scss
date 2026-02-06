@@ -690,11 +690,18 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .viewer-back-button {
+  /* Move back button to top-left to avoid overlapping speed control */
+  .viewer-back-button-container {
+    position: fixed;
     top: 10px;
     left: 10px;
-    padding: 10px 16px;
-    font-size: 0.9rem;
+    bottom: auto;
+    z-index: 1200;
+  }
+
+  .viewer-back-button {
+    padding: 8px 14px;
+    font-size: 0.85rem;
   }
 
   .viewer-close {
@@ -703,6 +710,29 @@
     width: 40px;
     height: 40px;
     font-size: 24px;
+  }
+
+  /* Nav buttons - compact on mobile */
+  .viewer-nav-button {
+    top: 10px;
+    padding: 6px 10px;
+  }
+
+  .viewer-nav-prev {
+    left: auto;
+    right: 60px;
+  }
+
+  .viewer-nav-next {
+    right: 10px;
+  }
+
+  .nav-arrow {
+    font-size: 14px;
+  }
+
+  .nav-label {
+    font-size: 7px;
   }
 
   .viewer-info {

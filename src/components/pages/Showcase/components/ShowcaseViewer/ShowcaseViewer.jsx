@@ -155,7 +155,7 @@ function ShowcaseViewer({ animation, onClose }) {
               title="Previous Character"
             >
               <span className={styles['nav-arrow']}>‹</span>
-              <span className={styles['nav-label']}>Previous Character</span>
+              <span className={styles['nav-label']}>Prev</span>
             </button>
 
             <button
@@ -164,7 +164,7 @@ function ShowcaseViewer({ animation, onClose }) {
               disabled={currentCharacterIndex === allUnlockedCharacters.length - 1}
               title="Next Character"
             >
-              <span className={styles['nav-label']}>Next Character</span>
+              <span className={styles['nav-label']}>Next</span>
               <span className={styles['nav-arrow']}>›</span>
             </button>
           </>

@@ -215,30 +215,63 @@
 @media (max-width: 480px) {
   .speed-control-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 60px;
     right: 10px;
     left: 10px;
     top: auto;
     transform: none;
     min-width: unset;
-    padding: 6px 4px;
+    padding: 6px 8px;
   }
 
-  .speed-control-label,
+  /* Hide header label on mobile - value is sufficient */
+  .speed-control-header {
+    justify-content: flex-end;
+    margin-bottom: 6px;
+  }
+
+  .speed-control-label {
+    display: none;
+  }
+
   .speed-control-value {
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .speed-control-slider {
-    height: 3px;
+    height: 4px;
+  }
+
+  /* Hide slider markers on mobile */
+  .speed-control-markers {
+    display: none;
   }
 
   .speed-control-presets {
-    gap: 6px;
+    gap: 8px;
+    margin-top: 8px;
   }
 
-  .speed-control-presets button {
-    padding: 4px 8px;
-    font-size: 9px;
+  /* Compact preset buttons - no text labels */
+  .speed-preset-btn {
+    padding: 8px 12px;
+    font-size: 10px;
+    flex: 1;
+  }
+}
+
+/* Tablet and larger mobile (481px - 768px) */
+@media (max-width: 768px) and (min-width: 481px) {
+  .speed-control-container {
+    bottom: 60px;
+    min-width: 200px;
+  }
+
+  .speed-control-label {
+    display: none;
+  }
+
+  .speed-control-markers {
+    display: none;
   }
 }
