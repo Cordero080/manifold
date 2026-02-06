@@ -305,10 +305,9 @@ function ShowcaseViewer({ animation, onClose }) {
           )}
         </div>
 
-        {/* Speed Control */}
-        <SpeedControl speed={speed} onSpeedChange={setSpeed} />
-
         <div className="viewer-info">
+          {/* Speed Control - positioned inside viewer-info */}
+          <SpeedControl speed={speed} onSpeedChange={setSpeed} />
           <h2 className="viewer-title">{currentAnimation?.name || 'Cosmic Entity'}</h2>
         </div>
       </div>
