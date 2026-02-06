@@ -53,17 +53,19 @@ export default function NavBar({ portalColors = null, navScrolled = false }) {
       className={`quantum-nav${shouldUseClearNav ? ' showcase-viewer-navbar' : ''}`}
       style={quantumStyle}
     >
+      {/* Logo/Username - centered on mobile */}
       <div className="nav-logo">
         <Link to="/" className="logo-text" data-text={user?.username || 'N3XUS_GEOM'}>
           {user?.username || 'N3XUS_GEOM'}
         </Link>
       </div>
 
-      {/* Hamburger button - mobile only */}
+      {/* Hamburger button - mobile only, positioned on right */}
       <button 
         className={`nav-hamburger ${mobileMenuOpen ? 'open' : ''}`}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         aria-label="Toggle menu"
+        type="button"
       >
         <span></span>
         <span></span>

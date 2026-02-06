@@ -634,6 +634,41 @@
     visibility: visible !important;
     pointer-events: none !important;
   }
+
+  /* ===================================
+     MOBILE: Disable animations, keep EXACT desktop gradient
+     The gradient MUST match desktop exactly:
+     #00d4ff 0%, #ff0066 55%, #3dd4cc 75%, #f0a738 100%
+     =================================== */
+  @media (max-width: 768px) {
+    .title-word,
+    .title-word[data-word='N3XUS'],
+    .title-word[data-word='GE0M'],
+    .title-word[data-word='LVB'] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      /* EXACT same gradient as desktop */
+      background: linear-gradient(135deg, #00d4ff 0%, #ff0066 55%, #3dd4cc 75%, #f0a738 100%) !important;
+      background-size: 100% 100% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      /* EXACT same filter as desktop */
+      filter: saturate(3) brightness(1.4) contrast(1.2) !important;
+    }
+
+    /* Hide all pseudo-elements on mobile for performance */
+    .title-word[data-word='N3XUS']::before,
+    .title-word[data-word='N3XUS']::after,
+    .title-word[data-word='GE0M']::before,
+    .title-word[data-word='GE0M']::after,
+    .title-word[data-word='LVB']::before,
+    .title-word[data-word='LVB']::after {
+      display: none !important;
+      content: none !important;
+    }
+  }
 }
 
 /* Animations */
