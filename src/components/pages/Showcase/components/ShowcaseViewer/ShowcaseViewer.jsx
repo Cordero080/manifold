@@ -1,4 +1,4 @@
-import React, { useState, Suspense, memo, useRef } from 'react';
+import React, { useState, Suspense, memo, useRef, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import RotatingCube from './RotatingCube/RotatingCube';
@@ -11,6 +11,7 @@ import NexusEnvironment from './characters/Nexus/NexusEnvironment';
 import SheTechEnvironment from './environments/SheTechEnvironment';
 import styles from './ShowcaseViewer.module.scss';
 import sharedStyles from '@/styles/shared.module.scss';
+import { isMobileDevice, getOptimalDpr } from '@/utils/coreHelpers';
 
 // Custom camera control component - just auto-rotate camera, no user interaction
 function CameraController({ speed }) {
@@ -36,6 +37,10 @@ function ShowcaseViewer({ animation, onClose }) {
   // Store the mounted state to handle animations properly
   const [mounted, setMounted] = React.useState(false);
   const [canvasReady, setCanvasReady] = React.useState(false);
+
+  // Mobile detection for performance optimizations
+  const isMobile = useMemo(() => isMobileDevice(), []);
+  const optimalDpr = useMemo(() => getOptimalDpr(), []);
 
   // Animation speed state
   const [speed, setSpeed] = useState(1.0);
@@ -189,6 +194,8 @@ function ShowcaseViewer({ animation, onClose }) {
             <Canvas
               camera={{ position: [0, 0.8, 8], fov: 60 }}
               style={{ width: '100%', height: '100%', flex: '1 1 auto' }}
+              dpr={optimalDpr}
+              performance={{ min: 0.5 }}
             >
               {/* Render Icarus-X Three.js environment background */}
               {(currentAnimation?.id === 1 || currentAnimation?.id === 4) && (

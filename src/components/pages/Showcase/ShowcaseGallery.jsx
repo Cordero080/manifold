@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { Canvas } from '@react-three/fiber';
 import { useLocation } from 'react-router-dom';
@@ -8,6 +8,7 @@ import ShowcaseViewer from './components/ShowcaseViewer';
 import { noetechAnima } from './data/noetechAnima';
 import { portalWorlds, glyphSets } from '@/data/portalWorlds';
 import { quantumCollapse, getCardPosition } from './utils/showcaseHelpers';
+import { isMobileDevice, getOptimalDpr } from '@/utils/coreHelpers';
 import '@styles/quantumTitles.css';
 import '@styles/quantumBackground.css';
 import './ShowcaseGallery.scss';
@@ -24,6 +25,10 @@ const HERO_TAGLINES = [
 const CUTOUT_VARIANTS = ['reality', 'probability', 'entanglement', 'superposition'];
 
 export default function ShowcaseGallery() {
+  // Mobile detection for performance optimizations
+  const isMobile = useMemo(() => isMobileDevice(), []);
+  const optimalDpr = useMemo(() => getOptimalDpr(), []);
+  
   // Stores current randomly-selected portal world colors (tweak by editing portalWorlds in ./data/portalWorlds.js)
   const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
   // Stores current randomly-selected glyph set (tweak by editing glyphSets in ./data/portalWorlds.js)
@@ -143,7 +148,11 @@ export default function ShowcaseGallery() {
 
   // Multi-layer parallax effect on scroll and mouse movement
   // Creates depth effect by moving background/foreground layers at different speeds - tweak multipliers (mx*15, mx*45, etc) to adjust parallax intensity
+  // DISABLED on mobile for performance
   useEffect(() => {
+    // Skip parallax entirely on mobile for performance
+    if (isMobile) return;
+    
     const handleParallax = (e) => {
       const container = containerRef.current;
       const scrollY = container ? container.scrollTop : 0;
@@ -246,7 +255,7 @@ export default function ShowcaseGallery() {
       parallaxContainer?.removeEventListener('scroll', handleParallax);
       window.removeEventListener('mousemove', handleParallax);
     };
-  }, []);
+  }, [isMobile]);
 
   // Quantum collapse on scroll/click (theme color shift)
   // Changes background colors whenever user scrolls or clicks - tweak portalState colors in ./data/portalWorlds.js or disable by commenting out event listeners
@@ -536,6 +545,8 @@ export default function ShowcaseGallery() {
                         opacity: 1,
                         transition: 'opacity 0.7s',
                       }}
+                      dpr={optimalDpr}
+                      performance={{ min: 0.5 }}
                     >
                       <ambientLight intensity={0.6} />
                       <directionalLight position={[5, 5, 5]} intensity={1.2} color="#ffffff" />

@@ -216,6 +216,7 @@ h1.quantum-title {
 /* ====================================
    MOBILE PERFORMANCE OPTIMIZATIONS
    Disable animations on mobile for better performance
+   Keep gradients identical to desktop
    ==================================== */
 @media (max-width: 768px) {
   h1.quantum-title {
@@ -223,12 +224,26 @@ h1.quantum-title {
   }
 
   .title-word {
+    /* Disable animations but keep exact same gradient as desktop */
     animation: none !important;
     opacity: 1 !important;
+    /* Explicit gradient to match desktop exactly */
+    background: linear-gradient(135deg, #00d4ff 0%, #ff0066 55%, #3dd4cc 75%, #f0a738 100%) !important;
+    background-size: 200% 200% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: saturate(3) brightness(1.4) contrast(1.2) !important;
   }
 
   .slashed-zero {
     animation: none !important;
+    /* Explicit gradient to match desktop exactly */
+    background: linear-gradient(135deg, #07a2c1 0%, #fd0a6f 55%, #2eaca4 75%, #c8922e 100%) !important;
+    background-size: 200% 200% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
   }
 
   .zero-char::before,

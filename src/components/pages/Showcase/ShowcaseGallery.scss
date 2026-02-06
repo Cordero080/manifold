@@ -783,6 +783,13 @@
     font-size: 2rem;
     letter-spacing: 2px;
     padding: 10px 16px;
+    /* Keep exact same gradient as desktop */
+    background: linear-gradient(135deg, #27efce 0%, #ea619a 55%, #12cabe 75%, #f9bc4b 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: none; /* Disable animation for performance */
   }
 
   .showcase-main-subtitle {

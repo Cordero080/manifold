@@ -10,6 +10,7 @@ export default function NavBar({ portalColors = null, navScrolled = false }) {
   const { isAuthenticated, user, logout } = useAuth();
   const location = useLocation();
   const [isShowcaseViewer, setIsShowcaseViewer] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Check if showcase viewer is active
   useEffect(() => {
@@ -24,6 +25,11 @@ export default function NavBar({ portalColors = null, navScrolled = false }) {
 
     return () => observer.disconnect();
   }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // Check if we're on geom lab routes or showcase viewer
   const isGeomLab = location.pathname === '/geom-lab' || location.pathname === '/geometry-lab';
@@ -52,7 +58,19 @@ export default function NavBar({ portalColors = null, navScrolled = false }) {
           {user?.username || 'N3XUS_GEOM'}
         </Link>
       </div>
-      <div className="nav-links">
+
+      {/* Hamburger button - mobile only */}
+      <button 
+        className={`nav-hamburger ${mobileMenuOpen ? 'open' : ''}`}
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
         {/* Regular links - no scrambling */}
         {location.pathname !== '/' && (
           <Link to="/" className="nav-link nav-link--home">
@@ -110,6 +128,11 @@ export default function NavBar({ portalColors = null, navScrolled = false }) {
           </>
         )}
       </div>
+
+      {/* Mobile menu overlay */}
+      {mobileMenuOpen && (
+        <div className="nav-mobile-overlay" onClick={() => setMobileMenuOpen(false)} />
+      )}
     </nav>
   );
 }

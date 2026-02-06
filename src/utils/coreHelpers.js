@@ -133,3 +133,27 @@ export function truncateText(text, maxLength) {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength - 3) + '...';
 }
+
+/**
+ * Check if the current device is mobile
+ * @returns {boolean} True if mobile device
+ */
+export function isMobileDevice() {
+  if (typeof window === 'undefined') return false;
+  return (
+    window.innerWidth <= 768 ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  );
+}
+
+/**
+ * Get device pixel ratio, capped for performance on mobile
+ * @returns {number} Device pixel ratio (capped at 1.5 on mobile)
+ */
+export function getOptimalDpr() {
+  if (typeof window === 'undefined') return 1;
+  const isMobile = isMobileDevice();
+  const dpr = window.devicePixelRatio || 1;
+  // Cap at 1.5 on mobile for performance, 2 on desktop
+  return isMobile ? Math.min(dpr, 1.5) : Math.min(dpr, 2);
+}

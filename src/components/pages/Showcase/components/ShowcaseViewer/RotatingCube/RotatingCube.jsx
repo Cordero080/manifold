@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import FBXModel from "../../../models/FBXModel";
@@ -12,6 +12,7 @@ import HolographicPanels from './components/HolographicPanels';
 import GlitchBurst from '../characters/Icarus/GlitchBurst';
 import RadialSquares from '../characters/Vectra/RadialSquares';
 import QuantumShockwave from '../characters/Nexus/QuantumShockwave';
+import { isMobileDevice } from '@/utils/coreHelpers';
 
 export default function RotatingCube({
   size = 3,
@@ -31,6 +32,9 @@ export default function RotatingCube({
 }) {
   const cubeRef = useRef();
   const innerLightRef = useRef();
+
+  // Check if mobile for performance optimizations
+  const isMobile = useMemo(() => isMobileDevice(), []);
 
   // Refs for fourth tesseract animation (Nexus Prime)
   const fourthTesseractInnerRef = useRef();
@@ -166,8 +170,8 @@ export default function RotatingCube({
               : 1.0
       }
     >
-      {/* Holographic Cube Layers - NOT for She-Tech */}
-      {animationId !== 5 && <HolographicCube size={size} />}
+      {/* Holographic Cube Layers - NOT for She-Tech, simplified on mobile */}
+      {animationId !== 5 && !isMobile && <HolographicCube size={size} />}
 
       {/* Basic Tesseract - For Icarus only */}
       {(animationId === 1 || animationId === 4) && <TesseractGeometry size={size} />}
@@ -181,11 +185,11 @@ export default function RotatingCube({
       {/* SheTechCube - Wide rectangular container for She-Tech */}
       {animationId === 5 && <SheTechCube size={size} />}
 
-      {/* Holographic Panels */}
-      <HolographicPanels size={size} />
+      {/* Holographic Panels - disabled on mobile for performance */}
+      {!isMobile && <HolographicPanels size={size} />}
 
-      {/* Floating Orbs */}
-      <FloatingOrbs size={size} />
+      {/* Floating Orbs - disabled on mobile for performance */}
+      {!isMobile && <FloatingOrbs size={size} />}
 
       {/* Interior point light - removed pink for Nexus Prime only */}
       {animationId !== 3 && (
@@ -203,16 +207,16 @@ export default function RotatingCube({
         <pointLight position={[4, 12, 4]} color="#10c22e" intensity={1.5} distance={size} />
       )}
 
-      {/* Glitch Burst effects for ALL Icarus punches */}
-      {(animationId === 1 || animationId === 4) && icarusPunchTimes.length > 0 && (
+      {/* Glitch Burst effects for ALL Icarus punches - disabled on mobile */}
+      {!isMobile && (animationId === 1 || animationId === 4) && icarusPunchTimes.length > 0 && (
         <GlitchBurst triggerTimes={icarusPunchTimes} animationTime={animationTime} />
       )}
 
-      {/* Radial expanding tesseract for Vectra - triggers at 2 seconds */}
-      {animationId === 2 && <RadialSquares animationTime={animationTime} cubeSize={size} />}
+      {/* Radial expanding tesseract for Vectra - disabled on mobile */}
+      {!isMobile && animationId === 2 && <RadialSquares animationTime={animationTime} cubeSize={size} />}
 
-      {/* Quantum Shockwave effect for Nexus Prime punches */}
-      {animationId === 3 && nexusPunchTimes.length > 0 && (
+      {/* Quantum Shockwave effect for Nexus Prime punches - disabled on mobile */}
+      {!isMobile && animationId === 3 && nexusPunchTimes.length > 0 && (
         <QuantumShockwave triggerTimes={nexusPunchTimes} animationTime={animationTime} />
       )}
 
