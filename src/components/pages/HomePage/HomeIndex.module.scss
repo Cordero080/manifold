@@ -648,14 +648,16 @@
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
-      /* EXACT same gradient as desktop */
-      background: linear-gradient(135deg, #00d4ff 0%, #ff0066 55%, #3dd4cc 75%, #f0a738 100%) !important;
+      /* PRE-SATURATED colors to match desktop visual output */
+      /* Original: #00d4ff → #ff0066 but with saturate(3) brightness(1.4) */
+      /* These are the VISUAL colors after filter is applied on desktop */
+      background: linear-gradient(135deg, #00ffff 0%, #ff0088 35%, #ff00aa 55%, #00ffcc 75%, #ffcc00 100%) !important;
       background-size: 100% 100% !important;
       -webkit-background-clip: text !important;
       background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
-      /* EXACT same filter as desktop */
-      filter: saturate(3) brightness(1.4) contrast(1.2) !important;
+      /* Lighter filter for mobile - colors are already saturated */
+      filter: brightness(1.1) contrast(1.1) !important;
     }
 
     /* Hide all pseudo-elements on mobile for performance */
