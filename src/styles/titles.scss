@@ -216,7 +216,7 @@ h1.quantum-title {
 /* ====================================
    MOBILE PERFORMANCE OPTIMIZATIONS
    Disable animations on mobile for better performance
-   Use PRE-SATURATED colors to match desktop visual output
+   Keep SAME gradient and filter as desktop - just disable animation
    ==================================== */
 @media (max-width: 768px) {
   h1.quantum-title {
@@ -224,27 +224,13 @@ h1.quantum-title {
   }
 
   .title-word {
-    /* Disable animations */
     animation: none !important;
     opacity: 1 !important;
-    /* PRE-SATURATED gradient - matches visual output of desktop after filter */
-    background: linear-gradient(135deg, #00ffff 0%, #ff0088 35%, #ff00aa 55%, #00ffcc 75%, #ffcc00 100%) !important;
-    background-size: 100% 100% !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    /* Lighter filter - colors already saturated */
-    filter: brightness(1.1) contrast(1.1) !important;
+    /* Keep same gradient and filter as desktop - no overrides */
   }
 
   .slashed-zero {
     animation: none !important;
-    /* PRE-SATURATED gradient */
-    background: linear-gradient(135deg, #00ddff 0%, #ff0088 55%, #00ddcc 75%, #ffaa00 100%) !important;
-    background-size: 100% 100% !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
   }
 
   .zero-char::before,
