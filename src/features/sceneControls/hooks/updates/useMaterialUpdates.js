@@ -65,14 +65,14 @@ export function useMaterialUpdates(objectsRef, materialProps) {
     const processedSolid = new Set();
     const processedWireframe = new Set();
     objectsRef.current.forEach(({ solidMesh, wireframeMesh, material, wireframeMaterial }) => {
-      // Update shared material references
-      if (material && !processedSolid.has(material)) {
+      // Update shared material references (only for materials that support metalness)
+      if (material && !processedSolid.has(material) && 'metalness' in material) {
         processedSolid.add(material);
         material.metalness = metalness;
         material.roughness = 0.2;
         material.needsUpdate = true;
       }
-      if (wireframeMaterial && !processedWireframe.has(wireframeMaterial)) {
+      if (wireframeMaterial && !processedWireframe.has(wireframeMaterial) && 'metalness' in wireframeMaterial) {
         processedWireframe.add(wireframeMaterial);
         wireframeMaterial.metalness = metalness;
         wireframeMaterial.roughness = 0.2;
@@ -82,7 +82,7 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       // Also traverse mesh children for complex geometries
       if (solidMesh) {
         solidMesh.traverse((child) => {
-          if (child.isMesh && child.material && !processedSolid.has(child.material)) {
+          if (child.isMesh && child.material && !processedSolid.has(child.material) && 'metalness' in child.material) {
             processedSolid.add(child.material);
             child.material.metalness = metalness;
             child.material.roughness = 0.2;
@@ -92,7 +92,7 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       }
       if (wireframeMesh) {
         wireframeMesh.traverse((child) => {
-          if (child.isMesh && child.material && !processedWireframe.has(child.material)) {
+          if (child.isMesh && child.material && !processedWireframe.has(child.material) && 'metalness' in child.material) {
             processedWireframe.add(child.material);
             child.material.metalness = metalness;
             child.material.roughness = 0.2;
@@ -119,13 +119,17 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       // Update shared material references
       if (material && !processedSolid.has(material)) {
         processedSolid.add(material);
-        material.emissive.copy(emissiveColor);
-        material.needsUpdate = true;
+        if (material.emissive) {
+          material.emissive.copy(emissiveColor);
+          material.needsUpdate = true;
+        }
       }
       if (wireframeMaterial && !processedWireframe.has(wireframeMaterial)) {
         processedWireframe.add(wireframeMaterial);
-        wireframeMaterial.emissive.copy(emissiveColor);
-        wireframeMaterial.needsUpdate = true;
+        if (wireframeMaterial.emissive) {
+          wireframeMaterial.emissive.copy(emissiveColor);
+          wireframeMaterial.needsUpdate = true;
+        }
       }
 
       // Also traverse mesh children for complex geometries
@@ -133,8 +137,10 @@ export function useMaterialUpdates(objectsRef, materialProps) {
         solidMesh.traverse((child) => {
           if (child.isMesh && child.material && !processedSolid.has(child.material)) {
             processedSolid.add(child.material);
-            child.material.emissive.copy(emissiveColor);
-            child.material.needsUpdate = true;
+            if (child.material.emissive) {
+              child.material.emissive.copy(emissiveColor);
+              child.material.needsUpdate = true;
+            }
           }
         });
       }
@@ -142,8 +148,10 @@ export function useMaterialUpdates(objectsRef, materialProps) {
         wireframeMesh.traverse((child) => {
           if (child.isMesh && child.material && !processedWireframe.has(child.material)) {
             processedWireframe.add(child.material);
-            child.material.emissive.copy(emissiveColor);
-            child.material.needsUpdate = true;
+            if (child.material.emissive) {
+              child.material.emissive.copy(emissiveColor);
+              child.material.needsUpdate = true;
+            }
           }
         });
       }
@@ -164,7 +172,7 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       // Update solid mesh materials
       if (solidMesh) {
         solidMesh.traverse((child) => {
-          if (child.isMesh && child.material) {
+          if (child.isMesh && child.material && child.material.color) {
             child.material.color.setHex(convertedColor);
             child.material.needsUpdate = true;
           }
@@ -173,18 +181,18 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       // Update wireframe mesh materials
       if (wireframeMesh) {
         wireframeMesh.traverse((child) => {
-          if (child.isMesh && child.material) {
+          if (child.isMesh && child.material && child.material.color) {
             child.material.color.setHex(convertedColor);
             child.material.needsUpdate = true;
           }
         });
       }
       // Also update the shared material references directly
-      if (material) {
+      if (material && material.color) {
         material.color.setHex(convertedColor);
         material.needsUpdate = true;
       }
-      if (wireframeMaterial) {
+      if (wireframeMaterial && wireframeMaterial.color) {
         wireframeMaterial.color.setHex(convertedColor);
         wireframeMaterial.needsUpdate = true;
       }
@@ -269,14 +277,14 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       if (centerLines) {
         // Handle LineSegments/Line objects (for generic hyperframes like Möbius sphere)
         if (centerLines.isLine || centerLines.isLineSegments) {
-          if (centerLines.material) {
+          if (centerLines.material && centerLines.material.color) {
             centerLines.material.color.copy(convertedColor);
             centerLines.material.needsUpdate = true;
           }
         }
         // Traverse all child meshes/lines and update their materials
         centerLines.traverse((child) => {
-          if ((child.isMesh || child.isLine || child.isLineSegments) && child.material) {
+          if ((child.isMesh || child.isLine || child.isLineSegments) && child.material && child.material.color) {
             child.material.color.copy(convertedColor);
             child.material.needsUpdate = true;
           }
@@ -298,14 +306,14 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       if (curvedLines) {
         // Handle LineSegments/Line objects (for generic hyperframes like Möbius sphere)
         if (curvedLines.isLine || curvedLines.isLineSegments) {
-          if (curvedLines.material) {
+          if (curvedLines.material && curvedLines.material.color) {
             curvedLines.material.color.copy(convertedColor);
             curvedLines.material.needsUpdate = true;
           }
         }
         // Traverse all child meshes/lines and update their materials
         curvedLines.traverse((child) => {
-          if ((child.isMesh || child.isLine || child.isLineSegments) && child.material) {
+          if ((child.isMesh || child.isLine || child.isLineSegments) && child.material && child.material.color) {
             child.material.color.copy(convertedColor);
             child.material.needsUpdate = true;
           }
