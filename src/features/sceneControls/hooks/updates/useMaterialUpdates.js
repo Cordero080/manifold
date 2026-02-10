@@ -108,8 +108,10 @@ export function useMaterialUpdates(objectsRef, materialProps) {
 
   // EMISSIVE INTENSITY UPDATER (creates glow effect using baseColor)
   useEffect(() => {
+    // Safety check for undefined baseColor
+    const safeBaseColor = baseColor && baseColor.length >= 7 ? baseColor : '#4a0e78ff';
     // Use RGB part only for Three.js Color
-    const rgbColor = baseColor.slice(0, 7); // Remove alpha if present
+    const rgbColor = safeBaseColor.slice(0, 7); // Remove alpha if present
     const emissiveColor = new THREE.Color(rgbColor).multiplyScalar(emissiveIntensity);
     const processedSolid = new Set();
     const processedWireframe = new Set();
@@ -150,8 +152,10 @@ export function useMaterialUpdates(objectsRef, materialProps) {
 
   // BASE COLOR UPDATER
   useEffect(() => {
+    // Safety check for undefined baseColor
+    const safeBaseColor = baseColor && baseColor.length >= 7 ? baseColor : '#4a0e78ff';
     // Convert hex color string to Three.js color number (strip alpha channel)
-    const hexColor = baseColor.slice(1, 7); // Remove # and alpha (ff)
+    const hexColor = safeBaseColor.slice(1, 7); // Remove # and alpha (ff)
     // ↑ .slice(1, 7) removes '#' at start AND 'ff' alpha at end
     // ↑ hexColor = '0000ff' (6-char hex, no # symbol)
     const convertedColor = parseInt(hexColor, 16);
@@ -254,8 +258,11 @@ export function useMaterialUpdates(objectsRef, materialProps) {
 
   // HYPERFRAME SPIRAL COLOR UPDATER
   useEffect(() => {
+    // Safety check for undefined hyperframeColor
+    const safeHyperframeColor =
+      hyperframeColor && hyperframeColor.length >= 7 ? hyperframeColor : '#00d9ff';
     // Strip alpha channel if present (8-char hex to 6-char hex)
-    const rgbColor = hyperframeColor.slice(0, 7);
+    const rgbColor = safeHyperframeColor.slice(0, 7);
     const convertedColor = new THREE.Color(rgbColor);
 
     objectsRef.current.forEach(({ centerLines }) => {
@@ -280,8 +287,11 @@ export function useMaterialUpdates(objectsRef, materialProps) {
 
   // HYPERFRAME EDGE COLOR UPDATER
   useEffect(() => {
+    // Safety check for undefined hyperframeLineColor
+    const safeHyperframeLineColor =
+      hyperframeLineColor && hyperframeLineColor.length >= 7 ? hyperframeLineColor : '#00ff41';
     // Strip alpha channel if present (8-char hex to 6-char hex)
-    const rgbColor = hyperframeLineColor.slice(0, 7);
+    const rgbColor = safeHyperframeLineColor.slice(0, 7);
     const convertedColor = new THREE.Color(rgbColor);
 
     objectsRef.current.forEach(({ curvedLines }) => {
