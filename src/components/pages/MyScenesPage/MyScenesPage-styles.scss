@@ -1,6 +1,5 @@
 /* My Scenes Page Styles - Uses shared quantum styles */
 
-:global {
 .my-scenes-page {
   min-height: 100vh;
   width: 100%;
@@ -580,12 +579,12 @@
 
 @media (max-width: 600px) {
   .my-scenes-page {
-    padding: 80px 16px 40px;
+    padding: 100px 12px 40px;
   }
 
   .my-scenes-page__grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
   /* Title/subtitle sizes handled by shared styles */
 
@@ -604,6 +603,23 @@
   .my-scenes-page__select {
     width: 100%;
   }
-}
 
-} /* End :global */
+  .create-scene-card {
+    transform: scale(0.92);
+    min-height: 120px;
+    padding: 16px 12px;
+  }
+
+  .create-scene-card__icon {
+    font-size: 2rem;
+  }
+
+  .create-scene-card__title {
+    font-size: 0.875rem;
+    margin: 0 0 8px;
+  }
+
+  .create-scene-card__subtitle {
+    font-size: 0.75rem;
+  }
+}

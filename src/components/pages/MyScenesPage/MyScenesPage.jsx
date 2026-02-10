@@ -13,7 +13,7 @@ import HomeBackground from '@components/ui/HomeBackground/HomeBackground';
 import { quantumCollapse } from '@utils/coreHelpers';
 import '@styles/quantumTitles.css';
 import '@styles/quantumBackground.css';
-import './MyScenesPage-styles.module.scss';
+import './MyScenesPage-styles.scss';
 import styles from './MyScenesPage.module.scss';
 import sharedStyles from '@styles/shared.module.scss';
 import '@components/layout/NavBar/nav.scss';

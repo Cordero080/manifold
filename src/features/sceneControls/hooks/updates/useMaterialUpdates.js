@@ -72,7 +72,11 @@ export function useMaterialUpdates(objectsRef, materialProps) {
         material.roughness = 0.2;
         material.needsUpdate = true;
       }
-      if (wireframeMaterial && !processedWireframe.has(wireframeMaterial) && 'metalness' in wireframeMaterial) {
+      if (
+        wireframeMaterial &&
+        !processedWireframe.has(wireframeMaterial) &&
+        'metalness' in wireframeMaterial
+      ) {
         processedWireframe.add(wireframeMaterial);
         wireframeMaterial.metalness = metalness;
         wireframeMaterial.roughness = 0.2;
@@ -82,7 +86,12 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       // Also traverse mesh children for complex geometries
       if (solidMesh) {
         solidMesh.traverse((child) => {
-          if (child.isMesh && child.material && !processedSolid.has(child.material) && 'metalness' in child.material) {
+          if (
+            child.isMesh &&
+            child.material &&
+            !processedSolid.has(child.material) &&
+            'metalness' in child.material
+          ) {
             processedSolid.add(child.material);
             child.material.metalness = metalness;
             child.material.roughness = 0.2;
@@ -92,7 +101,12 @@ export function useMaterialUpdates(objectsRef, materialProps) {
       }
       if (wireframeMesh) {
         wireframeMesh.traverse((child) => {
-          if (child.isMesh && child.material && !processedWireframe.has(child.material) && 'metalness' in child.material) {
+          if (
+            child.isMesh &&
+            child.material &&
+            !processedWireframe.has(child.material) &&
+            'metalness' in child.material
+          ) {
             processedWireframe.add(child.material);
             child.material.metalness = metalness;
             child.material.roughness = 0.2;
@@ -284,7 +298,11 @@ export function useMaterialUpdates(objectsRef, materialProps) {
         }
         // Traverse all child meshes/lines and update their materials
         centerLines.traverse((child) => {
-          if ((child.isMesh || child.isLine || child.isLineSegments) && child.material && child.material.color) {
+          if (
+            (child.isMesh || child.isLine || child.isLineSegments) &&
+            child.material &&
+            child.material.color
+          ) {
             child.material.color.copy(convertedColor);
             child.material.needsUpdate = true;
           }
@@ -313,7 +331,11 @@ export function useMaterialUpdates(objectsRef, materialProps) {
         }
         // Traverse all child meshes/lines and update their materials
         curvedLines.traverse((child) => {
-          if ((child.isMesh || child.isLine || child.isLineSegments) && child.material && child.material.color) {
+          if (
+            (child.isMesh || child.isLine || child.isLineSegments) &&
+            child.material &&
+            child.material.color
+          ) {
             child.material.color.copy(convertedColor);
             child.material.needsUpdate = true;
           }

@@ -356,24 +356,36 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .sceneCard {
+    transform: scale(0.92);
+  }
+
   .sceneCardInfo {
-    padding: 12px;
-    gap: 8px;
+    padding: 10px;
+    gap: 6px;
   }
 
   .sceneCardTitle {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 
   .sceneCardDescription {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
+    -webkit-line-clamp: 1;
   }
 
   .sceneCardActions {
     flex-direction: column;
+    gap: 6px;
   }
 
   .sceneCardBtn {
     width: 100%;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .sceneCardThumbnail {
+    padding-top: 56%;
   }
 }
