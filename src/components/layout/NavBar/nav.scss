@@ -54,6 +54,7 @@
   align-items: center;
   position: relative;
   overflow: visible; /* Ensure logo text isn't clipped */
+  margin-left: -10px;
 }
 
 .logo-text {
@@ -68,8 +69,6 @@
   background-clip: text;
   color: #ffffff;
   text-shadow: 0 0 20px rgba(45, 86, 86, 0.4);
-  /* Gradient animation only - no tilting/glitch effects */
-  animation: gradientShift 4s ease-in-out infinite;
   padding: 0 5px; /* Add padding to prevent text clipping */
   display: inline-block; /* Ensure padding applies properly */
 }
@@ -371,9 +370,10 @@
   .nav-logo {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: visible;
     max-width: none;
+    margin-left: -5px;
   }
 
   .logo-text {

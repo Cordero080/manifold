@@ -64,10 +64,17 @@
 // Responsive: hide on small screens if needed
 @media (max-width: 768px) {
   .footer {
-    bottom: 10px;
-    right: 10px;
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
     padding: 8px 14px;
     gap: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .logo {

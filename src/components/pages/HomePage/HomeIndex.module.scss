@@ -780,10 +780,6 @@ input,
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: none;
-    animation:
-      logoGlitch 6s ease-in-out infinite,
-      gradientShift 4s ease-in-out infinite;
-    transition: filter 1.2s;
     text-decoration: none;
 
     @media (max-width: 768px) {
