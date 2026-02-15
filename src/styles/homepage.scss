@@ -22,7 +22,7 @@
   margin-top: 10px;
   margin-top: -10px;
   display: inline-block;
-  transform: translateY(15px); /* Fixed typo: was 15x */
+  transform: translateY(60px) !important;
 }
 
 /* Hero Stats */
@@ -64,12 +64,30 @@
   overflow-x: hidden;
 }
 
+/* Default desktop with navbar - title position */
+.title-wrapper {
+  margin-top: 20px;
+}
+
+/* When no navbar (not authenticated) - move title and manifold up */
+.no-nav .title-wrapper {
+  margin-top: -40px;
+}
+
+.no-nav .manifold-label {
+  transform: translateY(-25px);
+}
+
 /* ====================================
    RESPONSIVE BREAKPOINTS
    ==================================== */
 
 /* Tablet: 768px - 1024px */
 @media (max-width: 1024px) {
+  .title-wrapper {
+    margin-top: -10px;
+  }
+
   .quantum-subtitle {
     font-size: 10px;
     letter-spacing: 1.5px;
@@ -96,6 +114,14 @@
 
 /* Mobile Landscape: 481px - 767px */
 @media (max-width: 767px) {
+  .title-wrapper {
+    margin-top: -30px;
+  }
+
+  .manifold-label {
+    transform: translateY(40px) !important;
+  }
+
   .quantum-subtitle {
     font-size: 9px;
     letter-spacing: 1.2px;
@@ -124,6 +150,14 @@
 
 /* Mobile Portrait: < 480px */
 @media (max-width: 480px) {
+  .title-wrapper {
+    margin-top: -50px;
+  }
+
+  .manifold-label {
+    transform: translateY(30px) !important;
+  }
+
   .quantum-subtitle {
     font-size: 8px;
     letter-spacing: 1px;

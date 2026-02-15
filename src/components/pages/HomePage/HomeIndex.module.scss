@@ -787,15 +787,15 @@ input,
     text-decoration: none;
 
     @media (max-width: 768px) {
-      font-size: 14px;
+      font-size: 11px;
     }
 
     @media (max-width: 600px) {
-      font-size: 12px;
+      font-size: 10px;
     }
 
     @media (max-width: 480px) {
-      font-size: 11px;
+      font-size: 9px;
     }
   }
 
@@ -944,8 +944,8 @@ input,
     position: relative;
     z-index: 10;
     pointer-events: none;
-    /* Nudge the title slightly lower for improved visual balance */
-    margin-top: 32px;
+    /* Nudge the title lower for improved visual balance */
+    margin-top: 60px;
   }
 
   /* Quantum title h1 */

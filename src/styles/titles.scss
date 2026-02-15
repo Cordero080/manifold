@@ -2,18 +2,18 @@
 
 h1.quantum-title {
   font-family: 'Future Z', 'Orbitron', 'Rajdhani', sans-serif !important;
-  font-size: clamp(32px, 6vw, 100px);
+  font-size: clamp(28px, 5vw, 80px);
   font-weight: normal;
   line-height: 0.75;
-  margin: 0 0 30px 0;
+  margin: 100px 0 30px 0;
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: 8px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 60px;
+  padding: 25px 50px;
   isolation: isolate;
   perspective: 1000px;
   z-index: 100000;
@@ -132,18 +132,6 @@ h1.quantum-title {
   animation: pageTitleShimmer 5s ease-in-out infinite;
 }
 
-// .slashed-zero::after {
-//   content: '';
-//   position: absolute;
-//   left: 50%;
-//   top: 50%;
-//   width: 85%;
-//   height: 8px;
-//   background: linear-gradient(135deg, #c1077dc1 0%, #9c65f4 55%, #2eaca4 75%, #c82e76 90%);
-//   transform: translate(-65%, -90%) rotate(-30deg);
-//   z-index: 2;
-//   pointer-events: none;
-// }
 
 /* Apply upside-down A transform to all Orbitron text elements */
 .nav-link,
@@ -221,20 +209,32 @@ h1.quantum-title {
 @media (max-width: 768px) {
   h1.quantum-title {
     animation: none !important;
+    font-size: clamp(48px, 15vw, 45px);
+    margin: 70px 0 20px 0;
   }
 
   .title-word {
     animation: none !important;
-    opacity: 1 !important;
-    /* Keep same gradient and filter as desktop - no overrides */
+    opacity: 1;
+    background: linear-gradient(65deg, #0285bdbd 1%, #a23c52 5%, #3d9fd4bf 55%, #f29e1f 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: saturate(2) brightness(1.4) contrast(1.2);
   }
 
   .slashed-zero {
-    animation: none !important;
+    animation: none;
+    background: linear-gradient(135deg, #098fddd4 0%, #bc1f60bc 55%, #2eaca4 75%, #c8922e 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .zero-char::before,
   .zero-char::after {
-    display: none; /* Remove blur/shadow layers on mobile */
+    display: none;
   }
 }

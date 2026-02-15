@@ -377,7 +377,7 @@
   }
 
   .logo-text {
-    font-size: 14px;
+    font-size: 11px;
     white-space: nowrap;
     overflow: visible;
     text-overflow: clip;
@@ -454,10 +454,11 @@
   }
 
   .logo-text {
-    font-size: 12px;
+    font-size: 10px;
     max-width: none;
     overflow: visible;
     white-space: nowrap;
+    text-overflow: clip;
   }
 
   .nav-links {
@@ -509,10 +510,11 @@
   }
 
   .logo-text {
-    font-size: 11px;
+    font-size: 9px;
     max-width: none;
     overflow: visible;
     white-space: nowrap;
+    text-overflow: clip;
   }
 
   .nav-links {
@@ -543,8 +545,10 @@
   }
 
   .logo-text {
-    font-size: 9px;
+    font-size: 8px;
     white-space: nowrap;
+    text-overflow: clip;
+    overflow: visible;
   }
 
   .nav-links {
