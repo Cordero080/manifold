@@ -3,7 +3,7 @@
 
 // In development: use empty string (Vite proxy forwards /api to backend)
 // In production: Use Render backend URL
-const API_BASE_URL = import.meta.env.PROD ? 'https://nexus-geom-lab-backend-1.onrender.com' : '';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
 
 /**
  * Sign up a new user
