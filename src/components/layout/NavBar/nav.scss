@@ -53,7 +53,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  overflow: visible; /* Ensure logo text isn't clipped */
+  overflow: visible;
   margin-left: -10px;
 }
 
@@ -62,15 +62,11 @@
   font-family: 'Future Z', 'Orbitron', monospace;
   font-size: 28px;
   font-weight: 800;
-  background: linear-gradient(135deg, #00ffff, #ff0066, #ffff00, #00ff33, #cc00ff, #ff3300);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: #ffffff;
-  text-shadow: 0 0 20px rgba(45, 86, 86, 0.4);
-  padding: 0 5px; /* Add padding to prevent text clipping */
-  display: inline-block; /* Ensure padding applies properly */
+  color: rgba(0, 212, 255, 0.35);
+  -webkit-text-fill-color: rgba(0, 212, 255, 0.35);
+  text-shadow: none;
+  padding: 0 5px;
+  display: inline-block;
 }
 
 /* Inverted letter styles moved to /components/ui/InvertedLetterText/invertedLetters.css */
@@ -175,8 +171,8 @@
 .nav-terminal .terminal-cursor svg {
   color: rgba(0, 255, 255, 0.5);
   transition: all 0.3s ease;
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
 }
 
 .nav-terminal .terminal-cursor:hover svg {
@@ -348,7 +344,8 @@
     }
   }
   
-  /* Mobile overlay - always block when menu is open */
+  /* Mobile overlay - rendered outside <nav> in the root stacking context.
+     z-index 9999 keeps it below the nav (10000) so the dropdown stays clickable */
   .nav-mobile-overlay {
     display: block;
     position: fixed;
@@ -357,7 +354,8 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 10000;
+    z-index: 9999;
+    cursor: pointer;
   }
   
   .quantum-nav {
@@ -377,7 +375,7 @@
   }
 
   .logo-text {
-    font-size: 11px;
+    font-size: 18px;
     white-space: nowrap;
     overflow: visible;
     text-overflow: clip;
@@ -387,47 +385,63 @@
   /* Mobile dropdown menu */
   .nav-links {
     position: fixed;
-    top: 50px;
-    right: -100%;
+    top: 64px;
+    right: 0;
     width: 200px;
     height: auto;
-    max-height: calc(100vh - 50px);
+    max-height: calc(100vh - 64px);
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 40, 0.98));
     backdrop-filter: blur(20px);
     border-left: 1px solid rgba(0, 255, 255, 0.3);
     border-bottom: 1px solid rgba(0, 255, 255, 0.3);
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start !important;
     gap: 0;
     padding: 10px 0;
-    transition: right 0.3s ease;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
     z-index: 10001;
+    overflow-x: hidden;
     overflow-y: auto;
-    
+
     &.mobile-open {
-      right: 0;
+      transform: translateX(0);
     }
   }
 
   .nav-link {
-    width: 100%;
+    width: 100% !important;
     padding: 12px 20px;
     font-size: 14px;
     letter-spacing: 1px;
     border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-    
+    text-align: left;
+    box-sizing: border-box;
+
     &:last-child {
       border-bottom: none;
     }
   }
 
   .nav-terminal {
-    width: 100%;
+    width: 100% !important;
     padding: 12px 20px;
     font-size: 14px;
-    margin-left: 0;
+    margin-left: 0 !important;
     flex-shrink: 0;
     justify-content: flex-start;
+    box-sizing: border-box;
+
+    .terminal-cursor {
+      padding: 0;
+      justify-content: flex-start;
+
+      svg {
+        width: 24px !important;
+        height: 24px !important;
+        color: rgba(0, 255, 255, 0.7);
+      }
+    }
   }
 
   .nav-username {
@@ -454,7 +468,7 @@
   }
 
   .logo-text {
-    font-size: 10px;
+    font-size: 16px;
     max-width: none;
     overflow: visible;
     white-space: nowrap;
@@ -462,7 +476,7 @@
   }
 
   .nav-links {
-    top: 48px;
+    top: 64px;
     width: 180px;
   }
 
@@ -510,7 +524,7 @@
   }
 
   .logo-text {
-    font-size: 9px;
+    font-size: 14px;
     max-width: none;
     overflow: visible;
     white-space: nowrap;
@@ -518,7 +532,7 @@
   }
 
   .nav-links {
-    top: 46px;
+    top: 64px;
     width: 160px;
   }
 
@@ -545,14 +559,14 @@
   }
 
   .logo-text {
-    font-size: 8px;
+    font-size: 14px;
     white-space: nowrap;
     text-overflow: clip;
     overflow: visible;
   }
 
   .nav-links {
-    top: 48px;
+    top: 64px;
     width: 150px;
   }
 
@@ -589,11 +603,11 @@
   }
 
   .logo-text {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .nav-links {
-    top: 50px;
+    top: 64px;
     width: 140px;
   }
 

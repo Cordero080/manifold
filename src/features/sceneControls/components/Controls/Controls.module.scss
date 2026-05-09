@@ -691,11 +691,12 @@
 /* Mobile Landscape & Small Tablets (481px - 768px) */
 @media (max-width: 768px) and (min-width: 481px) {
   .controls {
-    width: 240px;
+    width: 340px;
     max-height: 65vh;
-    padding: 16px 12px;
-    left: 10px;
+    padding: 16px 14px;
+    left: 0;
     top: 120px;
+    transform-origin: top left;
   }
 
   .controls * {

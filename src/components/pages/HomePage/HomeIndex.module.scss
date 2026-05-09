@@ -767,34 +767,6 @@ input,
     box-shadow: var(--nav-box-shadow);
   }
 
-  /* Logo text with dynamic filter */
-  .logo-text {
-    position: relative;
-    font-family: 'Orbitron', 'JetBrains Mono', monospace;
-    font-size: 22px;
-    font-weight: 800;
-    color: #fff;
-    background: linear-gradient(135deg, #00ffff72, #ff00668d, #ffff0094, #00ff33, #cc00ff, #ff3300);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    text-decoration: none;
-
-    @media (max-width: 768px) {
-      font-size: 11px;
-    }
-
-    @media (max-width: 600px) {
-      font-size: 10px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 9px;
-    }
-  }
-
   .nav-link {
     font-size: 16px;
 
@@ -942,6 +914,14 @@ input,
     pointer-events: none;
     /* Nudge the title lower for improved visual balance */
     margin-top: 60px;
+
+    @media (max-width: 768px) {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      margin-top: 10px;
+    }
   }
 
   /* Quantum title h1 */
@@ -1531,7 +1511,6 @@ input,
     z-index: 99999;
   }
 
-  .nav-links,
   .nav-link,
   .terminal-cursor,
   .scene-content,
@@ -1558,6 +1537,14 @@ input,
     text-align: center;
     overflow: visible;
     pointer-events: auto !important;
+
+    @media (max-width: 768px) {
+      padding-top: 90px;
+    }
+
+    @media (max-width: 480px) {
+      padding-top: 70px;
+    }
   }
 
   /* When no nav is present, reduce top padding to move content higher */
@@ -1586,16 +1573,27 @@ input,
   }
 
   #probability .scene-title {
-    margin-top: 150px;
+    margin-top: 190px;
   }
 
   #probability .scene-description {
     margin-top: 50px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
   }
 
   #probability .code-snippets {
     margin-top: 0;
+  }
+
+  @media (max-width: 768px) {
+    #probability .scene-content {
+      padding: 60px 16px;
+    }
+
+    #probability .scene-description {
+      max-width: 90%;
+      width: 90%;
+    }
   }
 
   :global(.scene-title) {
@@ -1603,7 +1601,7 @@ input,
     font-family: 'Orbitron', 'JetBrains Mono', monospace;
     font-weight: 900;
     letter-spacing: 0.15em;
-    color: #fbfafe9c;
+    color: #f3f2f6f9;
     margin: 40px 0 20px 0;
 
     @media (max-width: 768px) {
@@ -1624,10 +1622,10 @@ input,
     font-family: 'Orbitron', 'JetBrains Mono', monospace;
     font-weight: 500;
     letter-spacing: 0.08em;
-    color: #00fff766;
+    color: #fef7fc84;
     text-shadow:
-      0 0 8px #00fff722,
-      0 0 16px #00fff711;
+      0 0 8px #010e0d22,
+      0 0 1px #035f2bf8;
     margin-bottom: 30px;
     max-width: 900px;
     margin-left: auto;
@@ -1719,45 +1717,6 @@ input,
     display: flex;
     align-items: center;
     position: relative;
-  }
-
-  .logo-text {
-    position: relative;
-    font-family: 'Orbitron', 'JetBrains Mono', monospace;
-    font-size: 22px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #00ffff72, #ff00668d, #ffff0094, #00ff33, #cc00ff, #ff3300);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: #ffffff;
-    text-shadow: 0 0 20px rgba(45, 86, 86, 0.4);
-    animation:
-      logoGlitch 6s ease-in-out infinite,
-      gradientShift 4s ease-in-out infinite;
-
-    &::before {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 2px;
-      color: #ff00ff;
-      animation: glitchShift1 3s ease-in-out infinite;
-      z-index: -1;
-      opacity: 0.7;
-    }
-
-    &::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: -2px;
-      color: #00ffff;
-      animation: glitchShift2 4s ease-in-out infinite;
-      z-index: -2;
-      opacity: 0.5;
-    }
   }
 
   .nav-links {
