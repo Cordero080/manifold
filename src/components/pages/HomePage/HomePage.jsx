@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react';
 // Components
 import ProgressBar from './components/ProgressBar';
 import Scene from './components/Scene';
-import ScrambleOnHover from './components/ScrambleOnHover';
 import QuantumNav from './components/QuantumNav';
 import BackgroundLayers from './components/BackgroundLayers';
 import HessianPolychoronAnimation from './components/HessianPolychoronAnimation';
@@ -163,16 +162,9 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
             </div>
             <div className="title-wrapper">
               <h1 className={`quantum-title ${styles.quantumTitle} quantum-title-h1`}>
-                <span className="title-word title-word-span" data-word="N3XUS">
-                  <ScrambleOnHover originalText="N3XUS" finalText="アトリエ" delay={3000} />
-                </span>
-                <br></br>
-                <span className="title-word title-word-span" data-word="GE0M">
-                  GE<span className="slashed-zero">0</span>M
-                </span>
-                <br></br>
-                <span className="title-word title-word-span" data-word="LVB">
-                  L<span className="title-inverted-v">V</span>B
+                <span className="title-word title-word-span" data-word="MANIFOLD">
+                  M<span className="manifold-v-back">V</span>
+                  <span className="title-inverted-v">V</span>NIFOLD
                 </span>
               </h1>
             </div>

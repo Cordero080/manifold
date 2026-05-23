@@ -294,7 +294,7 @@
   }
 }
 
-/* Enhanced N3XUS Title */
+/* Enhanced MANIFOLD Title */
 .quantumTitle {
   position: relative !important;
   z-index: 9999 !important;
@@ -563,28 +563,12 @@
   }
 
   /* Override title entrance animations in mono mode */
-  html.mono-mode .title-word[data-word='N3XUS'] {
+  html.mono-mode .title-word[data-word='MANIFOLD'] {
     animation:
       pageTitleShimmer 18s ease-in-out infinite,
       mysteriousFadeIn 4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
       titleFloatLayer1 8s ease-in-out infinite;
     animation-delay: 0s, 0s, 4s;
-  }
-
-  html.mono-mode .title-word[data-word='GE0M'] {
-    animation:
-      pageTitleShimmer 18s ease-in-out infinite,
-      mysteriousFadeIn 4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-      titleFloatLayer2 7s ease-in-out infinite;
-    animation-delay: 0s, 1.4s, 5.4s;
-  }
-
-  html.mono-mode .title-word[data-word='LVB'] {
-    animation:
-      pageTitleShimmer 18s ease-in-out infinite,
-      mysteriousFadeIn 4s cubic-bezier(0.16, 1, 0.3, 1) forwards,
-      titleFloatLayer3 9s ease-in-out infinite;
-    animation-delay: 0s, 2.8s, 6.8s;
   }
 }
 
@@ -691,7 +675,7 @@
 
 /* HomePage-specific title word animations */
 :global {
-  .title-word[data-word='N3XUS'] {
+  .title-word[data-word='MANIFOLD'] {
     animation:
       pageTitleShimmer 18s ease-in-out infinite,
       particleArrivalTopLeft 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards,
@@ -699,39 +683,11 @@
     animation-delay: 0s, 0s, 1.8s;
   }
 
-  .title-word[data-word='GE0M'] {
-    animation:
-      pageTitleShimmer 18s ease-in-out infinite,
-      particleArrivalRight 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-      titleFloatLayer2 5.5s ease-in-out infinite;
-    animation-delay: 0s, 0.3s, 2.1s;
-  }
-
-  .title-word[data-word='LVB'] {
-    animation:
-      pageTitleShimmer 18s ease-in-out infinite,
-      particleArrivalBottomLeft 2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-      titleFloatLayer3 6.5s ease-in-out infinite;
-    animation-delay: 0s, 0.6s, 2.6s;
-  }
-
-  /* Home-only: remove pseudo duplicate letters for N3XUS and GE0M only.
-     Do NOT remove or change any pseudo layers for LVB (the V). */
-  .title-word[data-word='N3XUS']::before,
-  .title-word[data-word='N3XUS']::after,
-  .title-word[data-word='GE0M']::before,
-  .title-word[data-word='GE0M']::after {
+  .title-word[data-word='MANIFOLD']::before,
+  .title-word[data-word='MANIFOLD']::after {
     display: none !important;
     content: none !important;
     visibility: hidden !important;
-    pointer-events: none !important;
-  }
-  /* Home-only: for LVB, replace pseudo content so only V is duplicated (hide L and B) */
-  .title-word[data-word='LVB']::before,
-  .title-word[data-word='LVB']::after {
-    content: 'V' !important;
-    display: block !important;
-    visibility: visible !important;
     pointer-events: none !important;
   }
 
@@ -741,22 +697,14 @@
      =================================== */
   @media (max-width: 768px) {
     .title-word,
-    .title-word[data-word='N3XUS'],
-    .title-word[data-word='GE0M'],
-    .title-word[data-word='LVB'] {
+    .title-word[data-word='MANIFOLD'] {
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
-      /* Keep same gradient and filter as desktop - no overrides */
     }
 
-    /* Hide all pseudo-elements on mobile for performance */
-    .title-word[data-word='N3XUS']::before,
-    .title-word[data-word='N3XUS']::after,
-    .title-word[data-word='GE0M']::before,
-    .title-word[data-word='GE0M']::after,
-    .title-word[data-word='LVB']::before,
-    .title-word[data-word='LVB']::after {
+    .title-word[data-word='MANIFOLD']::before,
+    .title-word[data-word='MANIFOLD']::after {
       display: none !important;
       content: none !important;
     }
@@ -1013,7 +961,7 @@ input,
     z-index: 10;
     pointer-events: none;
     /* Nudge the title lower for improved visual balance */
-    margin-top: 60px;
+    margin-top: 100px;
 
     @media (max-width: 768px) {
       margin-top: 20px;
