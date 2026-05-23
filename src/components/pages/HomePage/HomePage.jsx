@@ -7,6 +7,7 @@ import QuantumNav from './components/QuantumNav';
 import BackgroundLayers from './components/BackgroundLayers';
 import HessianPolychoronAnimation from './components/HessianPolychoronAnimation';
 import QuantumManifoldAnimation from './components/QuantumManifoldAnimation';
+import ScrambleOnHover from './components/ScrambleOnHover';
 
 // Styles
 import styles from './HomeIndex.module.scss';
@@ -161,10 +162,11 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
               <span className="timestamp" id="timestamp"></span>
             </div>
             <div className="title-wrapper">
-              <h1 className={`quantum-title ${styles.quantumTitle} quantum-title-h1`}>
+              <h1
+                className={`quantum-title ${styles.quantumTitle} ${styles.scrambleTitle} quantum-title-h1`}
+              >
                 <span className="title-word title-word-span" data-word="MANIFOLD">
-                  M<span className="manifold-v-back">V</span>
-                  <span className="title-inverted-v">V</span>NIFOLD
+                  <ScrambleOnHover originalText="MANIFOLD" finalText="アトリエ" delay={1500} />
                 </span>
               </h1>
             </div>

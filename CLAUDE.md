@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Nexus-Geom-Lab is a full-stack 3D geometry exploration platform. Users interact with real-time 3D shapes, save scene configurations, and progressively unlock characters/animations based on how many scenes they save.
+Manifold is a full-stack 3D geometry exploration platform. Users interact with real-time 3D shapes, save scene configurations, and progressively unlock characters/animations based on how many scenes they save.
 
 ## Commands
 
@@ -19,7 +19,7 @@ npm run format       # Prettier
 npm test             # Jest (39 tests across 7 suites)
 ```
 
-### Backend (`nexus-geom-lab-backend/`)
+### Backend (`manifold-backend/`)
 ```bash
 npm run dev   # nodemon index.js (port 3000)
 npm start     # node index.js
@@ -78,7 +78,7 @@ Scenes store a flat `config` object with all 3D editor state: `scale`, `metalnes
 
 - **Frontend**: Vercel — `vercel.json` uses `vite build` → `dist/`, SPA rewrites to `index.html`
 - **Backend**: Render — requires env vars `MONGODB_URI`, `JWT_SECRET`, `FRONTEND_URL`
-- **Base path**: `/` on Vercel, `/nexus-geom-lab/` on GitHub Pages (controlled by `VITE_DEPLOY_TARGET`)
+- **Base path**: `/` on Vercel, `/manifold/` on GitHub Pages (controlled by `VITE_DEPLOY_TARGET`)
 
 ## Dev User
 After running `npm run seed` in the backend: `pablo@test.com` / `test123`. The seed script is idempotent — safe to run multiple times.

@@ -108,6 +108,11 @@ h1.quantum-title {
     0 0 60px rgba(5, 1, 49, 0.89);
 }
 
+.scramble-hover-span.scramble-active {
+  letter-spacing: 18px;
+  transition: letter-spacing 0.3s ease;
+}
+
 .title-char {
   display: inline-block;
   font-family: inherit;

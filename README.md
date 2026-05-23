@@ -1,4 +1,4 @@
-# <img src="./public/assets/tesseract-icon.svg" width="32" height="32" alt="Tesseract" /> Nexus-Geom-Lab
+# <img src="./public/assets/tesseract-icon.svg" width="32" height="32" alt="Tesseract" /> Manifold
 
 > Interactive 3D geometry platform with 24 hyperdimensional shapes, progressive character unlocks, and full-stack scene management
 
@@ -23,7 +23,7 @@ This project is **NOT open source**. You may view the code for personal learning
 ![Express](https://img.shields.io/badge/Express-4.x-000000?style=for-the-badge&logo=express)
 ![MongoDB](https://img.shields.io/badge/MongoDB-5.0-47A248?style=for-the-badge&logo=mongodb)
 
-[🚀 Live Demo](https://nexus-geom-3d.vercel.app) • [📖 Full Documentation](./docs) • [� API Docs](./docs/TECHNICAL_SPECIFICATION.md)
+[🚀 Live Demo](https://manifold-3d.vercel.app) • [📖 Full Documentation](./docs) • [� API Docs](./docs/TECHNICAL_SPECIFICATION.md)
 
 </div>
 
@@ -33,23 +33,21 @@ This project is **NOT open source**. You may view the code for personal learning
 
 ### Landing Page
 
-![Landing Page](./screenshots/nexus-landing1.jpg)
-_Nexus Geom Lab landing page with quantum aesthetics_
+![Landing Page](./screenshots/manifold-landing-sign-in-up.png)
+_MANIFOLD landing page with sign in / sign up_
 
-### Landing Page (Homepage)
+![Landing Page - Button Interaction](./screenshots/manifold-landing-button-click.png)
+_Landing page with interactive enter button_
 
-![Homepage](./screenshots/homepage.png)
-_Landing page with quantum background and navigation_
+### Homepage
 
-### Homepage (Logged In)
+![Homepage](./screenshots/manifold-home.png)
+_Home page with MANIFOLD title and quantum aesthetics_
 
-![Homepage Logged In](./screenshots/homepage-logged-in.png)
-_Landing page showing authenticated user state with username and My Scenes link_
+### Dark Mode
 
-### Title Scramble Effect (アトリエ)
-
-![Nexus Scramble](./screenshots/nexus-scramble.png)
-_Title scrambles into Japanese characters for "atelier" (アトリエ) on hover_
+![Dark Mode](./screenshots/manifold-darkMode.png)
+_MANIFOLD interface in dark mode_
 
 ### Sign Up Page
 
@@ -118,7 +116,7 @@ _UI/UX design and user flow planning_
 
 **A gamified 4D geometry exploration platform.** Discover hyperdimensional shapes, save configurations you find beautiful, and unlock animated characters through progression. It combines mathematical visualization with game mechanics to make abstract concepts engaging.
 
-Built with React, Three.js, and MongoDB, Nexus-Geom Lab lets you explore 24 advanced geometries—from tesseracts to quantum manifolds—customize materials, animations, and lighting, then save your favorite scenes. Each save contributes to unlocking original 3D characters (Nexus Prime, Icarus-X, Vectra), creating a feedback loop that rewards curiosity.
+Built with React, Three.js, and MongoDB, Manifold lets you explore 24 advanced geometries—from tesseracts to quantum manifolds—customize materials, animations, and lighting, then save your favorite scenes. Each save contributes to unlocking original 3D characters (Nexus Prime, Icarus-X, Vectra), creating a feedback loop that rewards curiosity.
 
 **The concept**: Make 4D geometry *fun* to explore, not just educational. Unlike traditional geometry viewers, this creates an engagement loop—exploration → discovery → saving → unlocks → more exploration.
 
@@ -237,8 +235,8 @@ Built with React, Three.js, and MongoDB, Nexus-Geom Lab lets you explore 24 adva
 
 ```bash
 # Clone repository
-git clone https://github.com/Cordero080/nexus-geom-lab.git
-cd nexus-geom-lab
+git clone https://github.com/Cordero080/manifold.git
+cd manifold
 
 # Frontend setup
 npm install
@@ -246,7 +244,7 @@ npm run dev
 # Opens http://localhost:5173
 
 # Backend setup (separate terminal)
-cd nexus-geom-lab-backend
+cd manifold-backend
 npm install
 cp .env.example .env  # Add your MongoDB URI and JWT secret
 npm run dev
@@ -265,7 +263,7 @@ git add -A && git commit -m "deploy" && git push
 ```
 
 **Live URLs:**
-- Frontend: https://cordero080.github.io/nexus-geom-lab/
+- Frontend: https://cordero080.github.io/manifold/
 - Backend: https://nexus-geom-lab-backend-sn7k.onrender.com
 
 ### Run Tests
@@ -333,7 +331,7 @@ PORT=3000
 ## 📁 Project Structure
 
 ```
-nexus-geom-3D/
+manifold/
 ├── 📁 public/
 │   ├── 📁 assets/                   # Logo and SVG assets
 │   ├── 📁 fonts/                    # Future Z custom typography
@@ -479,7 +477,7 @@ nexus-geom-3D/
 │       ├── textScrambler.js                 # Code symbol effects
 │       ├── textScrambler.jsx                # Katakana effects
 │       └── threeConstants.js                # Three.js config
-├── 📁 nexus-geom-lab-backend/               # Express.js REST API
+├── 📁 manifold-backend/                     # Express.js REST API
 │   ├── index.js                             # Server entry
 │   ├── 📁 config/
 │   │   └── db.js                            # MongoDB connection
@@ -739,7 +737,7 @@ Free to use, modify, and distribute. Attribution appreciated but not required.
 
 - 📧 Email: Cordero080@gmail.com
 - 🐙 GitHub: [@pablocordero](https://github.com/pablocordero)
-- 🐛 Issues: [Report bugs](https://github.com/pablocordero/nexus-geom-3D/issues)
+- 🐛 Issues: [Report bugs](https://github.com/Cordero080/manifold/issues)
 
 ---
 

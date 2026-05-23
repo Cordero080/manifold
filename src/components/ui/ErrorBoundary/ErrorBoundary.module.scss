@@ -59,13 +59,8 @@
 }
 
 .errorContainer {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 0, 10, 0.98) 0%,
-    rgba(40, 0, 20, 0.98) 50%,
-    rgba(20, 0, 10, 0.98) 100%
-  );
-  border: 1px solid rgba(255, 0, 100, 0.3);
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
@@ -73,17 +68,6 @@
   overflow: hidden;
   position: relative;
   animation: slideUp 0.4s ease-out;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 0%, rgba(255, 0, 100, 0.08) 50%, transparent 100%);
-    pointer-events: none;
-  }
 }
 
 .errorHeader {
@@ -91,8 +75,8 @@
   justify-content: center;
   align-items: center;
   padding: 20px 24px;
-  border-bottom: 1px solid rgba(255, 0, 100, 0.2);
-  background: linear-gradient(90deg, rgba(255, 0, 100, 0.1) 0%, rgba(255, 0, 50, 0.05) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
   position: relative;
   gap: 12px;
 }
@@ -104,23 +88,17 @@
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 2px;
-  background: linear-gradient(135deg, #ff0066, #ff3366, #ff6699);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 20px rgba(255, 0, 100, 0.4);
-  animation: titleGlow 2s ease-in-out infinite alternate;
   font-family: 'Orbitron', 'JetBrains Mono', monospace;
 }
 
 .errorIcon {
-  background: rgba(255, 0, 100, 0.15);
-  border: 1px solid rgba(255, 0, 100, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   width: 28px;
   height: 28px;
   min-width: 28px;
-  color: #ff0066;
+  color: #ffffff;
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -177,17 +155,17 @@
 }
 
 .primaryButton {
-  background: linear-gradient(135deg, rgba(255, 0, 100, 0.3) 0%, rgba(255, 0, 50, 0.3) 100%);
-  border-image: linear-gradient(135deg, #ff0066, #ff3366) 1;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
   color: #ffffff;
 
   &:hover {
-    background: linear-gradient(135deg, rgba(255, 0, 100, 0.5) 0%, rgba(255, 0, 50, 0.5) 100%);
+    background: linear-gradient(135deg, rgba(255, 0, 100, 0.4) 0%, rgba(255, 0, 50, 0.4) 100%);
+    border-color: #ff0066;
     transform: translateY(-2px);
     box-shadow:
       0 8px 24px rgba(255, 0, 100, 0.4),
-      0 0 30px rgba(255, 0, 100, 0.3);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      0 0 30px rgba(255, 0, 100, 0.2);
   }
 
   &:active {
@@ -196,15 +174,15 @@
 }
 
 .secondaryButton {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 0.9);
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.7);
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   }
 
   &:active {

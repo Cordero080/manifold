@@ -962,14 +962,14 @@ input,
     z-index: 10;
     pointer-events: none;
     /* Nudge the title lower for improved visual balance */
-    margin-top: 100px;
+    margin-top: 20px;
 
     @media (max-width: 768px) {
-      margin-top: 20px;
+      margin-top: -65px;
     }
 
     @media (max-width: 480px) {
-      margin-top: 10px;
+      margin-top: -75px;
     }
   }
 
@@ -1895,6 +1895,10 @@ input,
     .button-wrapper-no-auth {
       gap: 24px;
       flex-wrap: wrap;
+
+      button {
+        padding: 14px 64px;
+      }
     }
   }
 
@@ -1908,6 +1912,10 @@ input,
 
     .button-wrapper-no-auth {
       gap: 16px;
+
+      button {
+        padding: 14px 56px;
+      }
     }
   }
 }

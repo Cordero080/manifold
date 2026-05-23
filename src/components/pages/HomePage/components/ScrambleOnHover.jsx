@@ -10,6 +10,7 @@ import React, { useEffect, useRef, useState } from 'react';
 export default function ScrambleOnHover({ originalText, finalText, delay = 3000 }) {
   const [displayText, setDisplayText] = useState(originalText);
   const [isHovered, setIsHovered] = useState(false);
+  const [isScrambling, setIsScrambling] = useState(false);
   const timeoutRef = useRef(null);
   const intervalRef = useRef(null);
 
@@ -66,6 +67,7 @@ export default function ScrambleOnHover({ originalText, finalText, delay = 3000 
     if (isHovered) {
       // Start scrambling after delay
       timeoutRef.current = setTimeout(() => {
+        setIsScrambling(true);
         const duration = 2000;
         const chars = finalText.split('');
         const settled = new Array(chars.length).fill(false);
@@ -108,6 +110,7 @@ export default function ScrambleOnHover({ originalText, finalText, delay = 3000 
       // Reset on mouse leave
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (intervalRef.current) clearInterval(intervalRef.current);
+      setIsScrambling(false);
       setDisplayText(originalText);
     }
 
@@ -121,7 +124,7 @@ export default function ScrambleOnHover({ originalText, finalText, delay = 3000 
     <span
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="scramble-hover-span"
+      className={`scramble-hover-span${isScrambling ? ' scramble-active' : ''}`}
     >
       {displayText}
     </span>
