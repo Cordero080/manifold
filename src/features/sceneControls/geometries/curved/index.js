@@ -6,7 +6,3 @@
  */
 
 export { createTorus, metadata as torusMetadata } from './torus.js';
-export {
-  createCompoundFloatingCity,
-  metadata as compoundFloatingCityMetadata,
-} from './compoundFloatingCity.js';

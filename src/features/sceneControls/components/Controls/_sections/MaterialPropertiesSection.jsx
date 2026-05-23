@@ -181,7 +181,6 @@ function MaterialPropertiesSection({
               { value: 'icosahedron', label: '⬢ Cpd-Icosahedron' },
               { value: 'sphere', label: '● Cpd-Sphere' },
               { value: 'compoundsphere', label: '◉ Super-Cpd-Sphere' },
-              { value: 'compoundfloatingcity', label: '∿ Compound Curves' },
               { value: 'hessianpolychoron', label: '✦ Hessian Polychoron' },
               { value: 'mobiussphere', label: '⟲ Möbius Sphere' },
               { value: 'simplecpdhypercube', label: '◻ Cpd-Hypercube' },

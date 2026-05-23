@@ -5,12 +5,10 @@ import {
   updateSpectralOrbHue,
 } from '../objects/spectralOrbs';
 
-// Detect mobile devices for performance optimization
-const isMobile =
-  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    typeof navigator !== 'undefined' ? navigator.userAgent : ''
-  ) ||
-  (typeof window !== 'undefined' && window.innerWidth < 768);
+// Detect mobile devices for performance optimization (user agent only, not window width)
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  typeof navigator !== 'undefined' ? navigator.userAgent : ''
+);
 
 // Track current environment and orb state per scene
 const sceneState = new WeakMap();

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../HomeIndex.module.scss';
-import QuantumPortal from './QuantumPortal';
 
 /**
  * All background layers for HomePage including portal bg and parallax layers
@@ -15,44 +14,42 @@ export default function BackgroundLayers({ portalState, bgRef, fgRef }) {
 
   useEffect(() => {
     setTargetColors(portalState.colors);
-    
+
     const startTime = Date.now();
     const duration = 800; // Reduced to 0.8 seconds for faster transition
     const startColors = [...currentColors];
-    
+
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Ease in-out
-      const eased = progress < 0.5 
-        ? 2 * progress * progress 
-        : -1 + (4 - 2 * progress) * progress;
-      
+      const eased = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+
       const interpolated = startColors.map((start, i) => {
         const target = portalState.colors[i];
         const startRGB = hexToRgb(start);
         const targetRGB = hexToRgb(target);
-        
+
         const r = Math.round(startRGB.r + (targetRGB.r - startRGB.r) * eased);
         const g = Math.round(startRGB.g + (targetRGB.g - startRGB.g) * eased);
         const b = Math.round(startRGB.b + (targetRGB.b - startRGB.b) * eased);
-        
+
         return rgbToHex(r, g, b);
       });
-      
+
       setCurrentColors(interpolated);
-      
+
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(animate);
       }
     };
-    
+
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
     animationRef.current = requestAnimationFrame(animate);
-    
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -62,26 +59,6 @@ export default function BackgroundLayers({ portalState, bgRef, fgRef }) {
 
   return (
     <>
-      {/* Three.js Quantum Portal Effect - Top */}
-      <QuantumPortal
-        position="top"
-        sceneColors={{
-          color1: currentColors[0],
-          color2: currentColors[1],
-          color3: currentColors[2],
-        }}
-      />
-
-      {/* Three.js Quantum Portal Effect - Bottom */}
-      <QuantumPortal
-        position="bottom"
-        sceneColors={{
-          color1: currentColors[0],
-          color2: currentColors[1],
-          color3: currentColors[2],
-        }}
-      />
-
       {/* Base Dark Layer */}
       <div className={styles.baseDark}></div>
 
@@ -156,13 +133,15 @@ export default function BackgroundLayers({ portalState, bgRef, fgRef }) {
 
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : { r: 0, g: 0, b: 0 };
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : { r: 0, g: 0, b: 0 };
 }
 
 function rgbToHex(r, g, b) {
-  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }

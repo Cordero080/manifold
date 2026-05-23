@@ -33,7 +33,7 @@ export default function UnlockModal({ isOpen, onClose, unlockedNoetechs, savedSc
       <div className="save-modal unlock-modal" onClick={(e) => e.stopPropagation()}>
         <div className="unlock-modal__content">
           <div className="unlock-modal__icon">⬡</div>
-          <h2 className="unlock-modal__title">¡Noetech Unlocked!</h2>
+          <h2 className="unlock-modal__title">Character Unlocked!</h2>
           <div className="unlock-modal__noetechs">
             {unlockedNoetechs.map((noetech, index) => (
               <div key={index} className="unlock-modal__noetech-name">

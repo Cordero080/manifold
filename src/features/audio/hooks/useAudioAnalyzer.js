@@ -48,7 +48,7 @@ export function useAudioAnalyzer() {
       // Create analyzer node
       const analyzer = audioContext.createAnalyser();
       analyzer.fftSize = 512; // Smaller = faster response (was 2048)
-      analyzer.smoothingTimeConstant = 0; // No smoothing = instant response
+      analyzer.smoothingTimeConstant = 0.4; // Smooth out sudden spikes
       analyzerRef.current = analyzer;
 
       // Create data array for frequency data

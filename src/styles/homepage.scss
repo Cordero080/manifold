@@ -64,6 +64,58 @@
   overflow-x: hidden;
 }
 
+/* Quantum manifold slow warp — own rhythm, shrinks/grows/distorts */
+@keyframes manifoldDrift {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) scale(1) skewY(0deg);
+  }
+  15% {
+    transform: translateX(-50%) translateY(-60px) scale(0.88) skewY(1.5deg);
+  }
+  35% {
+    transform: translateX(-50%) translateY(-140px) scale(0.75) skewY(-2.5deg) skewX(1deg);
+  }
+  55% {
+    transform: translateX(-50%) translateY(-90px) scale(0.92) skewY(2deg) skewX(-1.5deg);
+  }
+  70% {
+    transform: translateX(-50%) translateY(-200px) scale(0.7) skewY(-1deg);
+  }
+  85% {
+    transform: translateX(-50%) translateY(-80px) scale(0.85) skewY(1deg);
+  }
+}
+
+.manifold-drift {
+  animation: manifoldDrift 38s ease-in-out infinite;
+}
+
+/* Hessian polychoron slow drift — fills space left by removed <p> */
+@keyframes hessianDrift {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) scale(1) skewX(0deg);
+  }
+  20% {
+    transform: translateX(-50%) translateY(-160px) scale(1.08) skewX(1.5deg);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-420px) scale(1.18) skewX(-2deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-550px) scale(1.22) skewX(0deg);
+  }
+  65% {
+    transform: translateX(-50%) translateY(-400px) scale(1.14) skewX(2deg);
+  }
+  80% {
+    transform: translateX(-50%) translateY(-180px) scale(1.06) skewX(-1deg);
+  }
+}
+
+.hessian-drift {
+  animation: hessianDrift 26s ease-in-out infinite;
+}
+
 /* Default desktop with navbar - title position */
 .title-wrapper {
   margin-top: -20px;

@@ -550,6 +550,7 @@ export default function HessianPolychoronAnimation({ isActive = false }) {
   return (
     <div
       ref={containerRef}
+      className="hessian-drift"
       style={{
         width: '100%',
         height: '100%',

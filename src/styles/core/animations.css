@@ -13,16 +13,39 @@
 
 @keyframes navScan {
   0%,
+  51%,
   100% {
     transform: translateX(-100%);
     opacity: 0;
   }
-  20%,
-  80% {
+  10% {
+    opacity: 1;
+  }
+  40% {
     opacity: 1;
   }
   50% {
     transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes navScanReverse {
+  0%,
+  51%,
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-100%);
+    opacity: 0;
   }
 }
 

@@ -142,8 +142,8 @@ export function useAudioReactive(
     const { bass, mids } = audioData;
 
     // Apply higher thresholds to filter out subtle ambient noise (crickets, etc.)
-    const bassThreshold = 0.45; // Lowered from 0.55 for more sensitivity
-    const midsThreshold = 0.35; // Lowered from 0.4 for more sensitivity
+    const bassThreshold = 0.45;
+    const midsThreshold = 0.45; // Higher threshold = less sensitive to high tones
 
     const activeBass = bass > bassThreshold ? bass - bassThreshold : 0;
     const activeMids = mids > midsThreshold ? mids - midsThreshold : 0;
@@ -192,12 +192,12 @@ export function useAudioReactive(
       const moveAmount = normalizedBass * 0.5;
 
       // Audio adds to rotation velocity (momentum builds up)
-      velocity.y += normalizedMids * 0.03; // Y-axis from mids only
-      velocity.x += normalizedBass * 1.0; // X-axis from bass - spins up fast
-      velocity.z += normalizedMids * 0.75; // Z-axis from mids
+      velocity.y += normalizedMids * 0.02; // Y-axis from mids only
+      velocity.x += normalizedBass * 0.55; // X-axis from bass
+      velocity.z += normalizedMids * 0.38; // Z-axis from mids
 
       // Apply very strong friction/drag (stops quickly)
-      const friction = 0.5; // 50% friction per frame - very aggressive
+      const friction = 0.35; // Aggressive decay - prevents momentum buildup
       velocity.x *= friction;
       velocity.y *= friction;
       velocity.z *= friction;

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 // Components
-import Quote from '@components/ui/Quote/Quote';
 import ProgressBar from './components/ProgressBar';
 import Scene from './components/Scene';
 import ScrambleOnHover from './components/ScrambleOnHover';
@@ -41,6 +40,17 @@ export default function HomePage() {
   const [navScrolled, setNavScrolled] = useState(false);
   const [probabilityFlipped, setProbabilityFlipped] = useState(false);
   const [superpositionDisassembled, setSuperpositionDisassembled] = useState(false);
+  const [monoMode, setMonoMode] = useState(false);
+
+  // Mono mode: apply/remove class on <html> for grayscale override
+  useEffect(() => {
+    if (monoMode) {
+      document.documentElement.classList.add('mono-mode');
+    } else {
+      document.documentElement.classList.remove('mono-mode');
+    }
+    return () => document.documentElement.classList.remove('mono-mode');
+  }, [monoMode]);
 
   // Scene fade/scroll logic
   useEffect(() => {
@@ -108,6 +118,16 @@ export default function HomePage() {
         />
       )}
 
+      {/* Mono mode toggle */}
+      <button
+        className={`${styles.monoToggle}${monoMode ? ` ${styles.monoToggleActive}` : ''}`}
+        onClick={() => setMonoMode((m) => !m)}
+        title={monoMode ? 'Switch to color mode' : 'Switch to monochrome mode'}
+        aria-label={monoMode ? 'Color mode' : 'Monochrome mode'}
+      >
+        ◑
+      </button>
+
       {/* Background Layers */}
       <BackgroundLayers portalState={portalState} bgRef={bgRef} fgRef={fgRef} />
 
@@ -156,25 +176,6 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
                 </span>
               </h1>
             </div>
-            <p className="quantum-subtitle">
-               I N T E R A C T I V E _ C O N S O L E _ A W A I T S 
-            </p>
-            <div className="hero-stats hero-stats-centered">
-              <div className="stat-item">
-                <span className="stat-label">QUANTUM STATE-</span>
-                <span
-                  className="stat-value stat-value-dynamic"
-                  data-stat="state"
-                  style={{
-                    '--stat-color': portalState.colors[0],
-                    '--stat-text-shadow': `0 0 8px ${portalState.colors[1]}, 0 0 2px ${portalState.colors[2]}`,
-                  }}
-                >
-                  {portalState.label.toUpperCase()}
-                </span>
-              </div>
-            </div>
-
             {/* Show Enter Geom Lab only when logged in, Login/Signup when logged out */}
             {isAuthenticated ? (
               <div className="button-wrapper-auth">
@@ -183,9 +184,9 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
                     navigate('/geom-lab');
                   }}
                   label={
-                    <>
-                      ENTER L<span style={{display: 'inline-block', transform: 'scaleY(-1)', verticalAlign: 'baseline'}}>V</span>B
-                    </>
+                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                      <polygon points="6,2 26,14 6,26" fill="currentColor" />
+                    </svg>
                   }
                   className="enter-geom-lab-hero-btn"
                 />
@@ -216,7 +217,7 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
           </div>
         </section>
 
-        {/* Scene 2: Probability Wave */}
+        {/* Scene 2: Object Matrix */}
         <section
           className={`quantum-scene${activeScene === 1 ? ' active' : ''}`}
           id="probability"
@@ -224,21 +225,11 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
         >
           <div className="scene-background bg-probability" aria-hidden="true"></div>
           <div className="scene-content">
-            <h2 className="scene-title">PROBABILITY CLOUD</h2>
-            <p className={`scene-description${probabilityFlipped ? ' flipped' : ''}`}>
-              Where code exists in superposition until observed
-            </p>
             <div className="probability-waves"></div>
-            <div className="code-snippets">
-              {/* <div className="floating-code">import name from './exportingFile.js';</div>
-              <div className="floating-code">console.future(identity);</div>
-              <div className="floating-code">PABLO D C0RDER0</div> */}
-              <Quote />
-            </div>
           </div>
         </section>
 
-        {/* Scene 3: Quantum Entanglement */}
+        {/* Scene 3: 4D Polytope Archive */}
         <section
           className={`quantum-scene${activeScene === 2 ? ' active' : ''}`}
           id="entanglement"
@@ -248,9 +239,6 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
           <HessianPolychoronAnimation isActive={activeScene === 2} />
           <div className="scene-content entanglement-scene-content">
             <div className="entanglement-network"></div>
-            <div className="connected-nodes">
-              <div className="quantum-bridge"></div>
-            </div>
           </div>
         </section>
 
@@ -261,25 +249,12 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
           animation={<QuantumManifoldAnimation isActive={activeScene === 3} />}
         >
           <div className="superposition-scene-div">
-            <h2 className="scene-title">SUPERPOSITION STATE</h2>
-            <p className={`scene-description${superpositionDisassembled ? ' disassemble' : ''}`}>
-              All possibilities exist simultaneously
-            </p>
             <div className="superposition-field"></div>
-            {/* <div className="quantum-console">
-              <div className="console-line">&gt;&gt;&gt; Initializing quantum state...</div>
-              <div className="console-line">&gt;&gt;&gt; PVBLO C0RDER0 = ψ(quantum_state)</div>
-              <div className="console-line">&gt;&gt;&gt; Observation collapsed wave function</div>
-              <div className="console-line">&gt;&gt;&gt; Result: "ETHEREAL"</div>
-            </div> */}
           </div>
         </Scene>
       </div>
 
-      <ProgressBar
-        portalState={portalState}
-        onQuantumCollapse={handleQuantumCollapse}
-      />
+      <ProgressBar portalState={portalState} onQuantumCollapse={handleQuantumCollapse} />
     </>
   );
 }

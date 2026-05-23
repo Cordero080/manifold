@@ -92,7 +92,7 @@ export const noetechAnima = [
     id: 5,
     noetechKey: 'she-tech',
     animationId: 'cyber-dance',
-    name: 'She-Tech',
+    name: '???',
     animation: 'Cyber Dance',
     variant: 'Neon Mystic',
     description: 'Digital Sorceress channeling pure energy...Dancing through datastreams',

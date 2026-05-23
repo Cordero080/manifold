@@ -15,7 +15,7 @@ import './ShowcaseGallery.scss';
 import sharedStyles from '@styles/shared.module.scss';
 
 const HERO_TAGLINES = [
-  'The Noetech Digital Pantheon',
+  'The Digital Pantheon',
   'The Cypher Animate',
   'Moyocoya, monemilia in Ometeotl',
   // The dual god dreams us into existence through creation

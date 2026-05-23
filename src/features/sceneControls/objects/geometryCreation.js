@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import { mergeGeometries, mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils';
 
 // Geometry modules
-import { createCompoundFloatingCity } from '../geometries/curved/compoundFloatingCity.js';
 import { createCompoundSphere } from '../geometries/compound/compoundSphere.js';
 import { createHessianPolychoron } from '../geometries/polytopes/hessianPolychoron.js';
 import { createSphere } from '../geometries/compound/sphere.js';
@@ -50,10 +49,6 @@ export function createGeometry(type = 'icosahedron', options = {}) {
     case 'compoundsphere':
       // Use modular geometry - see geometries/compound/compoundSphere.js
       return createCompoundSphere(options);
-
-    case 'compoundfloatingcity':
-      // Use modular geometry - see geometries/curved/compoundFloatingCity.js
-      return createCompoundFloatingCity(options);
 
     case 'simplecpdhypercube':
       // Use modular geometry - see geometries/polytopes/simpleCompoundHypercube.js

@@ -231,6 +231,7 @@ export default function QuantumManifoldAnimation({ isActive = false }) {
   return (
     <div
       ref={containerRef}
+      className="manifold-drift"
       style={{
         width: '100%',
         height: '100%',

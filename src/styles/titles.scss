@@ -34,7 +34,7 @@ h1.quantum-title {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: pageTitleShimmer 5s ease-in-out infinite;
+  animation: pageTitleShimmer 18s ease-in-out infinite;
   position: relative;
   z-index: 100001;
   isolation: isolate;
@@ -49,14 +49,14 @@ h1.quantum-title {
 
 .title-word[data-word='MY'] {
   animation:
-    pageTitleShimmer 5s ease-in-out infinite,
+    pageTitleShimmer 18s ease-in-out infinite,
     simpleFadeIn 1s ease-out forwards;
   animation-delay: 0s, 0s;
 }
 
 .title-word[data-word='SCENES'] {
   animation:
-    pageTitleShimmer 5s ease-in-out infinite,
+    pageTitleShimmer 18s ease-in-out infinite,
     simpleFadeIn 1s ease-out forwards;
   animation-delay: 0s, 0.2s;
 }
@@ -129,7 +129,7 @@ h1.quantum-title {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: pageTitleShimmer 5s ease-in-out infinite;
+  animation: pageTitleShimmer 18s ease-in-out infinite;
 }
 
 
