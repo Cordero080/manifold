@@ -38,11 +38,9 @@ export const saveScene = async (sceneData, token) => {
     // Backend sent response back over network
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('DEBUG saveScene - error response:', response.status, errorText);
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
     }
-    // check if request succeeded (status 200-299) otherwise throw error
     const data = await response.json();
     //  response.json() = PARSES JSON string back to JS object
     // Backend sent: '{"success": ture, "unlockedNoetechs": ["icarus-x"], ... }

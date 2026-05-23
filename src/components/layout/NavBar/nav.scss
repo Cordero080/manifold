@@ -35,7 +35,7 @@
   backdrop-filter: blur(30px);
   border-bottom: 2px solid rgba(0, 255, 255, 0.27);
   box-shadow: 0 2px 24px rgba(0, 255, 255, 0.13);
-  transition: background 1.2s ease, backdrop-filter 1.2s ease, box-shadow 1.2s ease, border-color 1.2s ease;
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 /* Scrolled state */
@@ -130,7 +130,7 @@
   padding: 8px 24px;
   border: 1px solid rgba(0, 255, 255, 0.4);
   border-radius: 4px;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .nav-link[href="/login"]:hover,
@@ -165,12 +165,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, filter 0.3s ease;
 }
 
 .nav-terminal .terminal-cursor svg {
   color: rgba(0, 255, 255, 0.5);
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, filter 0.3s ease, width 0.3s ease, height 0.3s ease;
   width: 22px;
   height: 22px;
 }

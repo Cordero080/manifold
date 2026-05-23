@@ -25,6 +25,7 @@ function SaveControls({ sceneConfig }) {
   const [isSaving, setIsSaving] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [newSceneName, setNewSceneName] = useState('');
+  const [saveError, setSaveError] = useState('');
   const [showUnlockModal, setShowUnlockModal] = useState(false);
   const [unlockedNoetechs, setUnlockedNoetechs] = useState([]);
   const [showAnimationUnlockModal, setShowAnimationUnlockModal] = useState(false);
@@ -65,6 +66,7 @@ function SaveControls({ sceneConfig }) {
 
     // Pre-fill with current scene name if editing
     setNewSceneName(canUpdate ? sceneName : '');
+    setSaveError('');
     setShowModal(true);
   };
 
@@ -237,7 +239,7 @@ function SaveControls({ sceneConfig }) {
         setShowSuccessSaveModal(true);
       }
     } catch (error) {
-      alert(`Failed to save scene: ${error.message}`);
+      setSaveError(error.message);
     } finally {
       setIsSaving(false);
     }
@@ -262,13 +264,17 @@ function SaveControls({ sceneConfig }) {
         onClose={handleCloseModal}
         sceneName={sceneName}
         newSceneName={newSceneName}
-        setNewSceneName={setNewSceneName}
+        setNewSceneName={(val) => {
+          setNewSceneName(val);
+          setSaveError('');
+        }}
         currentSceneId={currentSceneId}
         canUpdate={canUpdate}
         isSaving={isSaving}
         isLoading={isLoading}
         onSave={handleSave}
         onSaveAsNew={handleSaveAsNew}
+        saveError={saveError}
       />
 
       <UnlockModal

@@ -13,6 +13,7 @@ export default function SaveModal({
   isLoading,
   onSave,
   onSaveAsNew,
+  saveError,
 }) {
   if (!isOpen) return null;
 
@@ -75,6 +76,12 @@ export default function SaveModal({
             </ScrambleButton>
           )}
         </div>
+
+        {saveError && (
+          <p style={{ color: '#ff4466', fontSize: '12px', margin: '8px 0 0', textAlign: 'center' }}>
+            {saveError}
+          </p>
+        )}
 
         <div className="save-modal__hint">
           {currentSceneId && canUpdate

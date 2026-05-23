@@ -44,8 +44,7 @@ export default function NavBar({ portalColors = null, navScrolled = false }) {
         backdropFilter: navScrolled ? 'blur(20px)' : 'blur(30px)',
         borderBottom: `2px solid ${portalColors[1]}44`,
         boxShadow: `0 2px 24px ${portalColors[1]}22`,
-        transition:
-          'background 1.2s ease, backdrop-filter 1.2s ease, box-shadow 1.2s ease, border-color 1.2s ease',
+        transition: 'background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease',
       }
     : {};
 

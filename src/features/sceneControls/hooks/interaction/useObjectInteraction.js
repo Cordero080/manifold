@@ -20,14 +20,16 @@ import * as THREE from 'three';
  * @param {Object} refs - Scene, camera, renderer references for raycasting
  * @returns {Object} Functions: getUserRotation, setUserRotation, decayUserRotations
  */
-export function useObjectInteraction(refs) {
+export function useObjectInteraction(refs, onScaleChange, currentScale) {
   const { sceneRef, cameraRef, rendererRef } = refs;
 
   const hoveredObject = useRef(null);
   const raycaster = useRef(new THREE.Raycaster());
   const mouse = useRef(new THREE.Vector2());
-  // Store user rotation offsets for each object
   const objectRotations = useRef(new Map());
+  const lastPinchDistance = useRef(null);
+  const currentScaleRef = useRef(currentScale);
+  currentScaleRef.current = currentScale;
 
   // Get user rotation for an object
   const getUserRotation = useCallback((objectId) => {
@@ -201,9 +203,18 @@ export function useObjectInteraction(refs) {
 
     // Touch handler for mobile - converts touch to mouse-like coordinates
     const handleTouchMove = (event) => {
-      if (event.touches.length === 1) {
+      if (event.touches.length === 2 && lastPinchDistance.current !== null) {
+        const dx = event.touches[0].clientX - event.touches[1].clientX;
+        const dy = event.touches[0].clientY - event.touches[1].clientY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const delta = distance / lastPinchDistance.current;
+        lastPinchDistance.current = distance;
+        if (onScaleChange) {
+          const newScale = Math.min(3, Math.max(0.1, currentScaleRef.current * delta));
+          onScaleChange(newScale);
+        }
+      } else if (event.touches.length === 1) {
         const touch = event.touches[0];
-        // Create a synthetic event object with clientX/clientY
         handleMouseMove({
           clientX: touch.clientX,
           clientY: touch.clientY,
@@ -212,11 +223,17 @@ export function useObjectInteraction(refs) {
     };
 
     const handleTouchStart = (event) => {
-      if (event.touches.length === 1) {
+      if (event.touches.length === 2) {
+        const dx = event.touches[0].clientX - event.touches[1].clientX;
+        const dy = event.touches[0].clientY - event.touches[1].clientY;
+        lastPinchDistance.current = Math.sqrt(dx * dx + dy * dy);
+        lastClientX = null;
+        lastClientY = null;
+      } else if (event.touches.length === 1) {
         const touch = event.touches[0];
-        // Initialize lastClient values for touch
         lastClientX = touch.clientX;
         lastClientY = touch.clientY;
+        lastPinchDistance.current = null;
       }
     };
 

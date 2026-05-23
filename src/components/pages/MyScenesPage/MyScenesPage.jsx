@@ -49,7 +49,7 @@ export default function MyScenesPage() {
 
   const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
   const [navScrolled, setNavScrolled] = useState(false);
-  
+
   // Smooth color interpolation
   const [currentColors, setCurrentColors] = useState(portalState.colors);
   const [targetColors, setTargetColors] = useState(portalState.colors);
@@ -61,43 +61,41 @@ export default function MyScenesPage() {
   // Smooth color interpolation
   useEffect(() => {
     setTargetColors(portalState.colors);
-    
+
     const startTime = Date.now();
     const duration = 800;
     const startColors = [...currentColors];
-    
+
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
-      const eased = progress < 0.5 
-        ? 2 * progress * progress 
-        : -1 + (4 - 2 * progress) * progress;
-      
+
+      const eased = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+
       const interpolated = startColors.map((start, i) => {
         const target = portalState.colors[i];
         const startRGB = hexToRgb(start);
         const targetRGB = hexToRgb(target);
-        
+
         const r = Math.round(startRGB.r + (targetRGB.r - startRGB.r) * eased);
         const g = Math.round(startRGB.g + (targetRGB.g - startRGB.g) * eased);
         const b = Math.round(startRGB.b + (targetRGB.b - startRGB.b) * eased);
-        
+
         return rgbToHex(r, g, b);
       });
-      
+
       setCurrentColors(interpolated);
-      
+
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(animate);
       }
     };
-    
+
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
     animationRef.current = requestAnimationFrame(animate);
-    
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -383,10 +381,10 @@ export default function MyScenesPage() {
 
         {/* Header */}
         <div className="my-scenes-page__header">
-          <h1 className="quantum-page-title" data-text="MY SCENES">
-            MY SCENES
+          <h1 className="quantum-page-title" data-text="SCENES">
+            SCENES
           </h1>
-          <p className="quantum-page-subtitle">Your collection of geometric creations</p>
+          <p className="quantum-page-subtitle">my manifold library</p>
         </div>
 
         {/* Controls */}
@@ -517,9 +515,9 @@ export default function MyScenesPage() {
         {/* Back to Lab Button - Below Scene Cards */}
         {!loading && sortedScenes.length > 0 && (
           <div className={styles.backToLabButtonWrapper}>
-            <BeamScanButton 
-              onClick={() => navigate('/geom-lab')} 
-              label="BACK TO LAB"
+            <BeamScanButton
+              onClick={() => navigate('/geom-lab')}
+              label="← LAB"
               className="enter-geom-lab-hero-btn"
             />
           </div>
@@ -569,13 +567,15 @@ export default function MyScenesPage() {
 
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : { r: 0, g: 0, b: 0 };
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : { r: 0, g: 0, b: 0 };
 }
 
 function rgbToHex(r, g, b) {
-  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }

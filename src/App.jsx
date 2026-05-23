@@ -1,6 +1,6 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
-import useSceneState from "@/hooks/useSceneState";
+import useSceneState from '@/hooks/useSceneState';
 import ThreeScene from '@/features/sceneControls/ThreeScene';
 import Controls from '@/features/sceneControls/components/Controls/Controls';
 import SaveControls from '@/features/sceneControls/components/SaveButton/SaveControls';
@@ -8,9 +8,9 @@ import ExitButton from '@/features/sceneControls/components/Controls/ExitButton/
 import ScrambleButton from '@/components/ui/ScrambleButton/ScrambleButton';
 import NavBar from '@/components/layout/NavBar/NavBar';
 import { SceneProvider, useScene } from '@/context/SceneContext';
-import { AuthProvider, useAuth } from "@/features/auth/context/AuthContext";
-import { QuantumCursor } from "@/components/ui/Effects";
-import Footer from "@/components/pages/HomePage/components/Footer/Footer";
+import { AuthProvider, useAuth } from '@/features/auth/context/AuthContext';
+import { QuantumCursor } from '@/components/ui/Effects';
+import Footer from '@/components/pages/HomePage/components/Footer/Footer';
 import './cursor-override.module.scss';
 import sharedStyles from '@/styles/shared.module.scss';
 
@@ -41,17 +41,17 @@ function GeomLab() {
     // NOTE: It's NOT a Static Object. This line runs EVERY TIME App.jsx renders.
     // The ENTIRE config object is recreated every render.**
     // Where do they change?**
-    // In the hook (useSceneState.js). 
+    // In the hook (useSceneState.js).
     // Then App.jsx creates a NEW config object with the NEW values.**
     // NOTE: ** The ENTIRE config object is recreated every render.**
 
-    metalness,   
+    metalness,
     setMetalness,
     emissiveIntensity,
     setEmissiveIntensity,
-    baseColor,     // ie; Before state change: '#4a0e78'
-    setBaseColor,  // After user picks red and state updates: This is NOW '#ff0000'
-      // ThreeScene gets { baseColor: '#ff0000' }
+    baseColor, // ie; Before state change: '#4a0e78'
+    setBaseColor, // After user picks red and state updates: This is NOW '#ff0000'
+    // ThreeScene gets { baseColor: '#ff0000' }
     wireframeIntensity,
     setWireframeIntensity,
     // Hyperframe
@@ -133,7 +133,7 @@ function GeomLab() {
       if (link && link.href) {
         const url = new URL(link.href);
         let targetPath = url.pathname;
-        
+
         // Strip the base path if present (for GitHub Pages deployment)
         const basePath = import.meta.env.BASE_URL?.replace(/\/$/, '') || '';
         if (basePath && targetPath.startsWith(basePath)) {
@@ -429,13 +429,13 @@ function GeomLab() {
           </div>
         </div>
       )}
-      
-      <ThreeScene config={sceneConfig} />  
+
+      <ThreeScene config={sceneConfig} onScaleChange={setScale} />
       {/* ONLY NEEDS VALUE from state to call hook and update Three.js ui value */}
-      <Controls 
+      <Controls
         config={sceneConfig} //Needs all VALUES from State
         onChange={{
-          setScale,   // Need all SETTERS from State
+          setScale, // Need all SETTERS from State
           setMetalness,
           setEmissiveIntensity,
           setBaseColor,

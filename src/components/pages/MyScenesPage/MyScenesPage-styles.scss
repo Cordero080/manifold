@@ -44,21 +44,18 @@
 /* Controls */
 .my-scenes-page__controls {
   max-width: 1400px;
-  margin: -60px auto 90px; /* Moved up with negative top margin, increased bottom margin */
+  margin: -60px auto 90px;
   display: flex;
-  gap: 32px; /* Increased gap from 24px to 32px */
+  gap: 32px;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  margin-left: -20px; /* Move controls left */
-  /* Removed negative transforms - let it breathe naturally */
 }
 
 .my-scenes-page__control-group {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: -10px; /* Move sort dropdown to the left */
 }
 
 .my-scenes-page__control-group label {
@@ -300,9 +297,10 @@
 /* Scene Grid */
 .my-scenes-page__grid {
   max-width: 1400px;
-  margin: -50px auto 0; /* Moved up with negative top margin */
+  margin: -50px auto 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns for desktop */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  justify-content: center;
   gap: 12px;
   animation: fadeIn 0.5s ease-in;
 }
@@ -401,7 +399,7 @@
   line-height: 1;
   position: relative;
   z-index: 2;
-  color: #000000 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
   text-shadow: none !important;
 }
 
@@ -417,12 +415,12 @@
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
-  color: #000000 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 .create-scene-card__subtitle {
   font-size: 0.875rem;
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
   margin: 0;
   font-family: 'Orbitron', monospace;
   text-align: center;
@@ -563,15 +561,10 @@
 /* Button styles now handled by ScrambleButton component */
 
 /* Responsive */
-@media (min-width: 1600px) {
-  .my-scenes-page__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 @media (max-width: 900px) {
   .my-scenes-page__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
+    justify-content: center;
   }
 
   /* Title font-size handled by shared styles */

@@ -139,3 +139,10 @@
 .toggleButton:active {
   transform: translateX(0);
 }
+
+@media (max-width: 768px) {
+  .audioToggleContainer {
+    top: 72px;
+    right: 16px;
+  }
+}

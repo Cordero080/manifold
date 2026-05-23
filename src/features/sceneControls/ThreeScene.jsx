@@ -37,7 +37,7 @@ import { useAudioReactive } from '../audio/hooks/useAudioReactive';
 import AudioToggle from '../audio/components/AudioToggle';
 
 // ThreeScene: 3D renderer that receives a config object from App.jsx
-function ThreeScene({ config }) {
+function ThreeScene({ config, onScaleChange }) {
   // Destructure all configuration values from the single config object
   const {
     // Material props
@@ -193,11 +193,11 @@ function ThreeScene({ config }) {
   );
 
   // 4. USER INTERACTION - Handle mouse-over object rotation and animation loop
-  const { getUserRotation, decayUserRotations } = useObjectInteraction({
-    sceneRef,
-    cameraRef,
-    rendererRef,
-  });
+  const { getUserRotation, decayUserRotations } = useObjectInteraction(
+    { sceneRef, cameraRef, rendererRef },
+    onScaleChange,
+    scale
+  );
 
   useAnimationLoop(
     { rendererRef, sceneRef, cameraRef, animationIdRef, objectsRef, objectSpeedRef, orbSpeedRef },
