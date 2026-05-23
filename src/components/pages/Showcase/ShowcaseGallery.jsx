@@ -28,7 +28,7 @@ export default function ShowcaseGallery() {
   // Mobile detection for performance optimizations
   const isMobile = useMemo(() => isMobileDevice(), []);
   const optimalDpr = useMemo(() => getOptimalDpr(), []);
-  
+
   // Stores current randomly-selected portal world colors (tweak by editing portalWorlds in ./data/portalWorlds.js)
   const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
   // Stores current randomly-selected glyph set (tweak by editing glyphSets in ./data/portalWorlds.js)
@@ -152,7 +152,7 @@ export default function ShowcaseGallery() {
   useEffect(() => {
     // Skip parallax entirely on mobile for performance
     if (isMobile) return;
-    
+
     const handleParallax = (e) => {
       const container = containerRef.current;
       const scrollY = container ? container.scrollTop : 0;

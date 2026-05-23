@@ -184,7 +184,14 @@ MANIFOLD: A mathematical surface or multi-dimensional space that can be curved o
                     navigate('/geom-lab');
                   }}
                   label={
-                    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 28 28"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      style={{ display: 'block' }}
+                    >
                       <polygon points="6,2 26,14 6,26" fill="currentColor" />
                     </svg>
                   }

@@ -6,7 +6,7 @@
   pointer-events: none !important;
   z-index: 99999;
   transition: opacity 0.3s ease;
-  will-change: transform; /* PERFORMANCE: Tell browser to optimize */
+  will-change: transform;
   /* Background, box-shadow and size will be set dynamically by JavaScript */
 }
 
@@ -21,7 +21,7 @@
   pointer-events: none !important;
   z-index: 99999;
   transition: opacity 0.3s ease;
-  will-change: transform; /* PERFORMANCE: Tell browser to optimize */
+  will-change: transform;
   /* Background, box-shadow and size will be set dynamically by JavaScript */
 }
 

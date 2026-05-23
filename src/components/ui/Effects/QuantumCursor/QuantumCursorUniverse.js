@@ -54,7 +54,11 @@ export default class QuantumCursorUniverse {
     this.mouseY = e.clientY;
 
     const target = e.target;
+    const clickable = target.closest(
+      'a, button, [role="button"], [tabindex], label, select, input'
+    );
     this.isOverControl =
+      !!clickable ||
       target.tagName === 'INPUT' ||
       target.tagName === 'SELECT' ||
       target.tagName === 'BUTTON' ||
