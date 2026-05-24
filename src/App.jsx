@@ -519,8 +519,8 @@ function AppContent() {
 
   return (
     <SceneProvider>
-      {/* Render QuantumCursor on all pages EXCEPT geom-lab */}
-      {!isGeomLabPage && <QuantumCursor />}
+      {/* Render QuantumCursor on desktop only — no mouse on touch devices */}
+      {!isGeomLabPage && !('ontouchstart' in window) && <QuantumCursor />}
 
       {/* Footer only on homepage bottom */}
       {currentPath === '/' && <Footer />}
