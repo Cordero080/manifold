@@ -73,22 +73,6 @@ export const createHyperframeLineColorHandler = (onHyperframeLineColorChange) =>
   };
 };
 
-// Extracts selected value from dropdown and updates camera view preset
-export const createCameraViewHandler = (onCameraViewChange) => {
-  return (event) => {
-    const newView = event.target.value;
-    onCameraViewChange(newView);
-  };
-};
-
-// Extracts selected value from dropdown and updates environment preset
-export const createEnvironmentHandler = (onEnvironmentChange) => {
-  return (event) => {
-    const newEnv = event.target.value;
-    onEnvironmentChange(newEnv);
-  };
-};
-
 // Parses integer from slider input and updates environment hue rotation
 export const createEnvironmentHueHandler = (onEnvironmentHueChange) => {
   return (event) => {

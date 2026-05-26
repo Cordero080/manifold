@@ -96,6 +96,12 @@ export default class QuantumCursorUniverse {
     }
   }
 
+  destroy() {
+    this.energyWaves.forEach(({ element }) => element.remove());
+    this.energyWaves = [];
+    this._destroyed = true;
+  }
+
   createDimensionalRift() {
     this.dimensionalTear = true;
     if (this.dimensionalRift) {
@@ -203,6 +209,7 @@ export default class QuantumCursorUniverse {
   }
 
   animate() {
+    if (this._destroyed) return;
     this.updatePhysics();
     requestAnimationFrame(() => this.animate());
   }

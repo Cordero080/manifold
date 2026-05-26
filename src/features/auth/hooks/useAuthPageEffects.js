@@ -1,16 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { quantumCollapse } from '@utils/coreHelpers';
-
-const portalWorlds = [
-  { colors: ['#ff00cc', '#00fff7', '#1a003a'], label: 'Fractal' },
-  { colors: ['#ffea00', '#7300ffff', '#003a2a'], label: 'Nebula' },
-  { colors: ['#ff3300', '#cc00ff', '#0a0f1a'], label: 'Being' },
-  { colors: ['#00ff33', '#00aaff', '#003a3a'], label: '' },
-  { colors: ['#cfccbeff', '#056864ff', '#210205ff'], label: 'Singularity' },
-];
+import { portalWorldsBright } from '@/data/portalWorlds';
 
 export function useAuthPageEffects() {
-  const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
+  const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorldsBright));
   const [navScrolled, setNavScrolled] = useState(false);
   const bgRef = useRef(null);
   const fgRef = useRef(null);
@@ -46,7 +39,7 @@ export function useAuthPageEffects() {
   }, []);
 
   useEffect(() => {
-    const handleQuantumCollapse = () => setPortalState(quantumCollapse(portalWorlds));
+    const handleQuantumCollapse = () => setPortalState(quantumCollapse(portalWorldsBright));
     window.addEventListener('scroll', handleQuantumCollapse);
     window.addEventListener('click', handleQuantumCollapse);
     return () => {

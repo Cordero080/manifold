@@ -3,20 +3,15 @@ import { useRef, useEffect } from 'react';
 /**
  //Creates multi-layered 3D parallax scrolling effects on the HomePage by transforming background layers, scenes, and text elements based on scroll position and mouse movement.
  
- * Custom hook for parallax scrolling effects with multiple depth layers
- * Manages 5 parallax layers plus foreground/background with mouse movement
- * @returns {Object} Object containing refs for all parallax elements
+ * Custom hook for parallax scrolling effects.
+ * Drives bg/fg layers, quantum scenes, title, and floating-code text.
+ * @returns {{ parallaxRef, fgRef, bgRef }}
  */
 export default function useParallax() {
   // Create refs for parallax elements
   const parallaxRef = useRef(null);
   const fgRef = useRef(null);
   const bgRef = useRef(null);
-  const layer1Ref = useRef(null);
-  const layer2Ref = useRef(null);
-  const layer3Ref = useRef(null);
-  const layer4Ref = useRef(null);
-  const layer5Ref = useRef(null);
 
   useEffect(() => {
     let mx = 0;
@@ -34,47 +29,6 @@ export default function useParallax() {
           mx * 30 * motionDampen
         }px, ${-scrollY * 0.2 + my * 20 * motionDampen}px, 0)`;
         bgRef.current.style.opacity = String(1 - progress * 0.4);
-      }
-
-      // Layer 2 (Slow): Mid-background - different depth
-      if (layer1Ref.current) {
-        layer1Ref.current.style.transform = `translate3d(${
-          mx * 40 * motionDampen
-        }px, ${-scrollY * 0.3 + my * 25 * motionDampen}px, 0)`;
-        layer1Ref.current.style.opacity = String(1 - progress * 0.3);
-        layer1Ref.current.style.filter = `blur(${progress * 2}px)`;
-      }
-
-      // More layers with different speeds
-      if (layer2Ref.current) {
-        layer2Ref.current.style.transform = `translate3d(${
-          mx * 50 * motionDampen
-        }px, ${-scrollY * 0.4 + my * 30 * motionDampen}px, 0)`;
-        layer2Ref.current.style.opacity = String(1 - progress * 0.35);
-        layer2Ref.current.style.filter = `blur(${progress * 1.5}px)`;
-      }
-
-      if (layer3Ref.current) {
-        layer3Ref.current.style.transform = `translate3d(${
-          mx * 60 * motionDampen
-        }px, ${-scrollY * 0.5 + my * 35 * motionDampen}px, 0)`;
-        layer3Ref.current.style.opacity = String(1 - progress * 0.4);
-        layer3Ref.current.style.filter = `blur(${progress * 1}px)`;
-      }
-
-      if (layer4Ref.current) {
-        layer4Ref.current.style.transform = `translate3d(${
-          mx * 70 * motionDampen
-        }px, ${-scrollY * 0.6 + my * 38 * motionDampen}px, 0)`;
-        layer4Ref.current.style.opacity = String(1 - progress * 0.45);
-        layer4Ref.current.style.filter = `blur(${progress * 0.5}px)`;
-      }
-
-      if (layer5Ref.current) {
-        layer5Ref.current.style.transform = `translate3d(${
-          mx * 75 * motionDampen
-        }px, ${-scrollY * 0.65 + my * 39 * motionDampen}px, 0)`;
-        layer5Ref.current.style.opacity = String(1 - progress * 0.5);
       }
 
       // Foreground layer: 0.18x scroll speed, ±80px horizontal, ±40px vertical
@@ -171,14 +125,5 @@ export default function useParallax() {
     };
   }, []);
 
-  return {
-    parallaxRef,
-    fgRef,
-    bgRef,
-    layer1Ref,
-    layer2Ref,
-    layer3Ref,
-    layer4Ref,
-    layer5Ref,
-  };
+  return { parallaxRef, fgRef, bgRef };
 }

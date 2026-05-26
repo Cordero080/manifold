@@ -19,7 +19,7 @@
  * // ⬆️ RECEIVES: ['icarus-x'] from saveButtonHandlers.js
  */
 
-import { signup as signupApi, login as loginApi } from '../services/authApi';
+import { signup as signupApi, login as loginApi, getCurrentUser } from '../services/authApi';
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
 const AuthContext = createContext(null);
@@ -109,7 +109,9 @@ export function AuthProvider({ children }) {
   }, []);
 
   /**
-   * Initialize auth from localStorage on mount
+   * Initialize auth from localStorage on mount, then validate token with server.
+   * If the server rejects the token (expired/revoked), clears local state.
+   * Also refreshes unlockedAnimations from the server on every page load.
    */
   React.useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -118,16 +120,36 @@ export function AuthProvider({ children }) {
     if (storedUser && storedToken) {
       try {
         const parsedUser = JSON.parse(storedUser);
+        // Optimistically restore from localStorage so the UI doesn't flash
         setUser(parsedUser);
         setToken(storedToken);
         setUnlockedAnimations(parsedUser.unlockedAnimations || []);
-      } catch (error) {
+
+        // Validate token with server and refresh unlock state
+        getCurrentUser(storedToken)
+          .then((data) => {
+            const fresh = data.user;
+            setUser(fresh);
+            setUnlockedAnimations(fresh.unlockedAnimations || []);
+            localStorage.setItem('user', JSON.stringify(fresh));
+          })
+          .catch(() => {
+            // Token is invalid or expired — force logout
+            setUser(null);
+            setToken(null);
+            setUnlockedAnimations([]);
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+          })
+          .finally(() => setIsLoading(false));
+
+        return; // setIsLoading(false) handled in .finally above
+      } catch {
         localStorage.removeItem('user');
         localStorage.removeItem('token');
       }
     }
 
-    // Always set loading to false after checking localStorage
     setIsLoading(false);
   }, []);
 

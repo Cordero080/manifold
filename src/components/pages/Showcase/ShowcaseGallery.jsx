@@ -7,8 +7,8 @@ import RotatingCube from './components/ShowcaseViewer/RotatingCube/RotatingCube'
 import ShowcaseViewer from './components/ShowcaseViewer';
 import { noetechAnima } from './data/noetechAnima';
 import { portalWorlds, glyphSets } from '@/data/portalWorlds';
-import { quantumCollapse, getCardPosition } from './utils/showcaseHelpers';
-import { isMobileDevice, getOptimalDpr } from '@/utils/coreHelpers';
+import { quantumCollapse, isMobileDevice, getOptimalDpr } from '@/utils/coreHelpers';
+import { getCardPosition } from './utils/showcaseHelpers';
 import '@styles/quantumTitles.css';
 import '@styles/quantumBackground.css';
 import './ShowcaseGallery.scss';

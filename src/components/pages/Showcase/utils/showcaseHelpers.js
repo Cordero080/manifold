@@ -1,8 +1,4 @@
-// Quantum utility functions for Showcase components
-
-export function quantumCollapse(states) {
-  return states[Math.floor(Math.random() * states.length)];
-}
+// Showcase utility functions
 
 export function getCardPosition(index) {
   const positions = ['center', 'left', 'right'];

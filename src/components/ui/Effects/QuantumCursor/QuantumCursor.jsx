@@ -21,20 +21,8 @@ export default function QuantumCursor() {
     const universe = new QuantumCursorUniverse();
     universeRef.current = universe;
 
-    // Cleanup function to remove elements and restore cursor
     return () => {
-      if (universeRef.current) {
-        // Clean up energy waves
-        if (universeRef.current.energyWaves) {
-          universeRef.current.energyWaves.forEach((wave) => {
-            if (wave.element && wave.element.parentNode) {
-              wave.element.parentNode.removeChild(wave.element);
-            }
-          });
-        }
-      }
-
-      // Restore default cursor
+      universeRef.current?.destroy();
       document.documentElement.style.removeProperty('cursor');
       document.body.style.removeProperty('cursor');
     };

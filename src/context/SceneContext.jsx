@@ -9,7 +9,6 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
  * - Scene mode: fresh, loaded, or remixed
  *
  * Provides:
- * - saveScene() - Save new or update existing scene
  * - loadScene() - Load scene into editor
  * - deleteScene() - Delete a scene
  * - resetScene() - Reset to fresh state
@@ -22,8 +21,6 @@ export function SceneProvider({ children }) {
   const [currentSceneId, setCurrentSceneId] = useState(null);
   const [sceneOwner, setSceneOwner] = useState(null); // User ID who owns the scene
   const [sceneName, setSceneName] = useState('');
-  const [sceneDescription, setSceneDescription] = useState('');
-  const [isPublic, setIsPublic] = useState(true);
   const [loadedConfig, setLoadedConfig] = useState(null); // Store loaded scene config
 
   // Scene mode: 'fresh', 'loaded', 'remixed'
@@ -42,69 +39,6 @@ export function SceneProvider({ children }) {
   );
 
   /**
-   * Save scene (create new or update existing)
-   * @param {Object} sceneData - Complete scene configuration
-   * @param {string} userId - ID of user saving the scene
-   * @param {string} token - JWT auth token
-   * @returns {Promise<Object>} Saved scene data
-   */
-  const saveScene = useCallback(
-    async (sceneData, userId, token) => {
-      // TODO: Replace with actual API call when backend is ready
-
-      // Simulate API call
-      const mockSavedScene = {
-        id: currentSceneId || `scene_${Date.now()}`,
-        userId: userId,
-        name: sceneData.name,
-        description: sceneData.description,
-        isPublic: sceneData.isPublic,
-        config: sceneData.config,
-        createdAt: new Date().toISOString(),
-        viewCount: 0,
-        likeCount: 0,
-      };
-
-      // Update context state
-      setCurrentSceneId(mockSavedScene.id);
-      setSceneOwner(userId);
-      setSceneName(mockSavedScene.name);
-      setSceneDescription(mockSavedScene.description);
-      setIsPublic(mockSavedScene.isPublic);
-      setSceneMode('loaded');
-
-      return mockSavedScene;
-
-      /* 
-      // Real implementation when backend is ready:
-      const response = await fetch(`${API_URL}/scenes`, {
-        method: currentSceneId ? 'PUT' : 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(sceneData)
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to save scene');
-      }
-      
-      const savedScene = await response.json();
-      setCurrentSceneId(savedScene.id);
-      setSceneOwner(userId);
-      setSceneName(savedScene.name);
-      setSceneDescription(savedScene.description);
-      setIsPublic(savedScene.isPublic);
-      setSceneMode('loaded');
-      
-      return savedScene;
-      */
-    },
-    [currentSceneId]
-  );
-
-  /**
    * Load scene into editor
    * @param {Object} scene - Scene data from API
    * @param {string} currentUserId - ID of logged-in user (null if not logged in)
@@ -114,8 +48,6 @@ export function SceneProvider({ children }) {
     setCurrentSceneId(scene.id || scene._id); // scene.id if from saveScene, scene._id if from API
     setSceneOwner(scene.userId);
     setSceneName(scene.name);
-    setSceneDescription(scene.description || '');
-    setIsPublic(scene.isPublic);
     setLoadedConfig(scene.config); // Store the config!
 
     // Determine scene mode
@@ -160,8 +92,6 @@ export function SceneProvider({ children }) {
     setCurrentSceneId(null);
     setSceneOwner(null);
     setSceneName('');
-    setSceneDescription('');
-    setIsPublic(true);
     setLoadedConfig(null);
     setSceneMode('fresh');
   }, []);
@@ -171,24 +101,19 @@ export function SceneProvider({ children }) {
     currentSceneId,
     sceneOwner,
     sceneName,
-    sceneDescription,
-    isPublic,
     sceneMode,
-    loadedConfig, // Export loaded config
+    loadedConfig,
 
     // Computed
     isOwnScene,
 
     // Actions
-    saveScene,
     loadScene,
     deleteScene,
     resetScene,
 
-    // Setters (for modal forms)
+    // Setters
     setSceneName,
-    setSceneDescription,
-    setIsPublic,
   };
 
   return <SceneContext.Provider value={value}>{children}</SceneContext.Provider>;

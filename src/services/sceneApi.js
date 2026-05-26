@@ -22,9 +22,6 @@ export const saveScene = async (sceneData, token) => {
   try {
     const url = `${API_BASE_URL}/api/scenes`; // this is the route we are posting to, a.k.a. backend endpoint
 
-    console.log('DEBUG saveScene - token value:', token);
-    console.log('DEBUG saveScene - localStorage token:', localStorage.getItem('token'));
-
     const response = await fetch(url, {
       method: 'POST',
       headers: {

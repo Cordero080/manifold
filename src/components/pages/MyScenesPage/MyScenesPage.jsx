@@ -11,6 +11,7 @@ import { DeleteSuccessModal } from '@components/ui/Modals';
 import QuantumNav from '../HomePage/components/QuantumNav';
 import HomeBackground from '@components/ui/HomeBackground/HomeBackground';
 import { quantumCollapse } from '@utils/coreHelpers';
+import { portalWorldsBright } from '@/data/portalWorlds';
 import '@styles/quantumTitles.css';
 import '@styles/quantumBackground.css';
 import './MyScenesPage-styles.scss';
@@ -19,17 +20,6 @@ import sharedStyles from '@styles/shared.module.scss';
 import '@components/layout/NavBar/nav.scss';
 import { GEOM_LAB_LINK_TEXT, SHOWCASE_LINK_TEXT } from '@components/layout/NavBar/navLabels';
 import homeStyles from '../HomePage/HomeIndex.module.scss';
-
-/**
- * PORTAL WORLDS SYSTEM
- */
-const portalWorlds = [
-  { colors: ['#ff00cc', '#00fff7', '#1a003a'], label: 'Fractal' },
-  { colors: ['#ffea00', '#7300ffff', '#003a2a'], label: 'Nebula' },
-  { colors: ['#ff3300', '#cc00ff', '#0a0f1a'], label: 'Being' },
-  { colors: ['#00ff33', '#00aaff', '#003a3a'], label: '' },
-  { colors: ['#cfccbeff', '#056864ff', '#210205ff'], label: 'Singularity' },
-];
 
 export default function MyScenesPage() {
   const navigate = useNavigate();
@@ -47,7 +37,7 @@ export default function MyScenesPage() {
   const [showDeleteSuccessModal, setShowDeleteSuccessModal] = useState(false);
   const [deletedSceneName, setDeletedSceneName] = useState('');
 
-  const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
+  const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorldsBright));
   const [navScrolled, setNavScrolled] = useState(false);
 
   // Smooth color interpolation
@@ -156,7 +146,7 @@ export default function MyScenesPage() {
   useEffect(() => {
     const handleQuantumCollapse = () => {
       // Collapse quantum superposition into definite states
-      const newPortalState = quantumCollapse(portalWorlds);
+      const newPortalState = quantumCollapse(portalWorldsBright);
 
       // Update React state to trigger UI re-render with new colors
       setPortalState(newPortalState);
@@ -244,9 +234,6 @@ export default function MyScenesPage() {
         break;
       case 'oldest':
         sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-        break;
-      case 'most-viewed':
-        sorted.sort((a, b) => b.viewCount - a.viewCount);
         break;
       case 'name':
         sorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -398,7 +385,6 @@ export default function MyScenesPage() {
               options={[
                 { value: 'newest', label: 'Newest First' },
                 { value: 'oldest', label: 'Oldest First' },
-                { value: 'most-viewed', label: 'Most Viewed' },
                 { value: 'name', label: 'Name (A-Z)' },
               ]}
             />

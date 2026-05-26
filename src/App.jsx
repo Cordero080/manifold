@@ -206,7 +206,7 @@ function GeomLab() {
 
       // Clear the loaded config so it doesn't re-apply
       // We'll do this after a short delay to ensure it's applied
-      setTimeout(() => resetScene, 100);
+      setTimeout(() => resetScene(), 100);
     }
   }, [loadedConfig]);
 

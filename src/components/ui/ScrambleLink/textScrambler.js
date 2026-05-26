@@ -16,22 +16,3 @@ export const scrambleText = (text) => {
     })
     .join('');
 };
-
-/**
- * Returns a random code snippet for display
- * @returns {string} - A random code snippet
- */
-export const getScrambledText = () => {
-  const codeSnippets = [
-    'func(x)',
-    '{id: 42}',
-    'x => y',
-    '[...arr]',
-    'async/await',
-    '0x1A2B',
-    '{ ...obj }',
-    'return π',
-  ];
-
-  return codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-};
