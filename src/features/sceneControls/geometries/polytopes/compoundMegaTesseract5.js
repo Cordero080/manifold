@@ -1,32 +1,11 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils';
-import { createTesseractWithFaces } from '../../utils/geometryHelpers';
+import { createTesseractWithFaces, stableStringify } from '../../utils/geometryHelpers';
 
 const baseGeometryCache = new Map();
 const finalGeometryCache = new Map();
 const BASE_CACHE_LABEL = 'compoundMegaTesseractFive:base';
 const FINAL_CACHE_LABEL = 'compoundMegaTesseractFive';
-
-function stableStringify(value) {
-  if (value === null) return 'null';
-  const type = typeof value;
-  if (type === 'number' || type === 'boolean') return JSON.stringify(value);
-  if (type === 'string') return JSON.stringify(value);
-  if (type === 'undefined') return '"__undefined__"';
-  if (type === 'function') return '"__function__"';
-  if (Array.isArray(value)) {
-    return `[${value.map((item) => stableStringify(item)).join(',')}]`;
-  }
-  if (value instanceof Date) {
-    return JSON.stringify(value.toISOString());
-  }
-  if (value && typeof value === 'object') {
-    const keys = Object.keys(value).sort();
-    const entries = keys.map((key) => `${JSON.stringify(key)}:${stableStringify(value[key])}`);
-    return `{${entries.join(',')}}`;
-  }
-  return JSON.stringify(value);
-}
 
 function createCacheKey(options, label) {
   if (!options || typeof options !== 'object') return 'default';

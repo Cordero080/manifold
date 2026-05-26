@@ -1,133 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@features/auth/context/AuthContext';
 import BeamScanButton from '@components/ui/BeamScanButton/BeamScanButton';
-import { quantumCollapse } from '@utils/coreHelpers';
+import { useAuthPageEffects } from '@features/auth/hooks/useAuthPageEffects';
 import './SignUpPage.css';
 import '@components/layout/NavBar/nav.scss';
 import homeStyles from '@components/pages/HomePage/HomeIndex.module.scss';
 
-// Portal worlds system (matching MyScenesPage/Showcase)
-const portalWorlds = [
-  { colors: ['#ff00cc', '#00fff7', '#1a003a'], label: 'Fractal' },
-  { colors: ['#ffea00', '#7300ffff', '#003a2a'], label: 'Nebula' },
-  { colors: ['#ff3300', '#cc00ff', '#0a0f1a'], label: 'Being' },
-  { colors: ['#00ff33', '#00aaff', '#003a3a'], label: '' },
-  { colors: ['#cfccbeff', '#056864ff', '#210205ff'], label: 'Singularity' },
-];
-
 export default function SignUpPage() {
   const navigate = useNavigate();
   const { signup } = useAuth();
+  const { portalState, navScrolled, bgRef, fgRef } = useAuthPageEffects();
 
-  // Quantum state management (matching MyScenesPage/Showcase)
-  const [portalState, setPortalState] = useState(() => quantumCollapse(portalWorlds));
-  const [navScrolled, setNavScrolled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  // Parallax layer refs (matching MyScenesPage/Showcase)
-  const bgRef = useRef(null);
-  const fgRef = useRef(null);
-
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
-
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Parallax effect (matching MyScenesPage/Showcase)
-  useEffect(() => {
-    const handleParallax = (e) => {
-      const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight || 1;
-      const progress = Math.min(1, scrollY / maxScroll);
-      let mx = 0,
-        my = 0;
-      if (e && e.type === 'mousemove') {
-        mx = e.clientX / window.innerWidth - 0.5;
-        my = e.clientY / window.innerHeight - 0.5;
-      }
-
-      const motionDampen = 1 - progress * 0.3;
-
-      if (bgRef.current) {
-        bgRef.current.style.transform = `translate3d(${mx * 15 * motionDampen}px, ${-scrollY * 0.04 + my * 8 * motionDampen}px, 0)`;
-        bgRef.current.style.opacity = String(1 - progress * 0.4);
-      }
-
-      if (fgRef.current) {
-        fgRef.current.style.transform = `translate3d(${mx * 45 * motionDampen}px, ${-scrollY * 0.12 + my * 25 * motionDampen}px, 0)`;
-        fgRef.current.style.opacity = String(0.9 - progress * 0.6);
-      }
-    };
-
-    window.addEventListener('scroll', handleParallax);
-    window.addEventListener('mousemove', handleParallax);
-    handleParallax();
-
-    return () => {
-      window.removeEventListener('scroll', handleParallax);
-      window.removeEventListener('mousemove', handleParallax);
-    };
-  }, []);
-
-  // Quantum collapse on user interaction (matching MyScenesPage/Showcase)
-  useEffect(() => {
-    const handleQuantumCollapse = () => {
-      const newPortalState = quantumCollapse(portalWorlds);
-      setPortalState(newPortalState);
-    };
-
-    const handleClickCollapse = () => {
-      handleQuantumCollapse();
-    };
-
-    window.addEventListener('scroll', handleQuantumCollapse);
-    window.addEventListener('click', handleClickCollapse);
-
-    return () => {
-      window.removeEventListener('scroll', handleQuantumCollapse);
-      window.removeEventListener('click', handleClickCollapse);
-    };
-  }, []);
-
-  // Navbar scroll effect
-  useEffect(() => {
-    const handleNavScroll = () => {
-      if (window.scrollY > 50) {
-        setNavScrolled(true);
-      } else {
-        setNavScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleNavScroll);
-    handleNavScroll();
-    return () => window.removeEventListener('scroll', handleNavScroll);
-  }, []);
-
-  // Enhanced cursor effects
-  useEffect(() => {
-    const cursor = document.getElementById('cursor');
-    const handleMouseMove = (e) => {
-      if (cursor) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   const validateForm = () => {
     const newErrors = {};
-
-    // Username validation
     if (!formData.username.trim()) {
       newErrors.username = 'Username is required';
     } else if (formData.username.length < 3) {
@@ -135,59 +32,37 @@ export default function SignUpPage() {
     } else if (formData.username.length > 20) {
       newErrors.username = 'Username must be less than 20 characters';
     }
-
-    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Invalid email format';
     }
-
-    // Password validation
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-
-    // Confirm password validation
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error for this field when user starts typing
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: '',
-      }));
+      setErrors((prev) => ({ ...prev, [name]: '' }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
     setIsLoading(true);
-
     try {
-      // Call signup from AuthContext
       await signup(formData.username, formData.email, formData.password);
-
-      // Redirect to homepage on success
       navigate('/');
     } catch (error) {
       setErrors({ submit: error.message || 'Sign up failed. Please try again.' });
@@ -198,37 +73,28 @@ export default function SignUpPage() {
 
   return (
     <>
-      {/* Base Dark Layer */}
       <div className={homeStyles.baseDark}></div>
-
-      {/* Quantum Portal Background Layer */}
       <div
         className={homeStyles.quantumPortalLayer}
         style={{
           background: `
-            radial-gradient(circle at 30% 120%, 
-              ${portalState.colors[0]} 0%, 
-              ${portalState.colors[1]} 30%, 
-              ${portalState.colors[2]} 60%, 
+            radial-gradient(circle at 30% 120%,
+              ${portalState.colors[0]} 0%,
+              ${portalState.colors[1]} 30%,
+              ${portalState.colors[2]} 60%,
               transparent 80%
             ),
-            radial-gradient(circle at 70% 130%, 
-              ${portalState.colors[1]} 0%, 
-              ${portalState.colors[2]} 40%, 
+            radial-gradient(circle at 70% 130%,
+              ${portalState.colors[1]} 0%,
+              ${portalState.colors[2]} 40%,
               ${portalState.colors[0]} 70%,
               transparent 90%
             )
           `,
         }}
       />
-
-      {/* Inverted veil to cover quantum colors at top */}
       <div className={homeStyles.quantumVeil}></div>
-
-      {/* Dark Top Veil */}
       <div className={homeStyles.darkTopVeil}></div>
-
-      {/* Dynamic Portal Background */}
       <div
         style={{
           position: 'fixed',
@@ -252,11 +118,7 @@ export default function SignUpPage() {
             width: '100%',
             height: '100vh',
             pointerEvents: 'none',
-            background: `linear-gradient(120deg, 
-            ${portalState.colors[0]} 0%, 
-            ${portalState.colors[1]} 60%, 
-            ${portalState.colors[2]} 100%
-          )`,
+            background: `linear-gradient(120deg, ${portalState.colors[0]} 0%, ${portalState.colors[1]} 60%, ${portalState.colors[2]} 100%)`,
             transition: 'background 1.2s cubic-bezier(0.4,0,0.2,1)',
             filter: 'brightness(1.3) saturate(1.8)',
           }}
@@ -271,11 +133,7 @@ export default function SignUpPage() {
           <rect x="0" y="0" width="1920" height="1080" fill="url(#signup-portal-glow)" />
         </svg>
       </div>
-
-      {/* Clip-path background layer (matching Showcase/MyScenesPage) */}
       <div className="bg-gallery-layer bg-gallery-reality" aria-hidden="true"></div>
-
-      {/* Showcase-style parallax background layers */}
       <div ref={bgRef} className="parallax-bg-layer" aria-hidden="true">
         <svg
           width="100%"
@@ -326,10 +184,7 @@ export default function SignUpPage() {
           <ellipse cx="320" cy="120" rx="180" ry="40" fill="#ffffff22" />
         </svg>
       </div>
-
-      {/* Enhanced Holographic Cursor System */}
       <div className="cursor" id="cursor"></div>
-
       <div className="signup-page">
         <nav className={`quantum-nav ${navScrolled ? 'scrolled' : ''}`}>
           <div className="nav-logo">
@@ -346,7 +201,6 @@ export default function SignUpPage() {
             </Link>
           </div>
         </nav>
-
         <div className="signup-container">
           <div className="signup-header">
             <h1 className="signup-title">
@@ -360,7 +214,6 @@ export default function SignUpPage() {
             </h1>
             <p className="signup-subtitle"> </p>
           </div>
-
           <form className="signup-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username" className="form-label">
@@ -378,7 +231,6 @@ export default function SignUpPage() {
               />
               {errors.username && <span className="error-message">{errors.username}</span>}
             </div>
-
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 EMAIL
@@ -395,7 +247,6 @@ export default function SignUpPage() {
               />
               {errors.email && <span className="error-message">{errors.email}</span>}
             </div>
-
             <div className="form-group">
               <label htmlFor="password" className="form-label">
                 PASSWORD
@@ -418,21 +269,36 @@ export default function SignUpPage() {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                      <line x1="1" y1="1" x2="23" y2="23"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                      <line x1="1" y1="1" x2="23" y2="23" />
                     </svg>
                   ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                      <circle cx="12" cy="12" r="3"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
                 </button>
               </div>
               {errors.password && <span className="error-message">{errors.password}</span>}
             </div>
-
             <div className="form-group">
               <label htmlFor="confirmPassword" className="form-label">
                 CONFIRM PASSWORD
@@ -455,14 +321,30 @@ export default function SignUpPage() {
                   aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                 >
                   {showConfirmPassword ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                      <line x1="1" y1="1" x2="23" y2="23"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                      <line x1="1" y1="1" x2="23" y2="23" />
                     </svg>
                   ) : (
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                      <circle cx="12" cy="12" r="3"/>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
                     </svg>
                   )}
                 </button>
@@ -471,9 +353,7 @@ export default function SignUpPage() {
                 <span className="error-message">{errors.confirmPassword}</span>
               )}
             </div>
-
             {errors.submit && <div className="submit-error">{errors.submit}</div>}
-
             <div style={{ marginTop: '0px', display: 'flex', justifyContent: 'center' }}>
               <BeamScanButton
                 onClick={handleSubmit}
@@ -481,11 +361,15 @@ export default function SignUpPage() {
                 disabled={isLoading}
               />
             </div>
-
             <div className="form-footer">
               <p className="footer-text" style={{ fontSize: '18px' }}>
                 Already have an account?{' '}
-                <button type="button" onClick={() => navigate('/login')} className="link-button" style={{ fontSize: '18px' }}>
+                <button
+                  type="button"
+                  onClick={() => navigate('/login')}
+                  className="link-button"
+                  style={{ fontSize: '18px' }}
+                >
                   Login here
                 </button>
               </p>
