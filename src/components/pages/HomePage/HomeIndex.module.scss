@@ -1590,17 +1590,25 @@ input,
     pointer-events: auto !important;
 
     @media (max-width: 768px) {
-      padding-top: 90px;
+      padding-top: 50px;
     }
 
     @media (max-width: 480px) {
-      padding-top: 70px;
+      padding-top: 40px;
     }
   }
 
   /* When no nav is present, reduce top padding to move content higher */
   :global(.no-nav .scene-content) {
     padding-top: 80px;
+
+    @media (max-width: 768px) {
+      padding-top: 50px;
+    }
+
+    @media (max-width: 480px) {
+      padding-top: 40px;
+    }
   }
 
   /* All interactive children must be clickable */

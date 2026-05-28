@@ -123,7 +123,7 @@
 
 /* When no navbar (not authenticated) - move title and manifold up */
 .no-nav .title-wrapper {
-  margin-top: -40px;
+  margin-top: 30px;
 }
 
 .no-nav .manifold-label {
@@ -167,11 +167,15 @@
 /* Mobile Landscape: 481px - 767px */
 @media (max-width: 767px) {
   .title-wrapper {
-    margin-top: -30px;
+    margin-top: -60px;
+  }
+
+  .no-nav .title-wrapper {
+    margin-top: -80px;
   }
 
   .manifold-label {
-    transform: translateY(40px) !important;
+    transform: translateY(25px) !important;
   }
 
   .quantum-subtitle {
@@ -203,11 +207,15 @@
 /* Mobile Portrait: < 480px */
 @media (max-width: 480px) {
   .title-wrapper {
-    margin-top: -50px;
+    margin-top: -60px;
+  }
+
+  .no-nav .title-wrapper {
+    margin-top: -80px;
   }
 
   .manifold-label {
-    transform: translateY(30px) !important;
+    transform: translateY(18px) !important;
   }
 
   .quantum-subtitle {

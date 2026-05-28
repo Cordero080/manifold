@@ -147,57 +147,7 @@ h1.quantum-title {
   font-family: inherit !important;
 }
 
-.zero-char {
-  font-family: 'Orbitron', sans-serif !important;
-  font-weight: 900 !important;
-  vertical-align: -8px;
-  font-size: 1.05em;
-  position: relative;
-  display: inline-block;
-  isolation: isolate;
-  overflow: visible;
-  background: inherit;
-  background-size: inherit;
-  background-position: inherit;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
-.zero-char::before,
-.zero-char::after {
-  content: '0';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  white-space: nowrap;
-  pointer-events: none;
-  font-family: 'Orbitron', sans-serif !important;
-  font-weight: 900 !important;
-  background: inherit;
-  background-size: inherit;
-  background-position: inherit;
-  background-clip: inherit;
-  -webkit-background-clip: inherit;
-  -webkit-text-fill-color: inherit;
-}
-
-.zero-char::before {
-  z-index: -2;
-  filter: blur(18px);
-  opacity: 0.45;
-  transform: translate(-50%, -50%) translateY(6px) translateX(-2px) scale(1.05);
-}
-
-.zero-char::after {
-  z-index: -2;
-  opacity: 0.4;
-  transform: translate(-50%, -50%) translateY(10px) translateX(0px);
-  text-shadow:
-    0 0 20px rgba(22, 10, 27, 0.146),
-    0 0 60px rgba(5, 1, 49, 0.89);
-}
 
 /* ====================================
    MOBILE PERFORMANCE OPTIMIZATIONS
@@ -222,17 +172,6 @@ h1.quantum-title {
     filter: saturate(2) brightness(1.4) contrast(1.2);
   }
 
-  .slashed-zero {
-    animation: none;
-    background: linear-gradient(135deg, #098fddd4 0%, #bc1f60bc 55%, #2eaca4 75%, #c8922e 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .zero-char::before,
-  .zero-char::after {
-    display: none;
-  }
+  
+  
 }
