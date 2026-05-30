@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "node manifold-backend/index.js",
     "dev": "vite",
     "test": "jest",
     "build": "vite build",
